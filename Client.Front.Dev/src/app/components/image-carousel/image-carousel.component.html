@@ -1,0 +1,19 @@
+<div class="carousel-sm-container">
+  <div class="carousel-sm">
+    <div class="background">
+      <img (click)="onOpen()" class="image-carousel-sm" mat-card-image [src]="srcs[idx]">
+    </div>
+    <div class="foreground">
+      <div mat-card-image style="margin-top: 0; display: flex;">
+        <div *ngIf="idx != 0" class="carousel-navigation" (click)="idx=idx-1">
+          <mat-icon class="carousel-arrow">arrow_left</mat-icon>
+        </div>
+        <span style="flex: 1 1 auto"></span>
+        <div *ngIf="idx < srcs.length - 1" class="carousel-navigation" (click)="idx=idx+1">
+          <mat-icon class="carousel-arrow">arrow_right</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span [style.visibility]="srcs.length > 1 ? 'visible' : 'hidden'" class="carousel-index">{{idx+1}}/{{srcs.length}}</span>
+</div>

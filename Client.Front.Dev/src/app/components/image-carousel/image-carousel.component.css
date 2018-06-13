@@ -1,0 +1,66 @@
+.image-carousel-sm {
+    margin-top:0;
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.carousel-sm {
+    display: flex; /* required */
+    flex-flow: row nowrap; /* required */
+}
+.carousel-sm .background,
+.carousel-sm .foreground {
+    box-sizing: border-box; /* required */
+    width: 100%; /* required */
+    flex: none; /* required */
+}
+.carousel-sm .background {
+}
+.carousel-sm .foreground {
+    display: flex;
+    flex-direction: row;
+    margin-left: -100%; /* required */
+}
+
+.carousel-arrow {    
+    visibility: hidden;
+    user-select: none;
+    pointer-events: none;
+}
+
+.carousel-navigation {
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.carousel-sm-container:hover .carousel-navigation {
+    background: #fff2;
+}
+
+.carousel-navigation:hover {     
+    background: #fff3 !important;    
+}
+
+.carousel-navigation:active {     
+    background: #fff4 !important;    
+}
+
+.carousel-navigation:hover .carousel-arrow {
+    visibility: visible;
+}
+
+
+.carousel-sm-container:hover .carousel-arrow {
+    visibility: visible;
+}
+
+.carousel-index {
+    text-align: center;
+    display: block;
+    margin: 0;
+    margin-top: -14px;
+}

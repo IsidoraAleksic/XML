@@ -1,0 +1,21 @@
+<div style="text-align:center">
+  <div class="center-form">
+    <h1 style="color: #555">Login</h1>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="model.email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" [(ngModel)]="model.password">
+    </mat-form-field>
+    <div style="margin-bottom: 10px">
+      <button mat-button (click)="onLogin()">Login</button>
+    </div>
+    <div>
+      <button mat-button routerLink="/register">Register</button>
+    </div>
+    <p *ngIf="nok" style="color: red">Invalid Username or Password</p>
+    <div *ngIf="loading" style="margin: 10px">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </div>
+</div>

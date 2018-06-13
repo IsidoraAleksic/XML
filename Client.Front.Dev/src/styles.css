@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+.center-form {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    background: white;    
+}
+
+.center-form> * {
+    width: 100%;
+}
+
+/* a container with flex-direction column */
+.main-container {
+    height: 100vh; /* or position:absolute; height:100%; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  
+  /* this is the flex container that will take the rest of the height */
+  .content-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    height: 100%;
+    min-height: 0px; /* IMPORTANT: you need this for non-chrome browsers */
+  }
+  
+  .content {
+    flex: 1;
+    /* background: #6575ca; */
+    overflow-x: hidden;
+    overflow-y: auto;    
+  }
+  .content:before{
+    position: fixed;
+    z-index: -1;
+    top:0;
+    left:0;
+    content:"";
+    height:100%;
+    width:100%;
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center;    
+    filter: blur(4px);
+    transform: scale(1.1)
+  }
