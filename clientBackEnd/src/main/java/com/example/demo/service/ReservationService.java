@@ -15,7 +15,7 @@ public interface ReservationService {
     void delete(Reservation reservation);
     Reservation getById(Long id);
     Reservation getByAccommodationUnit(AccommodationUnit accommodationUnit);
-    Reservation getByStartDateBeforeAndEndDateAfter(Date endDate, Date startDate);
+    int getByAccommodationUnitAndStartDateBeforeAndEndDateAfter(AccommodationUnit accommodationUnit,Date endDate, Date startDate);
     Reservation getByUser(User user);
     List<Reservation> getAll();
 }

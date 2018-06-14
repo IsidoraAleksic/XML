@@ -13,6 +13,6 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
 
     Reservation getById(Long id);
     Reservation getByAccommodationUnit(AccommodationUnit accommodationUnit);
-    Reservation getByStartDateBeforeAndEndDateAfter(Date endDate, Date startDate);
+    int countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(AccommodationUnit accommodationUnit, Date endDate, Date startDate);
     Reservation getByUser(User user);
 }

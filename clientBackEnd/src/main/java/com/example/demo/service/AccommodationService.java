@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.*;
-import com.example.demo.model.type.FoodService;
+import com.example.demo.model.AccommodationCategory;
+import com.example.demo.model.AccommodationType;
+import com.example.demo.model.AccommodationUnit;
+import com.example.demo.model.AdditionalServices;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,5 +22,5 @@ public interface AccommodationService {
     List<AccommodationUnit> getByPlaceAndCapacity(String place,int capacity);
     List<AccommodationUnit> getByAllCriteria
             (String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory,
-             AdditionalServices additionalServices, FoodService foodService);
+             List<AdditionalServices> additionalServices);
 }

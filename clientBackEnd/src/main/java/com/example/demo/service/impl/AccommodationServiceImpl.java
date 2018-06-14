@@ -4,7 +4,6 @@ import com.example.demo.model.AccommodationCategory;
 import com.example.demo.model.AccommodationType;
 import com.example.demo.model.AccommodationUnit;
 import com.example.demo.model.AdditionalServices;
-import com.example.demo.model.type.FoodService;
 import com.example.demo.repository.AccommodationRepository;
 import com.example.demo.service.AccommodationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,9 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<AccommodationUnit> getByAllCriteria(String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory, AdditionalServices additionalServices, FoodService foodService) {
-        return accommodationRepository.getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesAndPansion(
-                place,capacity,accommodationType,accommodationCategory,additionalServices,foodService
-        );
+    public List<AccommodationUnit> getByAllCriteria(String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory, List<AdditionalServices> additionalServices) {
+        return accommodationRepository.getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServices(
+                place,capacity,accommodationType,accommodationCategory,additionalServices);
     }
 
 //    @Override

@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.model.type.FoodService;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -18,8 +16,6 @@ public class AccommodationUnit implements Serializable {
     private int capacity;
     @ManyToOne
     private AccommodationCategory category;
-    @Enumerated(EnumType.STRING)
-    private FoodService pansion;
 
 
     @ManyToMany
@@ -68,13 +64,7 @@ public class AccommodationUnit implements Serializable {
         this.category = category;
     }
 
-    public FoodService getPansion() {
-        return pansion;
-    }
 
-    public void setPansion(FoodService pansion) {
-        this.pansion = pansion;
-    }
 
     public List<AdditionalServices> getAdditionalServices() {
         return additionalServices;

@@ -38,8 +38,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation getByStartDateBeforeAndEndDateAfter(Date endDate, Date startDate) {
-        return reservationRepository.getByStartDateBeforeAndEndDateAfter(endDate,startDate);
+    public int getByAccommodationUnitAndStartDateBeforeAndEndDateAfter(AccommodationUnit accommodationUnit,Date endDate, Date startDate) {
+        return reservationRepository.countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(accommodationUnit,endDate,startDate);
     }
 
     @Override
