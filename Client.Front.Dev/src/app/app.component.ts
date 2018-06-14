@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-browser';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,11 @@ import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-brow
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
-  mockLogin: boolean = true;
+  
   bgStyle: SafeStyle;
 
   constructor(
+    public auth: AuthService,
     private sanitizer: DomSanitizer
   ) { 
   }
@@ -30,5 +31,9 @@ export class AppComponent implements OnInit {
     var path = bgs[Math.round(Math.random() * (bgs.length - 1))];
     this.bgStyle = this.sanitizer.bypassSecurityTrustStyle('--bg:url(' + path + ')');
   }
+
+  onLogout() {
+    this.auth.logout().subscribe();
+  }  
 
 }

@@ -2,12 +2,11 @@
     <mat-toolbar class="trans-toolbar">
         <a mat-button routerLink="/">Booking.цом</a>
         <div style="padding: 10px;"></div>
-        <mat-checkbox [checked]="mockLogin" (change)="mockLogin = !mockLogin">Logged in</mat-checkbox>
-        <span style="flex: 1 1 auto"></span>
-        <ng-template [ngIf]="mockLogin" [ngIfElse]="anon">
+        <span style="flex: 1 1 auto"></span>        
+        <ng-template [ngIf]="auth.current" [ngIfElse]="anon">
             <button mat-button>
                 <mat-icon>person</mat-icon>
-                Dejan Tot
+                {{auth.current.email}}
             </button>
             <button mat-button [matMenuTriggerFor]="notifMenu" class="icon-button"
                 matBadge="2" matBadgeColor="warn">
@@ -21,7 +20,7 @@
                     <mat-icon>settings</mat-icon>
                 </button>
                 <mat-menu #settingsMenu="matMenu">
-                    <button mat-menu-item>Log Out</button>
+                    <button (click)="onLogout()" mat-menu-item>Log Out</button>
                 </mat-menu>
         </ng-template>
         <ng-template #anon>
