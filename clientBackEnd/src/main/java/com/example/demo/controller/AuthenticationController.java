@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/authenticate")
-public class UserController {
+public class AuthenticationController {
 
     @Autowired
     AuthenticationService authenticationService;

@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import com.example.demo.model.type.Role;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     UserRepository userRepository;
 
 
-    public User authenticateUser(String username, String password) {
-        User user = userRepository.findByUsername(username);
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
         if (user == null)
             return null;
         if (user.getPassword().matches(password))
@@ -53,6 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return null;
 
         System.out.println(authentication.getName());
+        System.out.println("principal: " + authentication.getPrincipal());
         if (authentication.getName().equals("anonymousUser"))
             return null;
         System.out.println(authentication.getAuthorities());
@@ -65,7 +66,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public boolean updateUser(User user) {
-        User u = userRepository.findByUsername(user.getEmail());
+        User u = userRepository.findByEmail(user.getEmail());
         if(u==null)
             return false;
         if (user.getPassword() == null || user.getFirstName() == null ||
@@ -88,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 user.getEmail() == null )
             return null;
 
-        if (userRepository.findByUsername(user.getEmail()) != null)
+        if (userRepository.findByEmail(user.getEmail()) != null)
             return "exists";
         user.setRole(Role.GUEST);
         return "registered";

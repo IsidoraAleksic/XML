@@ -1,15 +1,11 @@
 package com.example.demo.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 @Entity
-public class AccommodationCategory {
+public class AccommodationCategory implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +13,8 @@ public class AccommodationCategory {
 	
 	protected String categoryName;
 	
-	@OneToMany(mappedBy = "accommodationCategory")
-	//protected List<Accommodation> accomodations;
+//	@OneToMany(mappedBy = "accommodationCategory")
+//	private List<AccommodationUnit> accomodations;
 
 	public Long getId() {
 		return id;
@@ -35,6 +31,7 @@ public class AccommodationCategory {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
-	
+
+	public AccommodationCategory() {
+	}
 }
