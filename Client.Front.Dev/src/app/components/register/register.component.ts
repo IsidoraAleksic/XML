@@ -27,12 +27,12 @@ export class RegisterComponent implements OnInit {
     this.nok = false;
     this.exists = false;
     this.auth.register(this.model as any).subscribe(x => {
-      if (x == "ok")
+      // if (x == "ok")
         this.router.navigateByUrl("");
-      else if (x == "nok")
-        this.nok = true;
-      else if (x == "exists")
-        this.exists = true;
+      // else if (x == "nok")
+      //   this.nok = true;
+      // else if (x == "exists")
+      //   this.exists = true;
     });
   }
 

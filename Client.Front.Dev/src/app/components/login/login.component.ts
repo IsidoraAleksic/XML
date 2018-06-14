@@ -25,10 +25,10 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.nok = false;
     this.auth.login(this.model as any).subscribe(x=>{
-      if ( x == "ok")
+      // if ( x == "ok")
         this.router.navigateByUrl("");
-      else if (x == "nok")
-        this.nok = true;
+      // else if (x == "nok")
+      //   this.nok = true;
     })
   }
 

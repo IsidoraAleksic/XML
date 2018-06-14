@@ -23,7 +23,6 @@ export class AuthService {
   login(user: any): Observable<string> {
     return this.http.post<string>(environment.backendSrc + "authenticate/login", user, { withCredentials: true }).pipe(
       tap(_ => {
-        if (_ == "ok")
           this.http.get<UserDTO>(environment.backendSrc + "authenticate/getUser", { withCredentials: true }).subscribe(x => {
             this.current = x;
           })
@@ -36,12 +35,10 @@ export class AuthService {
   }
 
   logout(): Observable<string> {
-    console.log('a')
     if (this.current)
       return this.http.get<string>(environment.backendSrc + "authenticate/logout", { withCredentials: true }).pipe(
         tap(_ => { this.current = null; })
       );
-      console.log('b')
     return null;
   }
 
