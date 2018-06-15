@@ -53,7 +53,7 @@ public class AuthenticationController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "text/plain", consumes = "application/json")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public void registerUser(@RequestBody User user, HttpServletRequest request) {
         String registered = authenticationService.registerUser(user);
         if (registered == null)

@@ -10,20 +10,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class DemoApplication {
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				super.addCorsMappings(registry);
+				String[] origins = new String[] { "http://192.168.1.115:4200", "http://localhost:4200" };
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer(){
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                super.addCorsMappings(registry);
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowCredentials(true);
-                registry.addMapping("/authenticate/*").allowedOrigins("http://localhost:4200").allowCredentials(true);
-                registry.addMapping("/disease/*").allowedOrigins("http://localhost:4200").allowCredentials(true);
-            }
-        };
+				registry.addMapping("/**").allowedOrigins(origins).allowCredentials(true);
+				registry.addMapping("/authenticate/*").allowedOrigins(origins).allowCredentials(true);
+			}
+		};
 
-    }
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}

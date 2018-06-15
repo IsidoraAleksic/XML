@@ -12,12 +12,15 @@ export class AppComponent implements OnInit {
   bgStyle: SafeStyle;
 
   constructor(
-    public auth: AuthService,
     private sanitizer: DomSanitizer
   ) { 
   }
   
   ngOnInit() {          
+    this.switchBg();
+  }
+
+  private switchBg() {
     var bgs = [
       'https://i.imgur.com/o1hHhWP.jpg',
       'https://i.imgur.com/a3Jyic2.jpg',
@@ -30,10 +33,6 @@ export class AppComponent implements OnInit {
     ];
     var path = bgs[Math.round(Math.random() * (bgs.length - 1))];
     this.bgStyle = this.sanitizer.bypassSecurityTrustStyle('--bg:url(' + path + ')');
-  }
-
-  onLogout() {
-    this.auth.logout().subscribe();
-  }  
+  } 
 
 }

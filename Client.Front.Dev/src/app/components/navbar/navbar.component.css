@@ -1,0 +1,13 @@
+.icon-button {
+    min-width: 0px;
+    padding: 0 4px;
+}
+
+.trans-toolbar {
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    background: none;
+    color: white;
+    box-shadow: 0px 0px 3px 1px #fff;
+}

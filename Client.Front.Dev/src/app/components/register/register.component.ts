@@ -11,8 +11,7 @@ export class RegisterComponent implements OnInit {
 
   model: RegisterData = {};
   loading: boolean = false;
-  nok: boolean = false;
-  exists: boolean = false;
+  errmsg: string;
 
   constructor(
     private auth: AuthService,
@@ -24,15 +23,18 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     this.loading = true;
-    this.nok = false;
-    this.exists = false;
+    this.errmsg = undefined;
     this.auth.register(this.model as any).subscribe(x => {
-      // if (x == "ok")
-        this.router.navigateByUrl("");
-      // else if (x == "nok")
-      //   this.nok = true;
-      // else if (x == "exists")
-      //   this.exists = true;
+      this.router.navigateByUrl("login");
+    }, e => {
+      this.loading = false;
+      if (e.status == 400 || e.status == 409) {        
+        this.errmsg = e.error.message;
+      }
+      else {
+        this.errmsg = "Unknown error occured";
+        console.log(e);
+      }
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   model: LoginData = {};
   loading: boolean = false;
-  nok: boolean = false;
+  errmsg: any;
 
   constructor(
     private auth: AuthService,
@@ -21,14 +22,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogin() {    
+  onLogin() {
     this.loading = true;
-    this.nok = false;
-    this.auth.login(this.model as any).subscribe(x=>{
-      // if ( x == "ok")
-        this.router.navigateByUrl("");
-      // else if (x == "nok")
-      //   this.nok = true;
+    this.errmsg = undefined;
+    this.auth.login(this.model as any).subscribe(x => {
+      this.router.navigateByUrl("");
+    }, e => {
+      this.loading = false;
+      if (e.status == 400 || e.status == 404) {
+        this.errmsg = e.error.message;
+      }
+      else {
+        this.errmsg = "Unknown error occured";
+        console.log(e);
+      }
     })
   }
 
