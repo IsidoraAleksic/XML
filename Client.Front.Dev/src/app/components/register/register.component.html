@@ -1,28 +1,30 @@
-<div style="text-align:center">
-  <div class="center-form">
-    <h1 style="color: #555">Register</h1>
-    <mat-form-field>
-      <input matInput placeholder="First Name" [(ngModel)]="model.firstName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Last Name" [(ngModel)]="model.lastName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email" [(ngModel)]="model.email">
-    </mat-form-field>
-    <mat-form-field>
-      <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
-      <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
-        <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
-        <mat-icon *ngIf="showPassword">visibility</mat-icon>
-      </button>
-    </mat-form-field>
-    <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
-    <div>
-      <button mat-button (click)="onRegister()">Register</button>
-    </div>    
-    <div *ngIf="loading" style="margin: 10px">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<div class="background" [style]="bg.style">
+  <div fxLayout fxLayoutAlign="center center" style="height: 100vh;">
+    <div fxLayout="column" class="form-component">
+      <h1 class="mat-display-1" style="color: #555">Register</h1>
+      <mat-form-field>
+        <input matInput placeholder="First Name" [(ngModel)]="model.firstName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" [(ngModel)]="model.lastName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="model.email">
+      </mat-form-field>
+      <mat-form-field>
+        <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
+        <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
+          <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+          <mat-icon *ngIf="showPassword">visibility</mat-icon>
+        </button>
+      </mat-form-field>
+      <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
+      <div>
+        <button mat-button (click)="onRegister()">Register</button>
+      </div>
+      <div *ngIf="loading" style="margin: 10px">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
     </div>
   </div>
 </div>

@@ -1,13 +1,38 @@
-<div
-  style="background: white"
-  fxLayout="column"
-  fxFlexFill>
-  <div  
-    fxLayout="column" 
-    fxLayout.xs="column"
-    class="user-header">
-    <div>{{auth.current.firstName}} {{auth.current.lastName}}</div>
-    <div>{{auth.current.email}}</div>
+<div class="background">
+  <div fxLayout="column" style="height: 100vh;">
+    <div *ngIf="auth.current" class="profile-header mat-typography">
+      <div fxLayout fxLayoutAlign="start center" class="profile-header-content">
+        <button routerLink="" mat-icon-button>
+          <mat-icon>home</mat-icon>
+        </button>
+        <span class="mat-h1 no-select">{{auth.current.firstName}} {{auth.current.lastName}}</span>
+        <small class="no-select">{{auth.current.email}}</small>
+      </div>
+    </div>
+    <div fxLayout>
+      <div fxFlex style="overflow: auto; background: #f5f5f5; text-align: center;">
+        <h1 class="mat-h1" style="color: #555">Active Reservations</h1>
+        <ul class="inls">
+          <li *ngFor="let x of 30 | range">
+            <mat-card style="max-width: 330px; margin: 3px; display: inline-block;" class="mat-typography">
+              <mat-card-header>
+                <mat-card-title>Shiba Apartments</mat-card-title>
+                <mat-card-subtitle>Serbia, Novi Sad, Bul. Oslobodjenja 33</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  3.3.2003 - 10.3.2003
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Show Messages</button>
+                <button mat-button>Cancel</button>
+              </mat-card-actions>
+            </mat-card>
+          </li>
+        </ul>
+
+      </div>
+    </div>
   </div>
-  
 </div>

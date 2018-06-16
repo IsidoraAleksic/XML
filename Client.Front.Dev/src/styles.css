@@ -73,6 +73,7 @@ right: -9px !important;
 }
 
 .form-component {
+    flex: 1;
     max-width: 270px;
     text-align: center;
     background: white; 

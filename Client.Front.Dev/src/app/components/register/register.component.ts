@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { BackgroundStyleService } from '../../services/background-style.service';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,11 @@ export class RegisterComponent implements OnInit {
   model: RegisterData = {};
   loading: boolean = false;
   errmsg: string;
+  
   showPassword: boolean = false;
 
   constructor(
+    public bg: BackgroundStyleService,
     private auth: AuthService,
     private router: Router
   ) { }

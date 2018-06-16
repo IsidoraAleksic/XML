@@ -1,0 +1,14 @@
+.search-input {
+    font-size: 14px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.inls {
+    padding: 0;
+    list-style: none;
+}
+
+.inls li {
+    display: inline;
+}

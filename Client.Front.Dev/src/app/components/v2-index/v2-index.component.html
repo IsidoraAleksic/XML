@@ -1,8 +1,9 @@
 <div class="background" [style]="bg.style">
-  <div fxLayout="column" style="height: 100vh; color: white">
+  <div fxLayout="column" style="height: 100vh;">
     <app-navbar></app-navbar>
     <div fxLayout>
-      <div fxFlex style="overflow: auto">
+      <div fxFlex fxLayout="column" fxLayoutAlign="start center" style="overflow: auto">        
+        <app-search-form (basicSearch)="onBasicSearch($event)" (advancedSearch)="onAdvancedSearch($event)"></app-search-form>
         <p *ngFor="let x of 100 | range">ASD</p>
       </div>
     </div>
