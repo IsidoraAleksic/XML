@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AccommodationUnitRepository extends JpaRepository<AccommodationUnit, Long>{
 
+    List<AccommodationUnit> getByAgent_Id(long id);
 }

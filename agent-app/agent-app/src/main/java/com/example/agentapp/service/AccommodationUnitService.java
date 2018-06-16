@@ -10,5 +10,8 @@ public interface AccommodationUnitService {
 
     List<AccommodationUnit> getAllUnits();
 
+    List<AccommodationUnit> getUnitsByCreator(long id);
+
     AccommodationUnit addUnit(AccommodationUnit unit);
+
 }

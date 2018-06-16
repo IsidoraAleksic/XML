@@ -13,30 +13,20 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label>City:</label>
-                        <input v-model="data.city" type="text" class="form-control" placeholder="">
+                        <input v-model="temp.city" type="text" class="form-control" placeholder="">
                     </div>
 
                     <div class="col-md-6">
                         <label>Country:</label>
-                        <input v-model="data.country" type="text" class="form-control" placeholder="">
+                        <input v-model="temp.country" type="text" class="form-control" placeholder="">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Address:</label>
-                <input v-model="data.address" type="text" class="form-control" placeholder="">
+                <input v-model="temp.address" type="text" class="form-control" placeholder="">
             </div>
-
-            <div class="form-group">
-                <label>Accommodation type: </label>
-                  <select v-model="data.accommodationType" class="form-control">
-                      <option value="0">Hotel</option>
-                      <option value="1">Bed & breakfast</option>
-                      <option value="2">Apartment</option>
-                  </select>
-            </div>
-            <br>
 
             <div class="form-row">
                 <div class="form-group">
@@ -47,6 +37,8 @@
                     </textarea>    
                 </div>
             </div> 
+
+            <br>
 
             <div class="form-group">
                 <label>Upload photos: </label>
@@ -75,67 +67,51 @@
             <br>
 
             <div class="form-group">
-                <label>Choose options: </label>
-                <div class="row">
-                    
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input v-model="data.wifi" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck1">
-                            WiFi
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="data.parking" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck2">
-                            Parking
-                            </label>
-                        </div>    
-                    </div>
+                <label>Choose accommodation type: </label>
+                <div> 
+                    <template>
+                      <div>
+                        <multiselect v-model="selectedType" :options="types" ></multiselect>
+                      </div>
+                    </template>
+                </div>
+            </div>
 
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input v-model="data.breakfast" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck1">
-                            Breakfast
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="data.tv" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck2">
-                            TV
-                            </label>
-                        </div>    
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input v-model="data.privateBathroom" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck1">
-                            Private bathroom
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input v-model="data.kitchen" class="form-check-input" type="checkbox" value="" >
-                            <label class="form-check-label" for="defaultCheck2">
-                            Kitchen
-                            </label>
-                        </div>    
-                    </div>
-                </div>      
-            </div> <!-- checkbox area done -->
+            <div class="form-group">
+                <label>Choose accommodation category: </label>
+                <div> 
+                    <template>
+                      <div>
+                        <multiselect v-model="selectedCategory" :options="categories"></multiselect>
+                      </div>
+                    </template>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label>Choose additional services: </label>
+                <div> 
+                    <template>
+                      <div>
+                        <multiselect v-model="selectedServices" :options="additionalServices" :multiple="true"></multiselect>
+                      </div>
+                    </template>
+                </div>
+            </div>                    
 
             <br>
 
             <div class="form-group">
                 <button @click="sendFormData" type="button" class="btn btn-primary btn-block"> Save  </button>
-            </div> <!-- form-group// -->                                      
+            </div>                                      
         </form>
-        </article> <!-- card-body end .// -->
-        </div> <!-- card.// -->
-        </div> <!-- col.//-->
+        </article> 
+        </div> 
+        </div> 
 
-        </div> <!-- row.//-->
+        </div> 
 
 
 </div> 
@@ -145,6 +121,8 @@
 <script>
 
     import ImageForm from './ImageForm'
+    import Multiselect from 'vue-multiselect'
+
     import * as axios from 'axios';
 
     const BASE_URL = 'http://localhost:8082/agent';
@@ -152,24 +130,29 @@
     export default {
         name : 'AccommodationForm',
         components : {
-            ImageForm
+            ImageForm, Multiselect
         },
         data() {
             return {
-                data: {
+                temp: {
                     city : '',
                     country : '',
-                    address : '',
+                    address : ''
+                },
+                data: {
+                    agent : {
+                        id : 1
+                    },
+                    place : '',
                     description : '',
-                    capacity : 1,
-                    accommodationType : '1',      //kad budes slala na bek salji kao int
-                    wifi: false,
-                    parking : false,
-                    breakfast : false,
-                    tv : false,
-                    privateBathroom : false,
-                    kitchen : false    
-                }
+                    capacity : 1
+                },
+                selectedServices : null,
+                selectedCategory : null,
+                selectedType : null,
+                categories: [],
+                types : [],
+                additionalServices : []
             }
         },
         methods : {
@@ -178,9 +161,15 @@
                 //kad vrati accommodation unit
                 //this.$event.emit() za upload slika
                 let sendData = this.data;
+
+                //getuj id logovanog agenta i sendData.agent = {id}
+
+                sendData.place = this.temp.address + ',' + this.temp.city + ',' + this.temp.country;
                 sendData.capacity = parseInt(sendData.capacity);
-                sendData.accommodationType = parseInt(sendData.accommodationType);
-                // sendData = JSON.stringify(sendData);
+                sendData.accommodationType = { typeName : this.selectedType};
+                sendData.category = { categoryName : this.selectedCategory };
+                sendData.additionalServices = this.selectedServices.map( x => {  return { name : x } });
+
                 alert(JSON.stringify(sendData))
                 this.sendRequest(sendData);
             },
@@ -195,11 +184,22 @@
                             this.$emit('upload', x.data.id); 
                         });
             }
+        },
+        created() {
+            //axios poziv da se dobiju svi acc typeovi i acc kategorije i additional servisi
+            const url = `${BASE_URL}/attributes`;
+            axios.get(url)
+                    .then(x => {
+                        this.categories = x.data.categories;
+                        this.types = x.data.types;
+                        this.additionalServices = x.data.additionalServices;
+                    });
         }
     }
     
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 
 </style>

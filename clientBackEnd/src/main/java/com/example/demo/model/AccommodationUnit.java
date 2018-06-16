@@ -1,28 +1,41 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer","handler"})
 public class AccommodationUnit implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String place;
+    private String description;
+    private int capacity;
+
     @ManyToOne
     private AccommodationType accommodationType;
-    private int capacity;
+
     @ManyToOne
     private AccommodationCategory category;
 
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<AdditionalServices> additionalServices;
 
-       public AccommodationUnit() {
-        }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agent_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Agent agent;
+
+
+    public AccommodationUnit() {
+    }
 
     public long getId() {
         return id;
@@ -30,6 +43,30 @@ public class AccommodationUnit implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     public String getPlace() {
@@ -48,14 +85,6 @@ public class AccommodationUnit implements Serializable {
         this.accommodationType = accommodationType;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
     public AccommodationCategory getCategory() {
         return category;
     }
@@ -63,8 +92,6 @@ public class AccommodationUnit implements Serializable {
     public void setCategory(AccommodationCategory category) {
         this.category = category;
     }
-
-
 
     public List<AdditionalServices> getAdditionalServices() {
         return additionalServices;

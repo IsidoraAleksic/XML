@@ -2,7 +2,6 @@
 
     <div class="container">
 
-        <h1 class="my-4 text-center text-lg-left">Accommodation photos</h1>
 
         <div class="row text-center text-lg-left">
             <template v-for="item in images">
@@ -26,9 +25,10 @@
 
     export default {
         name : 'ImageView',
+        props : ['unit'],
         data() {
             return {
-                unitId : 0, //ovo ce da se dobavlja na osnovu otvorenog smjestaja
+                unitId : this.unit, //ovo ce da se dobavlja na osnovu otvorenog smjestaja
                 images : []
             }
         },
@@ -37,9 +37,9 @@
                 return 'data:image/' + imgData.format + ';base64,' + imgData.content;
             }
         },
-        mounted() {
+        created() {
             //ovo nece ici na mounted nego na event i id ce bit dinamicki
-            axios.get(BASE_URL + '/photos/get/1')
+            axios.get(BASE_URL + '/photos/get/'+this.unitId)
                     .then(x => {
                         this.images = this.images.concat(x.data);
                     });

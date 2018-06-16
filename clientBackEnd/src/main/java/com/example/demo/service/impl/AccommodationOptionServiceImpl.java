@@ -3,15 +3,16 @@ package com.example.demo.service.impl;
 import com.example.demo.model.AccommodationCategory;
 import com.example.demo.model.AccommodationType;
 import com.example.demo.model.AdditionalServices;
+import com.example.demo.model.dto.SearchParameters;
 import com.example.demo.repository.AccommodationCategoryRepository;
 import com.example.demo.repository.AccommodationTypeRepository;
 import com.example.demo.repository.AdditionalServicesRepository;
-import com.example.demo.service.AccommodationOptionServices;
+import com.example.demo.service.AccommodationOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccommodationOptionServicesImpl implements AccommodationOptionServices {
+public class AccommodationOptionServiceImpl implements AccommodationOptionService {
 
     @Autowired
     AccommodationCategoryRepository accommodationCategoryRepository;
@@ -34,5 +35,12 @@ public class AccommodationOptionServicesImpl implements AccommodationOptionServi
     @Override
     public AccommodationCategory getCategoryById(Long id) {
         return accommodationCategoryRepository.getById(id);
+    }
+
+    @Override
+    public SearchParameters getParameters() {
+        SearchParameters searchParameters = new SearchParameters(additionalServicesRepository.findAll(),
+                        accommodationCategoryRepository.findAll(),accommodationTypeRepository.findAll());
+        return searchParameters;
     }
 }

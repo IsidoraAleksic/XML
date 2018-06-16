@@ -18,6 +18,13 @@ public class Reservation implements Serializable {
     private Date startDate;
     private Date endDate;
 
+    public Reservation(User user, AccommodationUnit accommodationUnit, Date startDate, Date endDate) {
+        this.user = user;
+        this.accommodationUnit = accommodationUnit;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public long getId() {
         return id;
     }

@@ -29,6 +29,13 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     }
 
     @Override
+    public List<AccommodationUnit> getUnitsByCreator(long id) {
+        List<AccommodationUnit> units = accommodationUnitRepository.getByAgent_Id(id);
+        int n = units.size();
+        return units;
+    }
+
+    @Override
     public AccommodationUnit addUnit(AccommodationUnit unit) {
         return accommodationUnitRepository.save(unit);
     }

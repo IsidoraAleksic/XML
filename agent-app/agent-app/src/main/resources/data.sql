@@ -1,29 +1,41 @@
-insert into accommodation_unit(country, city, address, description, accommodation_type,
-                               capacity, category, wifi, parking, tv, breakfast, kitchen, private_bathroom)
-values ('Serbia', 'Novi Sad', 'Bul Oslovodjenja 10', 'ok smjestaj', 2, 1, 3, true, false, true, false, true, true);
-
-insert into accommodation_unit(country, city, address, description, accommodation_type,
-                               capacity, category, wifi, parking, tv, breakfast, kitchen, private_bathroom)
-values ('Serbia', 'Belgrade', 'Seikina 64', 'ok smjestaj', 2, 1, 3, true, false, true, false, true, true);
-
-insert into accommodation_unit(country, city, address, description, accommodation_type,
-                               capacity, category, wifi, parking, tv, breakfast, kitchen, private_bathroom)
-values ('Montenegro', 'Herceg Novi', 'Partizanski put 20', 'ok smjestaj', 2, 1, 3, true, false, true, false, true, true);
-
-insert into accommodation_unit(country, city, address, description, accommodation_type,
-                               capacity, category, wifi, parking, tv, breakfast, kitchen, private_bathroom)
-values ('Montenegro', 'Sutorina', 'Sutorina bb', 'ok smjestaj', 2, 1, 3, true, false, true, false, true, true);
+insert into accommodation_category(category_name) values ('*');
+insert into accommodation_category(category_name) values ('**');
+insert into accommodation_category(category_name) values ('***');
+insert into accommodation_category(category_name) values ('****');
+insert into accommodation_category(category_name) values ('*****');
 
 
+insert into accommodation_type(type_name) values ('APARTMENT');
+insert into accommodation_type(type_name) values ('HOTEL');
+insert into accommodation_type(type_name) values ('BED & BREAKFAST');
 
-insert into accommodation_photo(accommodation_unit_id, path) values (1, 'aja.jpg');
+insert into additional_service(name) values ('WiFi');
+insert into additional_service(name) values ('Parking');
+insert into additional_service(name) values ('Kitchen');
+insert into additional_service(name) values ('Private bathroom');
+insert into additional_service(name) values ('TV');
+
+insert into agent(username, password) values('user', 'user');
+insert into agent(username, password) values('petar', 'petar');
+
+insert into accommodation_unit
+(place, description, capacity, accommodation_type_id, category_id, agent_id) values
+('Futoska 12,Novi Sad,Serbia', 'super smjestaj', 5, 1, 3, 1);
+
+insert into accommodation_unit
+(place, description, capacity, accommodation_type_id, category_id, agent_id) values
+('Balzakova 23,Novi Sad,Serbia', 'ok smjestaj', 3, 3, 4, 1);
+
+insert into accommodation_unit
+(place, description, capacity, accommodation_type_id, category_id, agent_id) values
+('Sejkina 72,Belgrade,Serbia', 'odlican smjestaj', 12, 2, 5, 2);
+
+insert into accommodation_photo(accommodation_unit_id, path) values (1, '12.jpg');
 insert into accommodation_photo(accommodation_unit_id, path) values (1, '111.jpg');
-insert into accommodation_photo(accommodation_unit_id, path) values (1, '3.jpg');
 
-insert into users(username, password) values ('admin', 'admin');
-insert into users(username, password) values ('petarpetrovic', '123');
-
-insert into accommodation_unit_creator(accommodation_unit_id, user_id) values (1, 2);
-insert into accommodation_unit_creator(accommodation_unit_id, user_id) values (2, 2);
-insert into accommodation_unit_creator(accommodation_unit_id, user_id) values (3, 2);
-insert into accommodation_unit_creator(accommodation_unit_id, user_id) values (4, 2);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (1, 1);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (1, 2);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (1, 4);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (2, 1);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (2, 3);
+insert into accommodation_unit_additional_service(accommodation_unit_id, additional_service_id) values (2, 4);
