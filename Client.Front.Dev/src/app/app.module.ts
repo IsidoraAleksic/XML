@@ -18,6 +18,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { RangePipe } from './pipes/range.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import { V2IndexComponent } from './components/v2-index/v2-index.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     ImageCarouselDialogComponent,
     RangePipe,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    V2IndexComponent,
+    SearchFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

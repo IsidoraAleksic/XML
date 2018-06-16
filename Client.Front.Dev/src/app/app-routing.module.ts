@@ -4,14 +4,13 @@ import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { V2IndexComponent } from './components/v2-index/v2-index.component';
 
 const routes: Routes = [
-  { path: "", component: IndexComponent },
+  { path: "", component: V2IndexComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "profile", component: ProfileComponent }
-  //   { path: "", component: HomeComponent },
-  //   { path: "register", component: RegisterComponent }
 ];
 
 @NgModule({

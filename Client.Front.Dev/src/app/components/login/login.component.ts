@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { BackgroundStyleService } from '../../services/background-style.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
 
   constructor(
+    public bg: BackgroundStyleService,
     private auth: AuthService,
     private router: Router
   ) { }
