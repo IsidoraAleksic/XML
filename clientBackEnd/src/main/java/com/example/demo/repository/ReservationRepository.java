@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
@@ -14,5 +15,5 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     Reservation getById(Long id);
     Reservation getByAccommodationUnit(AccommodationUnit accommodationUnit);
     int countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(AccommodationUnit accommodationUnit, Date endDate, Date startDate);
-    Reservation getByUser(User user);
+    List<Reservation> getByUser(User user);
 }
