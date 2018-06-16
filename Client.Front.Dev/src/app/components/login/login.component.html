@@ -5,7 +5,11 @@
       <input matInput placeholder="Email" [(ngModel)]="model.email">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="model.password">
+      <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
+      <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
+        <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+        <mat-icon *ngIf="showPassword">visibility</mat-icon>
+      </button>
     </mat-form-field>
     <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
     <div style="margin-bottom: 10px">

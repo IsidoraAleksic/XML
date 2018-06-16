@@ -17,6 +17,7 @@ import { ImageCarouselDialogComponent } from './components/image-carousel/image-
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { RangePipe } from './pipes/range.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RangePipe } from './pipes/range.pipe';
     ImageCarouselComponent,
     ImageCarouselDialogComponent,
     RangePipe,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

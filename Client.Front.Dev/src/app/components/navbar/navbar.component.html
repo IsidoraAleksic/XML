@@ -2,7 +2,7 @@
     <a mat-button routerLink="/">Booking.цом</a>
     <span style="flex: 1 1 auto"></span>
     <ng-template [ngIf]="auth.current" [ngIfElse]="anon">
-        <button mat-button>
+        <button mat-button routerLink="profile">
             <mat-icon>account_circle</mat-icon>
             {{auth.current.email}}
         </button>

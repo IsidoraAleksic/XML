@@ -1,0 +1,12 @@
+.user-header  {
+    text-align: center;
+    font-family: Roboto,'Helvetica Neue',sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #555
+}
+
+.user-header > div {
+    margin: 8px;
+    user-select: none;
+}

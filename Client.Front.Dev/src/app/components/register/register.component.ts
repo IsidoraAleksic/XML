@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   model: RegisterData = {};
   loading: boolean = false;
   errmsg: string;
+  showPassword: boolean = false;
 
   constructor(
     private auth: AuthService,
