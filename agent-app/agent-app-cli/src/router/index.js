@@ -7,7 +7,8 @@ import ImageView from '@/components/ImageView'
 import AccommodationForm from '@/components/AccommodationForm'
 import Datepicker from '@/components/Datepicker'
 import AccommodationList from '@/components/AccommodationList'
-
+import AccommodationView from '@/components/AccommodationView'
+ 
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +47,11 @@ export default new Router({
       path: '/accList',
       name: 'AccommodationList',
       component: AccommodationList
+    },
+    {
+      path: '/accommodationUnit/:id',
+      name: 'AccommodationView',
+      component: AccommodationView
     }
   ]
 })

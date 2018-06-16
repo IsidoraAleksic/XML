@@ -5,14 +5,15 @@
                 <div class="col-md-3 mb-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-header">
-                            <h3>{{ unit.address }}</h3>
+                            <h4><router-link :to="{ name: 'AccommodationView', params: { unitId : unit.id }}"> 
+                            {{ getUnitAddress(unit.place) }}</router-link></h4>
                         </div>
                         <div class="card-body">
                             <p class="card-text"> {{ unit.description }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{unit.city}}</li>
-                            <li class="list-group-item">{{unit.country}}</li>
+                            <li class="list-group-item">{{ getUnitCity(unit.place) }}</li>
+                            <li class="list-group-item">{{ getUnitCountry(unit.place) }}</li>
                         </ul>
                         <div class="card-body">
                             <a href="#" class="card-link">Card link</a>
@@ -40,9 +41,20 @@
                 accommodationUnits : []
             }
         },
+        methods : {
+            getUnitAddress(location) {
+                return location.split(',')[0];
+            },
+            getUnitCity(location) {
+                return location.split(',')[1];
+            },
+            getUnitCountry(location) {
+                return location.split(',')[2];
+            }
+        },
         created() {
             //post zahtjev da se dobavi lista svih smjestaja koje je kreirao loginovani user, salje se samo userId kad bude
-            const url = `${BASE_URL}/accommodationUnit/get/2`;
+            const url = `${BASE_URL}/accommodationUnit/get/1`;
 
             axios.get(url)
                     .then(x => {
