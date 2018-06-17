@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -31,18 +31,11 @@ public class SearchController {
     public List<AccommodationPricing> basicSearch(@RequestParam("place") String place, @RequestParam("startDate") String startDate,
                                                   @RequestParam("endDate") String endDate, @RequestParam("people") int people){
 
-        Date date = null;
-        try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
-            date = sdf1.parse(startDate);
-            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-            date = sdf1.parse(endDate);
-            java.sql.Date sqlEndDate = new java.sql.Date(date.getTime());
-            return accommodationService.basicSearch(place,sqlStartDate,sqlEndDate,people);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        Date sqlStartDate = reservationService.toDate(startDate);
+        Date sqlEndDate = reservationService.toDate(endDate);
+        return accommodationService.basicSearch(place,sqlStartDate,sqlEndDate,people);
+
 
     }
 
@@ -55,18 +48,11 @@ public class SearchController {
     public List<AccommodationPricing> advancedSearch(@RequestParam("place") String place,@RequestParam("startDate") String startDate,
                                                      @RequestParam("endDate") String endDate, @RequestParam("people") int people,
                                                      @RequestParam("id") Long type, @RequestParam("id") Long category,
-                                                     @RequestParam(value = "additionalServices[]") List<Long> additionalServices){
-        Date date = null;
-        try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-            date = sdf1.parse(startDate);
-            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-            date = sdf1.parse(endDate);
-            java.sql.Date sqlEndDate = new java.sql.Date(date.getTime());
-            return accommodationService.advancedSearch(place,sqlStartDate,sqlEndDate,people,type,category,additionalServices);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+                                                     @RequestParam(value = "additionalServices[]") List<Long> additionalServices) {
+
+        Date sqlStartDate = reservationService.toDate(startDate);
+        Date sqlEndDate = reservationService.toDate(endDate);
+        return accommodationService.advancedSearch(place, sqlStartDate, sqlEndDate, people, type, category, additionalServices);
+
     }
 }

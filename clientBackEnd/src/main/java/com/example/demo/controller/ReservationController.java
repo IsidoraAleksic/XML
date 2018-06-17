@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/reserve")
+@PreAuthorize("GUEST")
 public class ReservationController {
 
     @Autowired
@@ -18,21 +19,25 @@ public class ReservationController {
     @Autowired
     AccommodationService accommodationService;
 
-    @PreAuthorize("GUEST")
-    @RequestMapping(value = "/reserve", method = RequestMethod.POST, consumes = "application/json")
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public void reserve(@RequestBody Reservation reservation){
        reservationService.reserve(reservation);
     }
 
-    @RequestMapping(value = "/cancel", method = RequestMethod.DELETE)
+    @RequestMapping(method = RequestMethod.DELETE)
     public void cancel( @RequestParam("id") Long id){
        reservationService.cancel(id);
     }
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping( method = RequestMethod.GET, produces = "application/json")
     public List<Reservation> getAll(){
         return reservationService.getByUser();
     }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
+//    public void delete(@PathVariable("id") Long id){
+//        reservationService.delete(id);
+//    }
 
 
 }

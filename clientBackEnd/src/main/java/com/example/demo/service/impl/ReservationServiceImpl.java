@@ -2,15 +2,19 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.model.AccommodationUnit;
+import com.example.demo.model.Message;
 import com.example.demo.model.Reservation;
 import com.example.demo.model.User;
+import com.example.demo.repository.MessageRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.service.AuthenticationService;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -20,6 +24,8 @@ public class ReservationServiceImpl implements ReservationService {
     ReservationRepository reservationRepository;
     @Autowired
     AuthenticationService authenticationService;
+    @Autowired
+    MessageRepository messageRepository;
 
     @Override
     public void save(Reservation reservation) {
@@ -28,12 +34,28 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void delete(Reservation reservation) {
+
         reservationRepository.delete(reservation);
     }
 
     @Override
     public Reservation getById(Long id) {
         return reservationRepository.getById(id);
+    }
+
+    @Override
+    public Date toDate(String date) {
+        java.util.Date toDate = null;
+        try {
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
+            toDate = sdf1.parse(date);
+            java.sql.Date sqlDate = new java.sql.Date(toDate.getTime());
+            return sqlDate;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -47,6 +69,9 @@ public class ReservationServiceImpl implements ReservationService {
             throw new BadRequestException("Reservation must not be null");
         }
         User user = authenticationService.getLoggedInUser();
+        if(user==null){
+            throw new BadRequestException("User must not be null");
+        }
         reservation.setUser(user);
         save(reservation);
 
@@ -58,6 +83,13 @@ public class ReservationServiceImpl implements ReservationService {
         if(reservation==null){
             throw new BadRequestException("Reservation must not be null");
         }
+        User user = authenticationService.getLoggedInUser();
+        if(user==null){
+            throw new BadRequestException("User must not be null");
+        }
+        List<Message> messages = messageRepository.getByReservation(reservation);
+        if(messages!=null )
+            messageRepository.deleteAll(messages);
         delete(reservation);
     }
 

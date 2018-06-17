@@ -12,15 +12,16 @@ public class Message implements Serializable {
     @ManyToOne
     private Reservation reservation;
     private String message;
+    private boolean agent;
 
     public Message() {
     }
 
-    public Message(Reservation reservation, String message) {
+    public Message(Reservation reservation, String message, boolean agent) {
         this.reservation = reservation;
         this.message = message;
+        this.agent = agent;
     }
-
     public long getId() {
         return id;
     }
@@ -43,5 +44,13 @@ public class Message implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isAgent() {
+        return agent;
+    }
+
+    public void setAgent(boolean agent) {
+        this.agent = agent;
     }
 }
