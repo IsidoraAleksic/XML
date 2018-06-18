@@ -2,9 +2,23 @@
   <div fxLayout="column" style="height: 100vh;">
     <app-navbar></app-navbar>
     <div fxLayout>
-      <div fxFlex fxLayout="column" fxLayoutAlign="start center" style="overflow: auto">          
+      <div fxFlex fxLayout="column" fxLayoutAlign="start center" style="overflow: auto;" [ngSwitch]="state">
         <app-search-form (basicSearch)="onBasicSearch($event)" (advancedSearch)="onAdvancedSearch($event)"></app-search-form>
-        <p *ngFor="let x of 100 | range">ASD</p>
+        <div class="state-message" *ngSwitchCase="'start'">
+          <span class="mat-h1">Enter search parameters</span>
+        </div>
+        <div class="state-loading" *ngSwitchCase="'loading'">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div class="state-message" *ngSwitchCase="'no-results'">
+            <span class="mat-h1">No results</span>
+          </div>
+        <ng-container *ngSwitchCase="'results'">
+
+            <app-accommodation-detail [accommodation]="accommodation"
+            class="accommodation-list"
+            *ngFor="let accommodation of searchResults"></app-accommodation-detail>
+        </ng-container>
       </div>
     </div>
-</div>
+  </div>

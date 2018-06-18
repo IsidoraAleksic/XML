@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{data.place}} Reviews</h2>
+<mat-dialog-content [ngSwitch]="state">
+  <mat-list *ngSwitchCase="'results'">
+    <mat-list-item *ngFor="let review of reviews" class="mat-typography">
+      <h3 matLine>{{review.user.firstName}} {{review.user.lastName}}</h3>
+      <p matLine>{{review.review}}</p>
+    </mat-list-item>
+  </mat-list>
+  <div style="margin: 10px" *ngSwitchCase="'loading'">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <p class="mat-h1" *ngSwitchCase="'no-results'">No reviews yet</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+</mat-dialog-actions>

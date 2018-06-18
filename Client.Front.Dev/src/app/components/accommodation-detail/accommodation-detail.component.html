@@ -1,0 +1,23 @@
+<div class="accomodation-container">
+  <mat-card class="accomodation-card">
+    <mat-card-header>
+      <mat-card-title>{{accommodation.place}} </mat-card-title>
+      <mat-card-title> Cost: {{accommodation.price}}$ </mat-card-title>
+      <!-- <mat-card-subtitle>Serbia, Novi Sad, Bul. Oslobodjenja 33</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-chip-list>
+      <mat-chip *ngFor="let service of accommodation.additionalServices">{{service.name}}</mat-chip>
+    </mat-chip-list>
+    <br/>
+    <app-image-carousel [title]="'Shiba Apartments'" [srcs]="['https://material.angular.io/assets/img/examples/shiba1.jpg', 'https://i.imgur.com/o1hHhWP.jpg', 'https://material.angular.io/assets/img/examples/shiba2.jpg']"></app-image-carousel>
+    <mat-card-content>
+      <p>
+        {{accommodation.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onBook()"color="primary">BOOK</button>
+      <button mat-button (click)="showReviews()">REVIEWS</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

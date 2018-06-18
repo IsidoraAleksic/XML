@@ -22,6 +22,7 @@ public class ReviewController {
         reviewService.post(review);
     }
 
+    // TODO: Allow unauthorized
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public List<Review> get(@PathVariable("id") Long id){
         return reviewService.get(id);

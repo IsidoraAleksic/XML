@@ -11,6 +11,35 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 })
 export class V2IndexComponent implements OnInit {
 
+  state: string = "results";
+  searchResults = [{
+    id: 1,
+    price: 1000,
+    place: "Place",
+    description: "Description",
+    additionalServices: []
+  },{
+    price: 1000,
+    place: "Place",
+    description: "Description",
+    additionalServices: []
+  },{
+    price: 1000,
+    place: "Place",
+    description: "Description",
+    additionalServices: []
+  },{
+    price: 1000,
+    place: "Place",
+    description: "Description",
+    additionalServices: []
+  },{
+    price: 1000,
+    place: "Place",
+    description: "Description",
+    additionalServices: []
+  }];
+
   constructor(
     public bg: BackgroundStyleService,
     private searchService: SearchService
@@ -20,17 +49,28 @@ export class V2IndexComponent implements OnInit {
   }
   
   onBasicSearch(search: any) {
+    this.state = "loading";
     this.searchService.basicSearch(search)
       .subscribe(x => {
-        console.log(x);
+        this.searchResults = x;
+        this.setResultState();
       }, err => { console.log(err) });
   }
 
   onAdvancedSearch(search: any) {
+    this.state = "loading";
     this.searchService.advancedSearch(search)
     .subscribe(x => {
-      console.log(x);
+      this.searchResults = x;
+      this.setResultState();
     }, err => { console.log(err) });
+  }
+
+  private setResultState() {
+    if (this.searchResults.length == 0)
+      this.state = "no-results";
+    else
+      this.state = "results";
   }
 
 }

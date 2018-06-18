@@ -1,0 +1,12 @@
+.state-message {    
+     background: white; flex: 1; padding: 10px
+}
+
+.state-loading {
+    width: 100%; max-width: 330px;
+    background: white; flex: 1; padding: 10px
+}
+
+.accommodation-list {
+    width: 100%;
+}

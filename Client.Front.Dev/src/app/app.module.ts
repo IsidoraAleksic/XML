@@ -21,6 +21,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { V2IndexComponent } from './components/v2-index/v2-index.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { NotInPipe } from './pipes/not-in.pipe';
+import { AccommodationDetailComponent } from './components/accommodation-detail/accommodation-detail.component';
+import { ReviewListDialogComponent } from './components/review-list-dialog/review-list-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,13 @@ import { NotInPipe } from './pipes/not-in.pipe';
     ImageCarouselComponent,
     ImageCarouselDialogComponent,
     RangePipe,
+    NotInPipe,    
     NavbarComponent,
     ProfileComponent,
     V2IndexComponent,
     SearchFormComponent,
-    NotInPipe,
+    AccommodationDetailComponent,
+    ReviewListDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,7 @@ import { NotInPipe } from './pipes/not-in.pipe';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    ReviewListDialogComponent,
     ImageCarouselDialogComponent
   ]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { BackgroundStyleService } from '../../services/background-style.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class ProfileComponent implements OnInit {
 
   constructor(
+    public bg: BackgroundStyleService,
     public auth: AuthService
   ) { }
 

@@ -79,3 +79,7 @@ right: -9px !important;
     background: white; 
     padding: 15px;
 }
+
+.dialog-aligner {
+    margin: auto !important;
+}
