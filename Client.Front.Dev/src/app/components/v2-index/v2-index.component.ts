@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BackgroundStyleService } from '../../services/background-style.service';
 import { SearchService } from '../../services/search.service';
+import { SettingsService } from '../../services/settings.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
   selector: 'app-v2-index',

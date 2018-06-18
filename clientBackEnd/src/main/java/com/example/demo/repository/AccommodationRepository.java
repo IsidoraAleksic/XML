@@ -14,7 +14,7 @@ public interface AccommodationRepository extends JpaRepository<AccommodationUnit
 
     AccommodationUnit getById(Long id);
     List<AccommodationUnit> getByPlaceAndCapacity(String place,int capacity);
-    List<AccommodationUnit> getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServices
+    List<AccommodationUnit> getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesIn
             (String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory,
              List<AdditionalServices> additionalServices);
 

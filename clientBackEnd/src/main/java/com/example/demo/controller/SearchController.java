@@ -47,7 +47,7 @@ public class SearchController {
     @RequestMapping(value = "/advancedSearch", method = RequestMethod.GET, produces = "application/json")
     public List<AccommodationPricing> advancedSearch(@RequestParam("place") String place,@RequestParam("startDate") String startDate,
                                                      @RequestParam("endDate") String endDate, @RequestParam("people") int people,
-                                                     @RequestParam("id") Long type, @RequestParam("id") Long category,
+                                                     @RequestParam("type") Long type, @RequestParam("category") Long category,
                                                      @RequestParam(value = "additionalServices[]") List<Long> additionalServices) {
 
         Date sqlStartDate = reservationService.toDate(startDate);

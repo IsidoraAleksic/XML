@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-search-form',
@@ -8,21 +9,28 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchFormComponent implements OnInit {
 
   advanced: boolean;
-  search: any = {};
+  search: any = {
+    type: 1,
+    category: 1
+  };
 
   @Output() basicSearch = new EventEmitter<any>();
   @Output() advancedSearch = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(
+    public settings: SettingsService
+  ) { }
 
   ngOnInit() {
   }
 
   onSearch() {
-    if (this.advanced)
+    if (this.advanced) {
       this.advancedSearch.emit(this.search);
-    else
+    }
+    else {
       this.basicSearch.emit(this.search);
+    }
   }
 
 }

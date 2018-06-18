@@ -88,7 +88,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     public List<AccommodationUnit> getByAllCriteria(String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory, List<AdditionalServices> additionalServices) {
-        return accommodationRepository.getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServices(
+        return accommodationRepository.getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesIn(
                 place,capacity,accommodationType,accommodationCategory,additionalServices);
     }
     @Override

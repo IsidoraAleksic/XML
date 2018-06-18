@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
     public Date toDate(String date) {
         java.util.Date toDate = null;
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             toDate = sdf1.parse(date);
             java.sql.Date sqlDate = new java.sql.Date(toDate.getTime());
             return sqlDate;

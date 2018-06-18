@@ -20,6 +20,7 @@ import { RangePipe } from './pipes/range.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { V2IndexComponent } from './components/v2-index/v2-index.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { NotInPipe } from './pipes/not-in.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
     ProfileComponent,
     V2IndexComponent,
     SearchFormComponent,
+    NotInPipe,
   ],
   imports: [
     BrowserModule,

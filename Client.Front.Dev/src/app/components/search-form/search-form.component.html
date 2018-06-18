@@ -27,52 +27,33 @@
             </mat-form-field>
         </li>
     </ul>
-    <div *ngIf="advanced" style="margin-left: 14px; font-family: Roboto,'Helvetica Neue',sans-serif;">Category:</div>
-    <div style="margin-left: 14px" *ngIf="advanced">
-        <mat-slider style="width: 300px" color="primary" thumbLabel tickInterval="auto" min="0" max="5" [(ngModel)]="search.category"></mat-slider>
-    </div>
-    <div style="margin-left: 14px" *ngIf="advanced">
-        <mat-icon *ngFor="let x of search.category | range" color="primary">star</mat-icon>
-    </div>
-    <!-- <ul *ngIf="advanced" class="inls">
-        <li>
-            <mat-form-field class="search-input">
-                <mat-select placeholder="Accomodation Type" [(ngModel)]="selectedType">
-                    <mat-option *ngFor="let type of ['Any', 'Hotel', 'Bed & Breakfast','Apartment']" [value]="type">
-                        {{type}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field class="search-input">
-                <mat-select placeholder="Food Service" [(ngModel)]="selectedService">
-                    <mat-option *ngFor="let type of ['Any', 'Breakfast', 'Half Board','Full Board']" [value]="type">
-                        {{type}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>
-    </ul> -->
-    <ul *ngIf="advanced" class="inls">
-        <li>
-            <mat-checkbox [checked]="search.miniKitchen" class="search-input" color="primary">Mini Kitchen/Kitchen</mat-checkbox>
-        </li>
-        <li>
-            <mat-checkbox [checked]="search.tv" class="search-input" color="primary">TV</mat-checkbox>
-        </li>
-    </ul>
-    <ul *ngIf="advanced" class="inls">
-        <li>
-            <mat-checkbox [checked]="search.privateBathroom" class="search-input" color="primary">Private Bathroom</mat-checkbox>
-        </li>
-        <li>
-            <mat-checkbox [checked]="search.wifi" class="search-input" color="primary">WiFi</mat-checkbox>
-        </li>
-        <li>
-            <mat-checkbox [checked]="search.parking" class="search-input" color="primary">Parking</mat-checkbox>
-        </li>
-    </ul>
+    <ng-container *ngIf="advanced">
+        <ul class="inls">
+            <li>
+                <mat-form-field class="search-input">
+                    <mat-select placeholder="Type" [(ngModel)]="search.type">
+                        <mat-option *ngFor="let type of settings.accommodationTypes" [value]="type.id">
+                            {{type.typeName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field class="search-input">
+                    <mat-select placeholder="Category" [(ngModel)]="search.category">
+                        <mat-option *ngFor="let category of settings.accommodationCategories" [value]="category.id">
+                            {{category.categoryName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </li>
+        </ul>
+        <mat-selection-list #list [(ngModel)]="search.additionalServices">
+            <mat-list-option style="display: inline-block;" *ngFor="let service of settings.additionalServices" [value]="service.id">
+                {{service.name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </ng-container>
     <mat-checkbox (change)="advanced = !advanced" class="search-input" color="primary">Advanced Search</mat-checkbox>
     <div style="display: flex; justify-content: flex-end">
         <button mat-button (click)="onSearch()">Search</button>
