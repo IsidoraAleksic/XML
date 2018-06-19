@@ -23,6 +23,9 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
 import { NotInPipe } from './pipes/not-in.pipe';
 import { AccommodationDetailComponent } from './components/accommodation-detail/accommodation-detail.component';
 import { ReviewListDialogComponent } from './components/review-list-dialog/review-list-dialog.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { OptionDialogComponent } from './components/option-dialog/option-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { ReviewListDialogComponent } from './components/review-list-dialog/revie
     SearchFormComponent,
     AccommodationDetailComponent,
     ReviewListDialogComponent,
+    ConversationComponent,
+    LoginDialogComponent,
+    OptionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +58,8 @@ import { ReviewListDialogComponent } from './components/review-list-dialog/revie
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    OptionDialogComponent,
+    LoginDialogComponent,
     ReviewListDialogComponent,
     ImageCarouselDialogComponent
   ]

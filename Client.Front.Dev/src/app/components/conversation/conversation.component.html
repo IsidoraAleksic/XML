@@ -1,0 +1,14 @@
+<div class="background" [style]="bg.style">
+    <div fxLayout="column" style="height: 100vh;">
+      <app-navbar></app-navbar>
+      <div fxLayout>
+        <div fxFlex style="overflow: auto;" *ngIf="reservation && auth.current">
+          
+            <div style="background: #f5f5f5; color: #555; margin: 24px">
+              <h1 class="mat-h1">{{auth.current.firstName}} {{auth.current.lastName}}</h1>
+            </div>          
+  
+        </div>
+      </div>
+    </div>
+  </div>

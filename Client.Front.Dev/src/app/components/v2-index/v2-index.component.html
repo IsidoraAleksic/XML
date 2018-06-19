@@ -15,7 +15,7 @@
           </div>
         <ng-container *ngSwitchCase="'results'">
 
-            <app-accommodation-detail [accommodation]="accommodation"
+            <app-accommodation-detail [accommodation]="accommodation" (book)="onBook($event)"
             class="accommodation-list"
             *ngFor="let accommodation of searchResults"></app-accommodation-detail>
         </ng-container>
