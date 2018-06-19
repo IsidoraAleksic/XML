@@ -21,6 +21,10 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private boolean blocked;
+    private boolean activated;
+    private boolean deleted;
+    
     public User() {
     }
 
@@ -71,4 +75,29 @@ public class User implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+    
 }

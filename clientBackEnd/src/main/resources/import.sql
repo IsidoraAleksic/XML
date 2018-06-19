@@ -1,5 +1,5 @@
-INSERT INTO users(email,first_name,last_name,password,role) VALUES ('jefimija', 'jefimija','jefimija','jefimija', 'GUEST');
-INSERT INTO users(email,first_name,last_name,password,role) VALUES ('dejan.tot@gmail.com', 'dejan','tot','dejan', 'GUEST');
+INSERT INTO users(email,first_name,last_name,password,role,blocked,activated,deleted) VALUES ('jefimija', 'jefimija','jefimija','jefimija', 'GUEST',false,true,false);
+INSERT INTO users(email,first_name,last_name,password,role,blocked,activated,deleted) VALUES ('dejan.tot@gmail.com', 'dejan','tot','dejan', 'GUEST',false,true,false);
 
 
 INSERT INTO accommodation_category(category_name) VALUES ('*');
@@ -27,4 +27,4 @@ INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, addit
 INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, additional_services_id) VALUES ('1', '2');
 
 
-INSERT INTO agent(password,username) VALUES ('agent','agent');
+INSERT INTO agent(password,username,name,surname,email,reg_number) VALUES ('agent','agent','agent','agent','agent@gmail.com','23D');

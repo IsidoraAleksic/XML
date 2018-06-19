@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -95,5 +96,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return "registered";
     }
 
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public User findRegisteredByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }
