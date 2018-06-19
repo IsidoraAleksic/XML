@@ -87,9 +87,9 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<AccommodationUnit> getByAllCriteria(String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory, List<AdditionalServices> additionalServices) {
-        return accommodationRepository.getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesIn(
-                place,capacity,accommodationType,accommodationCategory,additionalServices);
+    public List<AccommodationUnit> getByAllCriteria(String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory, List<AdditionalServices> additionalServices) {    	
+        return accommodationRepository.advancedSearch(
+                place,capacity,accommodationType,accommodationCategory, additionalServices, (long) additionalServices.size());
     }
     @Override
     public List<AccommodationUnit> search(List<AccommodationUnit> accommodations, Date startDate, Date endDate) {
