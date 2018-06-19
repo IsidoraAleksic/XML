@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -87,6 +88,8 @@ public class ReservationServiceImpl implements ReservationService {
         if(user==null){
             throw new BadRequestException("User must not be null");
         }
+        if(reservation.getEndDate().before(Calendar.getInstance().getTime()))
+            throw new BadRequestException("Reservation has passed");
         List<Message> messages = messageRepository.getByReservation(reservation);
         if(messages!=null )
             messageRepository.deleteAll(messages);

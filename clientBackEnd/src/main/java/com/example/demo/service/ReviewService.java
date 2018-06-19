@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface ReviewService {
 
-    void post(Review review);
+    void post(Long reservationId, Review review);
     List<Review> get(Long accommodationId);
     void remove(Long id);
     Review findById(Long id);

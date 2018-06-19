@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ReviewListDialogComponent } from '../review-list-dialog/review-list-dialog.component';
 
@@ -10,16 +10,13 @@ import { ReviewListDialogComponent } from '../review-list-dialog/review-list-dia
 export class AccommodationDetailComponent implements OnInit {
 
   @Input() accommodation: any;
+  @Output() book = new EventEmitter<any>();
 
   constructor(
     private matDialog: MatDialog
   ) { }
 
   ngOnInit() {
-  }
-
-  onBook() {
-
   }
 
   showReviews() {

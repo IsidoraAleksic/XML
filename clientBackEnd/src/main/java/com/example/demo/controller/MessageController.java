@@ -10,22 +10,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/message")
-@PreAuthorize("GUEST")
+
 public class MessageController {
 
     @Autowired
     MessageService messageService;
 
+    @PreAuthorize("GUEST")
     @RequestMapping( method = RequestMethod.POST, consumes = "application/json")
     public void send(@RequestBody Message message){
         messageService.send(message);
     }
 
+    @PreAuthorize("GUEST")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     public List<Message> get(@PathVariable("id") Long id){
          return messageService.getByReservation(id);
     }
 
+    @PreAuthorize("GUEST")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id){
         messageService.delete(id);

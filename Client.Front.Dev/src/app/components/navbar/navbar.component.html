@@ -23,7 +23,7 @@
         </mat-menu>
     </ng-template>
     <ng-template #anon>
-        <a mat-button routerLink="login">Login</a>
+        <a mat-button (click)="onLogin()">Login</a>
         <a mat-button routerLink="register">Register</a>
     </ng-template>
 </div>

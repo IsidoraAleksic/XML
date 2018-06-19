@@ -12,4 +12,10 @@
   <p class="mat-h1" *ngSwitchCase="'no-results'">No reviews yet</p>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <mat-form-field style="width: 100%" *ngIf="data.canReview">
+    <textarea matInput placeholder="Leave a review" [(ngModel)]="dissTrack"></textarea>
+    <button mat-button matSuffix mat-icon-button (click)="onReview()">
+        <mat-icon>send</mat-icon>
+      </button>
+  </mat-form-field>
 </mat-dialog-actions>

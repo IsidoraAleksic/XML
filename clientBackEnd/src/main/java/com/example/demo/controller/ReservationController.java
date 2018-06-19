@@ -25,8 +25,8 @@ public class ReservationController {
        reservationService.reserve(reservation);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void cancel( @RequestParam("id") Long id){
+    @RequestMapping( value = "/{id}", method = RequestMethod.DELETE)
+    public void cancel( @PathVariable("id") Long id){
        reservationService.cancel(id);
     }
 
@@ -34,10 +34,12 @@ public class ReservationController {
     public List<Reservation> getAll(){
         return reservationService.getByUser();
     }
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
-//    public void delete(@PathVariable("id") Long id){
-//        reservationService.delete(id);
-//    }
+
+    @RequestMapping( value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public Reservation get( @PathVariable("id") Long id){
+        return reservationService.getById(id);
+    }
+
 
 
 }

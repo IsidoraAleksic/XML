@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Login</h1>
+<mat-dialog-content>
+  <mat-form-field style="display:block">
+    <input matInput placeholder="Email" [(ngModel)]="model.email">
+  </mat-form-field>
+  <mat-form-field style="display:block">
+    <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
+    <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
+      <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+      <mat-icon *ngIf="showPassword">visibility</mat-icon>
+    </button>
+  </mat-form-field>
+  <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
+  <div *ngIf="loading" style="margin: 10px">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onLogin()">Login</button>
+  <button mat-button mat-dialog-close routerLink="/register">Register</button>
+</mat-dialog-actions>

@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { UserDTO } from '../models/user-dto';
 import { environment } from '../../environments/environment';
 import { IWebDriverOptionsCookie } from 'selenium-webdriver';
+import { Subscribable } from '../events/subscribable';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ import { IWebDriverOptionsCookie } from 'selenium-webdriver';
 export class AuthService {
 
   current: UserDTO;
+
+  logoutEvent: Subscribable<any> = new Subscribable<any>();
 
   constructor(private http: HttpClient) {
     this.http.get<UserDTO>(environment.backendSrc + "authenticate/getUser", { withCredentials: true }).subscribe(x => {
@@ -37,7 +40,10 @@ export class AuthService {
   logout(): Observable<string> {
     if (this.current)
       return this.http.get<string>(environment.backendSrc + "authenticate/logout", { withCredentials: true }).pipe(
-        tap(_ => { this.current = null; })
+        tap(_ => { 
+          this.logoutEvent.next(true);
+          this.current = null;
+         })
       );
     return null;
   }
