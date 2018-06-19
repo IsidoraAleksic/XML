@@ -19,6 +19,8 @@ public class MessageServiceImpl implements MessageService {
     MessageRepository messageRepository;
     @Autowired
     ReservationRepository reservationRepository;
+    @Autowired
+    AuthenticationService authenticationService ;
 
     @Override
     public void delete(Long reservationId) {
@@ -37,8 +39,19 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void send(Message message) {
+
+        if(message.getMessage()==null || message.getMessage().equals("")){
+            throw new BadRequestException("Message content cannot be null");
+
+        }
+        System.out.println("Reservation: " + message.getReservation());
+        if(authenticationService.getLoggedInUser()==null)
+            throw new BadRequestException("User cannot be null");
         if(message.getReservation()==null)
             throw new BadRequestException("Reservation does not exist");
+        if(reservationRepository.getById(message.getReservation().getId())==null)
+            throw new BadRequestException("Reservation does not exist");
+
         messageRepository.save(message);
     }
 }

@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +10,9 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @ManyToOne
     private User user;
+    @ManyToOne
     private AccommodationUnit accommodationUnit;
     private Date startDate;
     private Date endDate;
