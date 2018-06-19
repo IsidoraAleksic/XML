@@ -13,7 +13,11 @@ export class ReviewService {
   ) { }
 
   getAll(accommodationId): Observable<any[]> {
-    return this.http.get<any[]>(environment.backendSrc+"review/"+accommodationId);
+    return this.http.get<any[]>(environment.backendSrc + "review/" + accommodationId);
+  }
+
+  review(reservationId: number, review: any): Observable<any> {
+    return this.http.post<any>(`${environment.backendSrc}review/${reservationId}`, review, { withCredentials: true });
   }
 
 }

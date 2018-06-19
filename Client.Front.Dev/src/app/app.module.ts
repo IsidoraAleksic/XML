@@ -26,6 +26,7 @@ import { ReviewListDialogComponent } from './components/review-list-dialog/revie
 import { ConversationComponent } from './components/conversation/conversation.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { OptionDialogComponent } from './components/option-dialog/option-dialog.component';
+import { BeforeTodayPipe } from './pipes/before-today.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OptionDialogComponent } from './components/option-dialog/option-dialog.
     ConversationComponent,
     LoginDialogComponent,
     OptionDialogComponent,
+    BeforeTodayPipe,
   ],
   imports: [
     BrowserModule,

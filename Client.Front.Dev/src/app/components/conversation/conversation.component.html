@@ -1,14 +1,29 @@
 <div class="background" [style]="bg.style">
-    <div fxLayout="column" style="height: 100vh;">
-      <app-navbar></app-navbar>
-      <div fxLayout>
-        <div fxFlex style="overflow: auto;" *ngIf="reservation && auth.current">
-          
-            <div style="background: #f5f5f5; color: #555; margin: 24px">
+  <div fxLayout="column" style="height: 100vh;">
+    <app-navbar></app-navbar>
+    <div fxLayout fxFlex>
+      <!-- todo ngOnInit if auth.current route -->
+      <div fxFlex fxLayout="column" style="overflow: auto;">
+
+        <!-- <div style="background: #f5f5f5; color: #555; margin: 24px">
               <h1 class="mat-h1">{{auth.current.firstName}} {{auth.current.lastName}}</h1>
-            </div>          
-  
-        </div>
+            </div>           -->
+
+        <mat-chip-list class="mat-chip-list-stacked">
+          <mat-chip style="width: auto" *ngFor="let msg of messages" [fxFlexAlign]="'end'" color="primary">
+            {{msg.message}}
+          </mat-chip>
+        </mat-chip-list>
+
       </div>
     </div>
+    <div style="background: #f5f5f5; color: #555; margin: 12px; padding: 12px">
+      <mat-form-field style="width: 100%">
+        <textarea matInput placeholder="Send a message" [(ngModel)]="input"></textarea>
+        <button mat-button matSuffix mat-icon-button (click)="onSend()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   </div>
+</div>
