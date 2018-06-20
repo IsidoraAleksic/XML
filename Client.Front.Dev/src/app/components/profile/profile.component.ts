@@ -53,9 +53,8 @@ export class ProfileComponent implements OnInit {
   }
 
   onReview(reservation: any) {
-    console.log(reservation);
     this.matDialog.open(ReviewListDialogComponent, {
-      width: '100%',
+      width: '80vw',
       maxWidth: '600px',
       panelClass: 'dialog-aligner',
       data:
@@ -64,6 +63,19 @@ export class ProfileComponent implements OnInit {
           id: reservation.accommodationUnit.id,
           place: reservation.accommodationUnit.place,
           canReview: true
+        }
+    })
+  }
+
+  showReviews(reservation: any) {
+    this.matDialog.open(ReviewListDialogComponent, {
+      width: '80vw',
+      maxWidth: '600px',
+      panelClass: 'dialog-aligner',
+      data:
+        {
+          id: reservation.accommodationUnit.id,
+          place: reservation.accommodationUnit.place,
         }
     })
   }
