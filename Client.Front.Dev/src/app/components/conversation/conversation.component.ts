@@ -29,16 +29,16 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.messageService.getAll(this.id).subscribe(x=>{
+      this.messageService.getAll(this.id).subscribe(x => {
         this.messages = x;
       })
       // this.reservationService.getOne(params['id']).subscribe(_=>{
-        // console.log(_);
-        // this.reservation = _;
+      // console.log(_);
+      // this.reservation = _;
       // }, err=>{
-        // this.router.navigateByUrl("");
+      // this.router.navigateByUrl("");
       // })
-    })    
+    })
   }
 
   onSend() {
@@ -49,8 +49,8 @@ export class ConversationComponent implements OnInit {
       message: this.input,
       agent: false
     }
-    this.input = "";    
-    this.messageService.send(message).subscribe(x=>{
+    this.input = "";
+    this.messageService.send(message).subscribe(x => {
       this.messages.push(message);
     })
 

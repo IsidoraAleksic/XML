@@ -1,0 +1,8 @@
+.message-wrapper {
+    margin: 8px;
+    flex-shrink: 0
+}
+
+.message-content {
+    white-space: pre-line;
+}

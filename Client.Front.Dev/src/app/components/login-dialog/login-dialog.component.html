@@ -1,15 +1,20 @@
 <h1 mat-dialog-title>Login</h1>
 <mat-dialog-content>
-  <mat-form-field style="display:block">
-    <input matInput placeholder="Email" [(ngModel)]="model.email">
-  </mat-form-field>
-  <mat-form-field style="display:block">
-    <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
-    <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
-      <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
-      <mat-icon *ngIf="showPassword">visibility</mat-icon>
-    </button>
-  </mat-form-field>
+  <form [formGroup]="form">
+    <mat-form-field style="display:block">
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="form.hasError('email', ['email']) && !form.hasError('required')">Please enter a valid email address</mat-error>
+      <mat-error *ngIf="form.hasError('required', ['email'])">Email is required</mat-error>
+    </mat-form-field>
+    <mat-form-field style="display:block">
+      <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" formControlName="password">
+      <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
+        <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+        <mat-icon *ngIf="showPassword">visibility</mat-icon>
+      </button>
+      <mat-error *ngIf="form.hasError('required',['password'])">Password is required</mat-error>
+    </mat-form-field>
+  </form>
   <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
   <div *ngIf="loading" style="margin: 10px">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>

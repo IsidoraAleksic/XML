@@ -2,22 +2,32 @@
   <div fxLayout fxLayoutAlign="center center" style="height: 100vh;">
     <div fxLayout="column" class="form-component">
       <h1 class="mat-display-1" style="color: #555">Register</h1>
-      <mat-form-field>
-        <input matInput placeholder="First Name" [(ngModel)]="model.firstName">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Last Name" [(ngModel)]="model.lastName">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Email" [(ngModel)]="model.email">
-      </mat-form-field>
-      <mat-form-field>
-        <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" [(ngModel)]="model.password">
-        <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
-          <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
-          <mat-icon *ngIf="showPassword">visibility</mat-icon>
-        </button>
-      </mat-form-field>
+      <form [formGroup]="form">
+        <mat-form-field style="display:block">
+          <input matInput placeholder="First Name" formControlName="firstName">
+          <mat-error *ngIf="form.hasError('required',['password'])">First Name is required</mat-error>
+          <mat-error *ngIf="form.hasError('minlength',['password'])">Must be atleast 2 characters long</mat-error>
+        </mat-form-field>
+        <mat-form-field style="display:block">
+          <input matInput placeholder="Last Name" formControlName="lastName">
+          <mat-error *ngIf="form.hasError('required',['password'])">Last Name is required</mat-error>
+          <mat-error *ngIf="form.hasError('minlength',['password'])">Must be atleast 2 characters long</mat-error>
+        </mat-form-field>
+        <mat-form-field style="display:block">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="form.hasError('email', ['email']) && !form.hasError('required')">Please enter a valid email address</mat-error>
+      <mat-error *ngIf="form.hasError('required', ['email'])">Email is required</mat-error>
+        </mat-form-field>
+        <mat-form-field style="display:block">
+          <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="Password" formControlName="password">
+          <button mat-button matSuffix mat-icon-button (click)="showPassword = !showPassword;">
+            <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+            <mat-icon *ngIf="showPassword">visibility</mat-icon>
+          </button>
+          <mat-error *ngIf="form.hasError('required',['password'])">Password is required</mat-error>
+          <mat-error *ngIf="form.hasError('minlength',['password'])">Must be atleast 5 characters long</mat-error>
+        </mat-form-field>
+      </form>
       <p *ngIf="errmsg" style="color: red">{{errmsg}}</p>
       <div>
         <button mat-button (click)="onRegister()">Register</button>

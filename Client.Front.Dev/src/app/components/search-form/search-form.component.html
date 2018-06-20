@@ -1,32 +1,45 @@
 <div style="display: inline-block; background: white;">
-    <ul class="inls">
-        <li>
-            <mat-form-field class="search-input">
-                <input matInput placeholder="Place" [(ngModel)]="search.place" />
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field class="search-input">
-                <input matInput placeholder="People" [(ngModel)]="search.people" />
-            </mat-form-field>
-        </li>
-    </ul>
-    <ul class="inls">
-        <li>
-            <mat-form-field class="search-input">
-                <input matInput [matDatepicker]="dpStart" placeholder="Reservation Start" [(ngModel)]="search.startDate" disabled/>
-                <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
-                <mat-datepicker #dpStart disabled="false"></mat-datepicker>
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field class="search-input">
-                <input matInput [matDatepicker]="dpEnd" placeholder="Reservation End" [(ngModel)]="search.endDate" disabled/>
-                <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
-                <mat-datepicker #dpEnd disabled="false"></mat-datepicker>
-            </mat-form-field>
-        </li>
-    </ul>
+    <form [formGroup]="form">
+        <ul class="inls">
+            <li>
+                <mat-form-field class="search-input">
+                    <input matInput placeholder="Place" formControlName="place"/>
+                    <mat-error *ngIf="form.hasError('required',['place'])">Place is required</mat-error>
+                    <mat-error *ngIf="form.hasError('minlength',['place'])">Must be atleast 2 characters long</mat-error>
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field class="search-input">
+                    <input matInput placeholder="People" formControlName="people" />
+                    <mat-error *ngIf="form.hasError('required',['people'])">Number of people is required</mat-error>
+                    <mat-error *ngIf="form.hasError('min',['people'])">Number of people must be atleast 1</mat-error>
+                </mat-form-field>
+            </li>
+        </ul>
+        <ul class="inls">
+            <li>
+                <mat-form-field class="search-input">
+                    <input matInput [matDatepicker]="dpStart" placeholder="Reservation Start" formControlName="startDate"/>
+                    <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+                    <mat-datepicker #dpStart disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="form.hasError('required',['startDate'])">Start Date is required</mat-error>
+                    <mat-error *ngIf="form.hasError('beforeToday',['startDate'])">Start Date can't be before today</mat-error>
+                    <mat-error *ngIf="form.hasError('afterEnd',['startDate'])">Start Date can't be after End Date</mat-error>
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field class="search-input">
+                    <input matInput [matDatepicker]="dpEnd" placeholder="Reservation End" formControlName="endDate"/>
+                    <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #dpEnd disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="form.hasError('required',['endDate'])">End Date is required</mat-error>
+                    <mat-error *ngIf="form.hasError('beforeToday',['endDate'])">End Date can't be before today</mat-error>
+                    <mat-error *ngIf="form.hasError('beforeStart',['endDate'])">End Date can't be before Start Date</mat-error>
+                </mat-form-field>
+            </li>
+        </ul>
+    </form>
+
     <ng-container *ngIf="advanced">
         <ul class="inls">
             <li>
@@ -54,7 +67,7 @@
             </mat-list-option>
         </mat-selection-list>
     </ng-container>
-    <mat-checkbox (change)="advanced = !advanced" class="search-input" color="primary">Advanced Search</mat-checkbox>
+    <mat-checkbox (change)="advanced = !advanced" class="search-input">Advanced Search</mat-checkbox>
     <div style="display: flex; justify-content: flex-end">
         <button mat-button (click)="onSearch()">Search</button>
     </div>
