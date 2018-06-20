@@ -137,12 +137,6 @@ public class AdminController {
 		return list;
 	}
 
-	@RequestMapping("/getAllReviews")
-	public List<Review> getAllReviews() {
-		List<Review> list = reviewService.findAll();
-		return list;
-	}
-	
 	@RequestMapping("/getAllAccommodationType")
 	public List<AccommodationType> getAllAccommodationType() {
 		List<AccommodationType> list = accommodationTypeService.findAll();

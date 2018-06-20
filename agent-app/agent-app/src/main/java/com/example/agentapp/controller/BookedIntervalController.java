@@ -24,6 +24,7 @@ public class BookedIntervalController {
 
     @GetMapping("/get/{unitId}")
     public List<BookedInterval> getBookedIntervalsFromUnit(@PathVariable("unitId") long id) {
+        List<BookedInterval> ints = bookedIntervalService.getByUnitId(id);
         return bookedIntervalService.getByUnitId(id);
     }
 

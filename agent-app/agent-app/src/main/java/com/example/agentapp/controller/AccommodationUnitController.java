@@ -6,6 +6,7 @@ import com.example.agentapp.domain.AccommodationUnit;
 import com.example.agentapp.domain.AdditionalService;
 import com.example.agentapp.service.AccommodationAttributeService;
 import com.example.agentapp.service.AccommodationUnitService;
+import com.example.agentapp.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/accommodationUnit")
+@CrossOrigin
 public class AccommodationUnitController {
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     private AccommodationUnitService accommodationUnitService;
     private AccommodationAttributeService accommodationAttributeService;
@@ -28,6 +33,7 @@ public class AccommodationUnitController {
 //-------TEST
     @GetMapping("/all")
     public List<AccommodationUnit> getAllUnits() {
+        System.out.println("Logged in user id : +++++++" + authenticationService.getLoggedInUserId());
         return accommodationUnitService.getAllUnits();
     }
 
@@ -38,6 +44,7 @@ public class AccommodationUnitController {
 
     @GetMapping("/get/{creatorId}")
     public List<AccommodationUnit> getUnitsByCreator(@PathVariable("creatorId") long agentId) {
+//        Long loggedInId = authenticationService.getLoggedInUserId();
         return accommodationUnitService.getUnitsByCreator(agentId);
     }
 

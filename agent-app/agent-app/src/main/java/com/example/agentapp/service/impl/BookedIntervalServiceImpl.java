@@ -3,6 +3,7 @@ package com.example.agentapp.service.impl;
 import com.example.agentapp.domain.BookedInterval;
 import com.example.agentapp.repository.BookedIntervalRepository;
 import com.example.agentapp.service.BookedIntervalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class BookedIntervalServiceImpl implements BookedIntervalService {
 
     private BookedIntervalRepository bookedIntervalRepository;
 
+    @Autowired
     public BookedIntervalServiceImpl(BookedIntervalRepository bookedIntervalRepository) {
         this.bookedIntervalRepository = bookedIntervalRepository;
     }

@@ -33,7 +33,7 @@ public class AgentDTO {
 		this.regNumber = regNumber;
 		this.password = password;
 	}
-	
+
 	public Agent createAgent() {
 		Agent agent = new Agent();
 		agent.setName(name);
@@ -93,5 +93,5 @@ public class AgentDTO {
 		this.password = password;
 	}
 
-	
+
 }

@@ -157,9 +157,6 @@
         },
         methods : {
             sendFormData() {
-                //axios request
-                //kad vrati accommodation unit
-                //this.$event.emit() za upload slika
                 let sendData = this.data;
 
                 //getuj id logovanog agenta i sendData.agent = {id}
@@ -186,7 +183,6 @@
             }
         },
         created() {
-            //axios poziv da se dobiju svi acc typeovi i acc kategorije i additional servisi
             const url = `${BASE_URL}/attributes`;
             axios.get(url)
                     .then(x => {

@@ -1,4 +1,4 @@
 package com.example.agentapp.service;
 
-public interface UserService {
+public interface AgentService {
 }
