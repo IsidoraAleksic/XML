@@ -16,9 +16,6 @@ public class Agent {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique = true)
-    private String username;
-
     private String password;
 
     private String name;
@@ -40,13 +37,6 @@ public class Agent {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;

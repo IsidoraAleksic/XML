@@ -14,5 +14,5 @@ public interface ReviewService {
     void remove(Long id);
     Review findById(Long id);
 	void save(Review forPosting);
-
+	List<Review> findAll();
 }
