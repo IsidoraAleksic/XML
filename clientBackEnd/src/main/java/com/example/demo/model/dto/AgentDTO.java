@@ -40,7 +40,9 @@ public class AgentDTO {
 	public Agent createAgent() {
 		Agent agent = new Agent();
 		agent.setName(name);
-		agent.setSurname(password);
+		agent.setSurname(surname);
+		agent.setPassword(password);
+		agent.setUsername(username);
 		agent.setEmail(email);
 		agent.setRegNumber(regNumber);
 		return agent;
