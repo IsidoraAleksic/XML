@@ -1,4 +1,11 @@
+const controller = require('./controller');
+
 require('@google-cloud/debug-agent');
-exports.helloHttp = function helloHttp(req, res) {
-    res.status(200).send(req.method);
-}
+exports.helloHttp = controller([
+    "GET", function (req, res) {
+        res.send("Hello there");
+    },
+    "POST", function (req, res) {
+        res.send("Post there")
+    }
+    ]);
