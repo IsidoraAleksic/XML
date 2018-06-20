@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="js/sifarnici.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+</head>
+<body>
+	<div class="dropdown">
+	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Sifarnici
+	  </button>
+	  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		<div id="accommodationType"><li><a href="" onclick="getAccommodationType()" data-toggle="tab">Accommodation Type</a></li></div>
+		<li><a href="#accommodationCategory" onclick="getAccommodationCategory()" data-toggle="tab">Accommodation Category</a></li>
+		<li><a href="#additionalServices" onclick="getAdditionalServices()" data-toggle="tab">Additional Services</a></li>
+	  </div>
+	</div>
+	<div class="dropdown">
+		
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Other
+		</button>
+		
+		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+			<li><a href="#addAgent" onclick="" data-toggle="tab">Add agent</a></li>
+			<li><a href="#changeUsers" onclick="getUsers()" data-toggle="tabUsers">Change users</a></li>
+			<li><a href="#publishReviews" onclick="getReviews()" data-toggle="tab">Publish reviews</a></li>
+		</div>
+		
+	</div>
+	
+	<div><button type="button" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</button></div>
+	<div><button type="button" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</button></div>
+	<div><button type="button" onclick="openModalAdditionalServiceCreate()">Add new additional service</button></div>
+	<div  class="tab-pane" id="showUsers">
+		<br/><br/>
+		<table width="100" id="tableUsers">
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Status</th>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+<div class="modal fade" id="accommodationTypeModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add new accommodation type</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Name:</label>
+                        <input type="text" class="form-control" id="typeName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Accommodation Type</button>
+                </div>
+            </div>
+	</div>
+
+</div>
+
+<div class="modal fade" id="accommodationCategoryModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add/update accommodation category</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Name:</label>
+                        <input type="text" class="form-control" id="categoryName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Accommodation Category</button>
+                </div>
+            </div>
+	</div>
+
+</div>
+
+<div class="modal fade" id="additionalServiceModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add/update additional service</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Name:</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Additional Service</button>
+                </div>
+            </div>
+	</div>
+
+</div>
+
+</body>
+</html>
