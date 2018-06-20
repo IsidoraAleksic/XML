@@ -6,7 +6,6 @@
       <h5 v-if="isFailed">Upload failure!</h5>
 
       <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <!-- <h4>Upload images</h4> -->
         <div class="dropbox">
           <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" accept="image/*" class="input-file">
             <p v-if="isInitial">
@@ -77,7 +76,7 @@
                           });
         },
         saveImages(unitId) {  //ovo preko eventa dobija
-
+            if (!this.formData) return; 
             this.currentStatus = STATUS_SAVING;
             this.upload(this.formData, unitId);
         },

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-3">
                 <label>From: </label>
-                <datepicker v-model="fromDate.current" @input="selectedFromDate"></datepicker>    
+                <datepicker v-model="fromDate.current" @input="selectedFromDate" :disabledDates="fromDate.disabled"></datepicker>    
             </div>
             <div class="col-md-3">
                 <label>To: </label>
@@ -27,24 +27,27 @@
 
     const BASE_URL = 'http://localhost:8082/agent';
 
-    // kad se ucita ovo za izabrani smjestaj, treba getovati zauzete intervale i disable-ovat ih 
-
     export default {
 
         name : 'dp',
+        props : ['unit'],
         components : {
             Datepicker
         },
         data() {
             return {
-                unitId : 1,  //ovo ce se proslijediti iz parent komponente nekako 
+                unitId : this.unit, 
                 fromDate : {
-                    current : new Date()
+                    current : new Date(),
+                    disabled : {
+                        ranges : []
+                    }
                 },
                 toDate : {
                     current : new Date(),
                     disabled : {
-                        to : new Date(2018, 1, 1)
+                        to : new Date(2018, 1, 1),
+                        ranges : []
                     }
                 }
             }
@@ -60,12 +63,39 @@
                     from : this.fromDate.current.getTime(),
                     to : this.toDate.current.getTime()
                 }
+                alert(JSON.stringify(data));
                 this.sendRequest(data);
             },
             sendRequest(data) {
                 const url = `${BASE_URL}/book/bookInterval`;
                 axios.post(url, data);  //then
+                this.$parent.toggleShowBook();
+                alert('Success!');
             }
+        },
+        created() {
+            const url = `${BASE_URL}/book/get/`+ this.unitId;
+            let self = this;
+            
+            axios.get(url)
+                    .then(res => {                        
+                        let ret = res.data.map( x => {
+                        return  {
+                            from : new Date(
+                                new Date(x.fromDate).getFullYear(),
+                                new Date(x.fromDate).getMonth(),
+                                new Date(x.fromDate).getDate()
+                                ),
+                            to : new Date(
+                                new Date(x.toDate).getFullYear(),
+                                new Date(x.toDate).getMonth(),
+                                new Date(x.toDate).getDate()
+                                ) 
+                            }
+                        })  
+                        self.fromDate.disabled.ranges = self.fromDate.disabled.ranges.concat(ret);
+                        self.toDate.disabled.ranges = self.toDate.disabled.ranges.concat(ret);
+                    });
         }
     }
 

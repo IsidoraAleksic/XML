@@ -15,8 +15,8 @@ insert into additional_service(name) values ('Kitchen');
 insert into additional_service(name) values ('Private bathroom');
 insert into additional_service(name) values ('TV');
 
-insert into agent(username, password) values('user', 'user');
-insert into agent(username, password) values('petar', 'petar');
+insert into agent(username, password, authorities) values('user', '$2a$10$iYsLi867nkZ73eNtESb79O0v/0zPzuC0YZT/.vXV8Bl4GkBkv/6bu', 'AGENT');
+insert into agent(username, password, authorities) values('petar', 'petar', 'AGENT');
 
 insert into accommodation_unit
 (place, description, capacity, accommodation_type_id, category_id, agent_id) values

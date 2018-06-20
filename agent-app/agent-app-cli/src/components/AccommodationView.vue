@@ -7,7 +7,6 @@
         <div class="row">
             <div class="col-md-5">
                 <form>
-
                     <div class="form-row">  
                         <label class="col-md-2">City:</label>
                         <input v-model="city" type="text" class="form-control col-md-10" placeholder="">
@@ -27,26 +26,30 @@
                     <div class="form-row">
                         
                             <label class="col-md-2">Enter description: </label>                
-                        <hr>
-                       
+                        <hr>                      
                             <textarea class="col-md-10" v-if="unit.description" v-model="unit.description" rows="4" cols="44">
                             </textarea>    
-                        
                     </div> 
                 </form>
+                <br>
+                <a href="#" @click="toggleShowBook"><h5>Book an interval</h5></a>
+
             </div>
+
             <div class="col-md-7 text-center text-lg-left">
                 <ImageView v-if="id" v-bind:unit="id"></ImageView>
             </div>
-        </div>
+        </div>  <!-- row end -->
+        
+        <Datepicker v-if="showBook" v-bind:unit="id"></Datepicker>
 
-        </div>
     </div>
     
 </template>
 
 <script>
 
+    import Datepicker from './Datepicker';
     import ImageView from './ImageView';
     import * as axios from 'axios';
 
@@ -54,10 +57,11 @@
 
     export default {
         name : 'AccommodationView',
-        components : { ImageView },
+        components : { ImageView, Datepicker },
         data() {
             return {
                 id : 0,
+                showBook : false,
                 place : '',
                 unit : {}
             }
@@ -82,6 +86,9 @@
                          alert(JSON.stringify(x.data));
                          this.unit = x.data;   
                         });
+            },
+            toggleShowBook() {
+                this.showBook = this.showBook ? false : true;
             }
         },
         created() {

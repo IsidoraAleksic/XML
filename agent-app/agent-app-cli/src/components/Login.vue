@@ -4,9 +4,9 @@
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
             <h4>Welcome back.</h4>
-            <input v-model="username" type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+            <input v-model="data.username" type="text" class="form-control input-sm chat-input" placeholder="username" />
             <br/>
-            <input v-model="password" type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+            <input v-model="data.password" type="text" class="form-control input-sm chat-input" placeholder="password" />
             <br/>
             <div class="wrapper">
             <span class="group-btn">
@@ -20,44 +20,41 @@
 </template>
 
 <script>
-/*eslint-disable */
-export default {
-    name: 'Login',
-    data () {
-        return {
-          username: '',
-          password: ''
-        }
-    },
-    methods: {
-        showUsername: function() {
-            alert(this.username);
-        },
-        sendUserData: function(event) {
-            if (this.username === '' || this.password === '') {
-                alert('Username/password cannot be empty!');
-                return;
+    
+    import * as axios from 'axios';
+
+    const BASE_URL = 'http://localhost:8082/agent';
+
+    
+    export default {
+        name: 'Login',
+        data () {
+            return {
+                data: {
+                    username: '',
+                    password: ''      
+                }
             }
-            var data = JSON.stringify({
-                "action" : "login",
-                "username" : "",
-                "data" : {
-                    "username" : this.username,
-                    "password" : this.password
-                } 
-            });
-            window.socket.send(data);
         },
-        loginComplete: function(value) {
-            //if success 
-            //else alert fail neki 
-            // this.$router.push('/chat');
+        methods: {
+            sendUserData: function(event) {
+                if (this.username === '' || this.password === '') {
+                    alert('Username/password cannot be empty!');
+                    return;
+                }
+                this.sendRequest(this.data);
+            },
+            sendRequest(data) {
+                const url = `${BASE_URL}/auth`;
+                axios.post(url, data)
+                        .then( x => {
+                            alert(x.data);
+                            this.$router.push('/accList');
+                        });
+            }
         }
-    },
-    created: function() {
-        this.$parent.$on('login', this.loginComplete);
     }
-}
+
 </script>
 
 <style>
