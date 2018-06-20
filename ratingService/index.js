@@ -1,11 +1,20 @@
 const controller = require('./controller');
+const ratingsRepository = require('./ratings.repository');
 
 require('@google-cloud/debug-agent');
-exports.helloHttp = controller([
+exports.ratings = controller([
     "GET", function (req, res) {
-        res.send("Hello there");
+        ratingsRepository.getAll().then((result) => {
+            res.status(200).send(result);
+        }, (err) => {
+            res.status(500).send(err);
+        })
     },
     "POST", function (req, res) {
-        res.send("Post there")
+        ratingsRepository.insert(req.body).then((result) => {
+            res.status(200).send(result);
+        }, (err) => {
+            res.status(500).send({error: err});
+        })
     }
-    ]);
+]);
