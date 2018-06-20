@@ -1,10 +1,14 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer","handler"})
 public class AccommodationCategory implements Serializable {
 
 	@Id

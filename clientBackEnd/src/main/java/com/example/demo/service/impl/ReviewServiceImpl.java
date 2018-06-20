@@ -69,4 +69,14 @@ public class ReviewServiceImpl implements ReviewService {
             throw new BadRequestException("Review cannot be null");
         reviewRepository.delete(review);
     }
+
+	@Override
+	public Review findById(Long id) {
+		return reviewRepository.getById(id);
+	}
+
+	@Override
+	public void save(Review forPosting) {
+		reviewRepository.save(forPosting);
+	}
 }

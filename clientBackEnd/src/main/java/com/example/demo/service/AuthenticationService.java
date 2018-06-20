@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,4 +15,6 @@ public interface AuthenticationService {
     void setLoggedInUser(User user);
     User getLoggedInUser();
     boolean updateUser(User user);
+    public List<User> findAll();
+    public User findRegisteredByEmail(String email);
 }
