@@ -62,4 +62,19 @@ public class AccommodationAttributeServiceImpl implements AccommodationAttribute
        return additionalServiceRepository.findByNameInIgnoreCase(names);
     }
 
+    @Override
+    public void insertAccommodationCategories(List<AccommodationCategory> categories) {
+        accommodationCategoryRepository.saveAll(categories);
+    }
+
+    @Override
+    public void insertAccommodationTypes(List<AccommodationType> types) {
+        accommodationTypeRepository.saveAll(types);
+    }
+
+    @Override
+    public void insertAdditionalServices(List<AdditionalService> services) {
+        additionalServiceRepository.saveAll(services);
+    }
+
 }

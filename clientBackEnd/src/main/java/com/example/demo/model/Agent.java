@@ -16,8 +16,6 @@ public class Agent {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-
-
     private String password;
 
     private String name;

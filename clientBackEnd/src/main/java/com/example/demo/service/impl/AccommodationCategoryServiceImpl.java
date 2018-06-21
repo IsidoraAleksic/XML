@@ -34,7 +34,7 @@ public class AccommodationCategoryServiceImpl implements AccommodationCategorySe
 
 	public String update(Long id, AccommodationCategoryDTO accommodationCategoryDTO) {
 		AccommodationCategory accommodationCategory = accommodationCategoryRepository.getById(id);
-		if(!accommodationCategory.getId().equals(accommodationCategoryDTO.getId())) {
+		if(!accommodationCategory.getId().equals(id)) {
 			return "ERROR";
 		}
 		accommodationCategory.setCategoryName(accommodationCategoryDTO.getCategoryName());
