@@ -6,6 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="js/sifarnici.js"></script>
+	<script src="js/other.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style>
 		table {
@@ -23,6 +24,20 @@
 		tr:nth-child(even) {
 			background-color: #dddddd;
 		}
+	.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	}
+
+	.button4 {background-color: #e7e7e7; color: black;} /* Gray */
 	</style>
 </head>
 <body>
@@ -50,9 +65,9 @@
 		
 	</div>
 	
-	<div><button type="button" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</button></div>
-	<div><button type="button" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</button></div>
-	<div><button type="button" onclick="openModalAdditionalServiceCreate()">Add new additional service</button></div>
+	<button type="button" class="button button4" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</button>
+	<button type="button" class="button button4" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</button>
+	<button type="button" class="button button4" onclick="openModalAdditionalServiceCreate()">Add new additional service</button>
 	<div  class="tab-pane" id="showUsers">
 		<br/><br/>
 		<table width="100" id="tableUsers">
@@ -137,6 +152,38 @@
 	</div>
 
 </div>
+
+<div class="tab-pane" id="addAgent">
+  	<div class="container">
+      <div class="row">
+      <div class="col-lg-5">
+           <form role="form" action="" method="post" class="registration-form"><br><br>
+           	<div class="form-group">
+           		<label class="sr-only" for="first-name">First name</label>
+               	<input type="text" name="first-name" placeholder="First name" class="form-first-name form-control" id="formRegister-first-name">
+               </div>
+               <div class="form-group">
+               	<label class="sr-only" for="last-name">Last name</label>
+               	<input type="text" name="last-name" placeholder="Last name" class="form-last-name form-control" id="formRegister-last-name">
+               </div>
+               <div class="form-group">
+               	<label class="sr-only" for="form-email">Email</label>
+               	<input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="formRegister-email">
+               </div>
+               <div class="form-group">
+               	<label class="sr-only" for="form-brn">Business registration number</label>
+               	<input type="text" name="form-brn" placeholder="Business registration number" class="form-brn form-control" id="formRegister-brn">
+               </div>
+               <button type="button" onclick="registerAgent()" class="btn">Add</button>
+           </form>
+           </div>
+           <div class="col-lg-7"></div>
+          </div>
+      </div>
+  </div>
+             
+
+
 
 </body>
 </html>

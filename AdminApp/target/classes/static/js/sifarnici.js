@@ -121,61 +121,6 @@ function getAdditionalServices(){
     });
 
 }
-function getUsers(){
-	$('#showUsers').show=true;
-	$.ajax({
-        url: backedServer+"/administrator/getAllUsers",
-        dataType: "json",
-        type: "GET",
-        success: function(data){
-            var users = data;
-            var content = "";
-
-            for (var user in users) {
-                content+=createUsersDiv(users[user]);
-            }
-            $("#users").empty().append(content);
-
-        }
-    });
-
-}
-
-function createUsersDiv(user){
-	$("#showUsers").find('tbody')
-    .append($('<tr>')
-        .append($('<td>')
-            .append(
-				user.firstName
-            )
-        )
-		.append($('<td>')
-            .append(
-				user.lastName
-            )
-        )
-	);
-}
-
-function getReviews(){
-	$.ajax({
-        url: backedServer+"/administrator/getAllReviews",
-        dataType: "json",
-        type: "GET",
-        success: function(data){
-            var reviews = data;
-            var content = "";
-
-            for (var review in reviews) {
-                content+=createReviewsDiv(reviews[review]);
-            }
-            $("#reviews").empty().append(content);
-
-        }
-    });
-
-}
-
 
 function addAccommodationType(){
     $.ajax({

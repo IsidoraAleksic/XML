@@ -79,4 +79,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public void save(Review forPosting) {
 		reviewRepository.save(forPosting);
 	}
+
+	@Override
+	public List<Review> findAll() {
+		return reviewRepository.findAll();
+	}
 }

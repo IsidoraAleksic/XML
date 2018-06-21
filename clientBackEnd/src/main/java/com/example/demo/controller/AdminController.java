@@ -136,6 +136,12 @@ public class AdminController {
 		List<User> list = authenticationService.findAll();
 		return list;
 	}
+	
+	@RequestMapping("/getAllReviews")
+	public List<Review> getAllReviews() {
+		List<Review> list = reviewService.findAll();
+		return list;
+	}
 
 	@RequestMapping("/getAllAccommodationType")
 	public List<AccommodationType> getAllAccommodationType() {
@@ -200,11 +206,22 @@ public class AdminController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PostMapping("/postReview")
-	public boolean postReview(@RequestBody Long id) {
+	@PostMapping("/postReview/approve")
+	public boolean postReviewApprove(@RequestBody Long id) {
 		Review forPosting = reviewService.findById(id);
 		if (forPosting != null) {
 			forPosting.setApproved(true);
+			reviewService.save(forPosting);
+			return true;
+		}
+
+		return false;
+	}
+	@PostMapping("/postReview/reject")
+	public boolean postReviewReject(@RequestBody Long id) {
+		Review forPosting = reviewService.findById(id);
+		if (forPosting != null) {
+			forPosting.setApproved(false);
 			reviewService.save(forPosting);
 			return true;
 		}
