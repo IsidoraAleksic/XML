@@ -33,7 +33,7 @@ public class AccommodationUnitController {
 //-------TEST
     @GetMapping("/all")
     public List<AccommodationUnit> getAllUnits() {
-        System.out.println("Logged in user id : +++++++" + authenticationService.getLoggedInUserId());
+        System.out.println("Logged in user USERNAME : +++++++" + authenticationService.getLoggedInEmail());
         return accommodationUnitService.getAllUnits();
     }
 
@@ -42,9 +42,9 @@ public class AccommodationUnitController {
         return accommodationUnitService.getUnit(id);
     }
 
-    @GetMapping("/get/{creatorId}")
+    @GetMapping("/get/{creatorId}") // nece ni trebat
     public List<AccommodationUnit> getUnitsByCreator(@PathVariable("creatorId") long agentId) {
-//        Long loggedInId = authenticationService.getLoggedInUserId();
+//        Long loggedInId = authenticationService.getLoggedInEmail();
         return accommodationUnitService.getUnitsByCreator(agentId);
     }
 
