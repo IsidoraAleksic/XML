@@ -9,6 +9,7 @@ public class AgentDTO {
 
 	private long id;
 
+
 	private String password;
 
 	private String name;
@@ -23,7 +24,7 @@ public class AgentDTO {
 		super();
 	}
 
-	public AgentDTO(long id, String name, String surname, String email, String contact,
+	public AgentDTO(long id,  String name, String surname, String email, String contact,
 			String regNumber, String password) {
 		super();
 		this.id = id;
@@ -33,7 +34,7 @@ public class AgentDTO {
 		this.regNumber = regNumber;
 		this.password = password;
 	}
-
+	
 	public Agent createAgent() {
 		Agent agent = new Agent();
 		agent.setName(name);
@@ -93,5 +94,5 @@ public class AgentDTO {
 		this.password = password;
 	}
 
-
+	
 }

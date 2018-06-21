@@ -21,13 +21,13 @@ public class Agent {
     private String password;
 
     private String name;
-
+    
     private String surname;
-        @Column(unique = true)
+    @Column(unique = true)
     private String email;
-
+    
     private String regNumber;
-
+    
     public Agent() {
     }
 
@@ -39,7 +39,6 @@ public class Agent {
         this.id = id;
     }
 
-  
 
     public String getPassword() {
         return password;

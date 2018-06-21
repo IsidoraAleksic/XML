@@ -27,4 +27,4 @@ INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, addit
 INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, additional_services_id) VALUES ('1', '2');
 
 
-INSERT INTO agent(password,username,name,surname,email,reg_number) VALUES ('agent','agent','agent','agent','agent@gmail.com','23D');
+INSERT INTO agent(password,name,surname,email,reg_number) VALUES ('agent','agent','agent','agent@gmail.com','23D');
