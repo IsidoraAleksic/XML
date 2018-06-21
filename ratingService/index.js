@@ -1,18 +1,45 @@
 const controller = require('./controller');
-const ratingsRepository = require('./ratings.repository');
+const ratingService = require('./service/rating.service');
+const accommodationService = require('./service/accommodation.service');
 
 require('@google-cloud/debug-agent');
 exports.ratings = controller([
-    "GET", function (req, res) {
-        ratingsRepository.getAll().then((result) => {
+    "POST", function (req, res) {
+        ratingService.insert(req.body).then((result) => {
             res.status(200).send(result);
         }, (err) => {
-            res.status(500).send(err);
+            if (err.myError) {
+                res.status(err.code).send(err.message);
+            } else {
+                res.status(500).send(err);
+            }
         })
-    },
+    }
+]);
+
+exports.average = controller([
     "POST", function (req, res) {
-        ratingsRepository.insert(req.body).then((result) => {
-            res.status(200).send(result);
+        if (!req.query.month) {
+            res.status(400).send("Query param 'month' required");
+            return;
+        }
+
+        var month = Number.parseInt(req.query.month + "");
+
+        if (month < 0 || month > 11) {
+            res.status(400).send("Query param 'month' must be between 0 and 11");
+            return;
+        }
+
+        if (!req.query.days) {
+            res.status(400).send("Query param 'month' required");
+            return;
+        }
+
+        var days = Number.parseInt(req.query.days + "");
+
+        accommodationService.average(req.body, month, days).then((accommodations) => {
+            res.send(accommodations);
         }, (err) => {
             if (err.myError) {
                 res.status(err.code).send(err.message);

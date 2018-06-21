@@ -20,6 +20,7 @@ if (args.length < 1) {
 var verbose = args.indexOf("--verbose");
 if (verbose == -1) {
     console.log("To see statements being executed run with --verbose");
+    verbose = false;
 } else {
     args.splice(verbose, 1);
     verbose = true;
@@ -57,7 +58,8 @@ function executeQueryStep(idx) {
         process.exit(0);
     }
 
-    if (queryArgs[idx].startsWith("$")) {
+    if (queryArgs[idx].startsWith("$")) {        
+        console.log(`Executing '${queryArgs[idx].substring(1)}'...`);
         executeQuery(idx, queryArgs[idx].substring(1));
     } else {
         if (!queryArgs[idx].endsWith(".sql"))
@@ -70,14 +72,13 @@ function executeQueryStep(idx) {
 
         var query = fs.readFileSync(queryArgs[idx], 'utf-8');
         console.log(`Executing '${queryArgs[idx]}'...`);
+        if (verbose)
+            console.log("\n" + query + "\n");        
         executeQuery(idx, query);
     }
 }
 
-function executeQuery(idx, query) {
-    if (verbose) {
-        console.log("\n" + query + "\n");
-    }
+function executeQuery(idx, query) {    
     con.query(query, function (err, results, fields) {
         if (err) {
             if (verbose)

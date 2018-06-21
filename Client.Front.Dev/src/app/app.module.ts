@@ -9,8 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './modules/material/material.module';
 
 import { AppComponent } from './app.component';
-import { IndexComponent } from './components/index/index.component';
-import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ImageCarouselComponent } from './components/image-carousel/image-carousel.component';
 import { ImageCarouselDialogComponent } from './components/image-carousel/image-carousel-dialog/image-carousel-dialog.component';
@@ -27,12 +25,11 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { OptionDialogComponent } from './components/option-dialog/option-dialog.component';
 import { BeforeTodayPipe } from './pipes/before-today.pipe';
+import { RatingDialogComponent } from './components/rating-dialog/rating-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    IndexComponent,
-    LoginComponent,
+    AppComponent,    
     RegisterComponent,
     ImageCarouselComponent,
     ImageCarouselDialogComponent,
@@ -48,6 +45,7 @@ import { BeforeTodayPipe } from './pipes/before-today.pipe';
     LoginDialogComponent,
     OptionDialogComponent,
     BeforeTodayPipe,
+    RatingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +59,7 @@ import { BeforeTodayPipe } from './pipes/before-today.pipe';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    RatingDialogComponent,
     OptionDialogComponent,
     LoginDialogComponent,
     ReviewListDialogComponent,

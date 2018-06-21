@@ -17,6 +17,10 @@ export class V2IndexComponent implements OnInit {
   startDate: any;
   endDate: any;
 
+  reverseOrder: boolean = false;
+
+  orderBy: string = '';
+
   state: string = "start";
   searchResults = [];
 
@@ -32,6 +36,34 @@ export class V2IndexComponent implements OnInit {
   ngOnInit() {
   }
 
+  onOrderBy(value: string) {
+    if (this.orderBy == value)
+      this.reverseOrder = !this.reverseOrder;
+    else
+      this.reverseOrder = false;
+
+    this.orderBy = value;
+
+    this.searchResults.sort((a, b) => {
+      if (value == 'cost') {
+        if (!this.reverseOrder)
+          return a.price - b.price;
+        else
+          return b.price - a.price;
+      } else if (value == 'category') {
+        if (!this.reverseOrder)
+          return a.category.id - b.category.id;
+        else
+          return b.category.id - a.category.id;
+      } else if (value == 'rating') {
+        if (!this.reverseOrder)
+          return a.rating - b.rating;
+        else
+          return b.rating - a.rating;
+      }
+    })
+  }
+
   onBook(accommodation: any) {
     if (!this.auth.current) {
       this.matDialog.open(LoginDialogComponent);
@@ -41,16 +73,16 @@ export class V2IndexComponent implements OnInit {
       this.reservationService.book({
         startDate: this.startDate,
         endDate: this.endDate,
-        accommodationUnit: {id: accommodation.id}      
-      }).subscribe(x=>{
+        accommodationUnit: { id: accommodation.id }
+      }).subscribe(x => {
         this.snackBar.open("Reservation made", "Ok", { duration: 1400 });
-      }, x=>{
+      }, x => {
         this.snackBar.open("Failed to make reservation", "Ok", { duration: 1400 });
       })
     }
 
   }
-  
+
   onBasicSearch(search: any) {
     this.startDate = search.startDate;
     this.endDate = search.endDate;
@@ -67,10 +99,10 @@ export class V2IndexComponent implements OnInit {
     this.endDate = search.endDate;
     this.state = "loading";
     this.searchService.advancedSearch(search)
-    .subscribe(x => {
-      this.searchResults = x;
-      this.setResultState();
-    }, err => { console.log(err) });
+      .subscribe(x => {
+        this.searchResults = x;
+        this.setResultState();
+      }, err => { console.log(err) });
   }
 
   private setResultState() {

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Rate your stay in {{data.accommodationUnit.place}}</h1>
+<mat-dialog-content>
+    <mat-form-field>
+        <mat-select placeholder="Select rating" [(ngModel)]="rating">
+            <mat-option *ngFor="let value of [1,2,3,4,5]" [value]="value">
+                {{value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button (click)="onRate()">Rate</button>
+</mat-dialog-actions>

@@ -2,8 +2,12 @@
   <mat-card class="accomodation-card">
     <mat-card-header>
       <mat-card-title>{{accommodation.place}} </mat-card-title>
-      <mat-card-title> Cost: {{accommodation.price}}$ </mat-card-title>
-      <!-- <mat-card-subtitle>Serbia, Novi Sad, Bul. Oslobodjenja 33</mat-card-subtitle> -->
+      <mat-card-title>{{accommodation.accommodationType.typeName}}</mat-card-title>
+      <mat-card-title>Category: {{accommodation.category.categoryName}}</mat-card-title>
+      <mat-card-title>Cost: {{accommodation.price}}$ </mat-card-title>
+      <mat-card-title *ngIf="accommodation.rating">Rating: {{(accommodation.rating+"").substring(0,4)}}</mat-card-title>
+      <mat-card-title *ngIf="!accommodation.rating">Not yet rated</mat-card-title>      
+      <mat-card-title>Posted by: {{accommodation.agent.name}}</mat-card-title>
     </mat-card-header>
     <mat-chip-list>
       <mat-chip *ngFor="let service of accommodation.additionalServices">{{service.name}}</mat-chip>

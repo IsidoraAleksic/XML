@@ -4,6 +4,9 @@
   "description": "Rating Service",
   "main": "index.js",
   "scripts": {
+    "setup": "npm install -g @google-cloud/functions-emulator && functions config set projectId rating-service",
+    "deploy": "functions start && functions deploy ratings --trigger-http",
+    "undeploy": "functions delete ratings && functions stop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "XML Jadi",

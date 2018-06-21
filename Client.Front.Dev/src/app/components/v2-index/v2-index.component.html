@@ -11,13 +11,27 @@
           <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
         <div class="state-message" *ngSwitchCase="'no-results'">
-            <span class="mat-h1">No results</span>
-          </div>
+          <span class="mat-h1">No results</span>
+        </div>
         <ng-container *ngSwitchCase="'results'">
-
-            <app-accommodation-detail [accommodation]="accommodation" (book)="onBook($event)"
-            class="accommodation-list"
-            *ngFor="let accommodation of searchResults"></app-accommodation-detail>
+          <div style="padding: 16px; background: white" class="mat-typography">
+            <button (click)="onOrderBy('cost')" mat-raised-button [color]="orderBy == 'price' ? 'primary' : 'basic'">
+              <mat-icon *ngIf="orderBy == 'cost' && !reverseOrder">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="orderBy == 'cost' && reverseOrder">arrow_drop_down</mat-icon>
+              Cost
+            </button>
+            <button (click)="onOrderBy('category')" mat-raised-button [color]="orderBy == 'category' ? 'primary' : 'basic'">
+              <mat-icon *ngIf="orderBy == 'category' && !reverseOrder">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="orderBy == 'category' && reverseOrder">arrow_drop_down</mat-icon>
+              Category
+            </button>
+            <button (click)="onOrderBy('rating')" mat-raised-button [color]="orderBy == 'rating' ? 'primary' : 'basic'">
+              <mat-icon *ngIf="orderBy == 'rating' && !reverseOrder">arrow_drop_up</mat-icon>
+              <mat-icon *ngIf="orderBy == 'rating' && reverseOrder">arrow_drop_down</mat-icon>
+              Rating
+            </button>
+          </div>
+          <app-accommodation-detail [accommodation]="accommodation" (book)="onBook($event)" class="accommodation-list" *ngFor="let accommodation of searchResults"></app-accommodation-detail>
         </ng-container>
       </div>
     </div>

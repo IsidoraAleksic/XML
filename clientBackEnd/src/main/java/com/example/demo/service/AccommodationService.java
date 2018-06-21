@@ -18,9 +18,9 @@ public interface AccommodationService {
 
     List<AccommodationUnit> getAll();
 
-    List<AccommodationPricing> basicSearch(String place, Date startDate, Date endDate, int people);
+    Object basicSearch(String place, Date startDate, Date endDate, int people);
 
-    List<AccommodationPricing> advancedSearch(String place, Date startDate, Date endDate, int people,
+    Object advancedSearch(String place, Date startDate, Date endDate, int people,
                                               Long type, Long category, List<Long> additionalServices);
 
     List<AccommodationUnit> search(List<AccommodationUnit> accommodations, Date startDate, Date endDate);

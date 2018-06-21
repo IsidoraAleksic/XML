@@ -20,4 +20,14 @@ export class ReviewService {
     return this.http.post<any>(`${environment.backendSrc}review/${reservationId}`, review, { withCredentials: true });
   }
 
+  rate(reservation: string, rating: string) {
+    return this.http.post<any>(`${environment.backendSrc}rating`,null, {
+      params: {
+        reservation: reservation,
+        rating: rating
+      },
+      withCredentials: true
+    })
+  }
+
 }
