@@ -1,5 +1,5 @@
 backedServer = "http://localhost:8080";
-var action="create";
+var action;
 var accommodationIdType;
 var accommodationIdCategory;
 var additionalServiceId;
@@ -24,16 +24,30 @@ function getAccommodationType(){
 
 function createAccommodationTypeDiv(accommodationType){
 var content = "";
-content+="<div class=\"card merch-container\"><h2>"+ "Name:" + accommodationType.typeName + "</h2>"+
+content+="<div class=\"card merch-container\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+
     "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+")\">Update Accommodation Type</button></div><br/>" +
     "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete Accommodation Type</button></div></div>";
 return content;
 }
 
+function createAccommodationCategoryDiv(accommodationCategory){
+	var content = "";
+	content+="<div class=\"card merch-container\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+
+	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+")\">Update Accommodation Category</button></div><br/>" +
+	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete Accommodation Category</button></div></div>";
+	return content;
+}
+
+function createAdditionalServicesDiv(additionalService){
+	var content = "";
+	content+="<div class=\"card merch-container\"><h2>"+ "Additional service:" + additionalService.name + "</h2>"+
+	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+")\">Update Additional Service</button></div><br/>" +
+	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete Accommodation Service</button></div></div>";
+	return content;
+	}
 function openModalAccommodationTypeCreate() {
     action="create";
     $("#accommodationTypeModal").modal();
-
 }
 function openModalAccommodationTypeUpdate(id) {
 	accommodationIdType=id;
@@ -45,7 +59,7 @@ function chooseMethodAccommodationType(){
     if(action == "create"){
     	addAccommodationType();
     }else{
-    	updateAccommodationType();
+    	updateAccommodationType(accommodationIdType);
     }
 }
 function openModalAccommodationCategoryCreate() {
@@ -93,8 +107,8 @@ function getAccommodationCategory(){
             var accommodationCategory = data;
             var content = "";
 
-            for (var type in accommodationType) {
-                content+=createAccommodationCategoryDiv(accommodationCategory[type]);
+            for (var category in accommodationCategory) {
+                content+=createAccommodationCategoryDiv(accommodationCategory[category]);
             }
             $("#accommodationCategory").empty().append(content);
 
@@ -137,7 +151,7 @@ function addAccommodationType(){
     });
 
 }
-function updateAccommodationType(){
+function updateAccommodationType(accommodationIdType){
     $.ajax({
         url: backedServer+"/administrator/updateAccommodationType/"+accommodationIdType,
         contentType: "application/json",
@@ -167,7 +181,7 @@ function addAccommodationCategory(){
     });
 
 }
-function updateAccommodationCategory(){
+function updateAccommodationCategory(accommodationIdCategory){
     $.ajax({
         url: backedServer+"/administrator/updateAccommodationCategory/"+accommodationIdCategory,
         contentType: "application/json",
@@ -199,7 +213,7 @@ function addAdditionalServices(){
 
 }
 
-function updateAdditionalServices(){
+function updateAdditionalServices(additionalServiceId){
     $.ajax({
         url: backedServer+"/administrator/updateAdditionalServices/"+additionalServiceId,
         contentType: "application/json",

@@ -46,10 +46,10 @@ public class RatingServiceImpl implements RatingService {
 		if (rating < 1 || rating > 5)
 			throw new BadRequestException("Rating must be between 1 and 5");
 
-		RatingDTO ratingDTO = new RatingDTO(user.getId(), reservation_id, rating);
+		/*RatingDTO ratingDTO = new RatingDTO(user.getId(), reservation_id, rating);
 
 		new RestTemplate().postForObject("http://localhost:8010/rating-service/us-central1/ratings", ratingDTO,
-				Object.class);
+				Object.class);*/
 
 	}
 

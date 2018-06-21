@@ -46,7 +46,7 @@
 		Sifarnici
 	  </button>
 	  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-		<div id="accommodationType"><li><a href="" onclick="getAccommodationType()" data-toggle="tab">Accommodation Type</a></li></div>
+		<li><a href="#accommodationType" onclick="getAccommodationType()" data-toggle="tab">Accommodation Type</a></li>
 		<li><a href="#accommodationCategory" onclick="getAccommodationCategory()" data-toggle="tab">Accommodation Category</a></li>
 		<li><a href="#additionalServices" onclick="getAdditionalServices()" data-toggle="tab">Additional Services</a></li>
 	  </div>
@@ -58,9 +58,9 @@
 		</button>
 		
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<li><a href="#addAgent" onclick="" data-toggle="tab">Add agent</a></li>
-			<li><a href="#changeUsers" onclick="getUsers()" data-toggle="tabUsers">Change users</a></li>
-			<li><a href="#publishReviews" onclick="getReviews()" data-toggle="tab">Publish reviews</a></li>
+			<li><a href="#addAgent" onclick="showHideAgent()" data-toggle="tab">Add agent</a></li>
+			<li><a href="#showUsers" onclick="showHideUser()" data-toggle="tabUsers">Change users</a></li>
+			<li><a href="#reviews" onclick="getReviews()" data-toggle="tab">Publish reviews</a></li>
 		</div>
 		
 	</div>
@@ -68,20 +68,29 @@
 	<button type="button" class="button button4" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</button>
 	<button type="button" class="button button4" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</button>
 	<button type="button" class="button button4" onclick="openModalAdditionalServiceCreate()">Add new additional service</button>
+	<div id="accommodationType"></div>
+	<div id="accommodationCategory"></div>
+	<div id="additionalServices"></div>
+	<div id="reviews"></div>
 	<div  class="tab-pane" id="showUsers">
 		<br/><br/>
 		<table width="100" id="tableUsers">
-			<tbody>
+			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Surname</th>
 					<th>Email</th>
 					<th>Role</th>
 					<th>Status</th>
-					
+					<th>&nbsp;</th>
 				</tr>
+			</thead>
+			<tbody>
 			</tbody>
 		</table>
+		<br/><br/>
+		<button type="button" onclick="showHideUser()" class="btn">Dismiss</button>
+		
 	</div>
 	
 <div class="modal fade" id="accommodationTypeModal" role="dialog">
@@ -131,6 +140,7 @@
 </div>
 
 <div class="modal fade" id="additionalServiceModal" role="dialog">
+	
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,6 +185,7 @@
                	<input type="text" name="form-brn" placeholder="Business registration number" class="form-brn form-control" id="formRegister-brn">
                </div>
                <button type="button" onclick="registerAgent()" class="btn">Add</button>
+               <button type="button" onclick="showHideAgent()" class="btn">Dismiss</button>
            </form>
            </div>
            <div class="col-lg-7"></div>

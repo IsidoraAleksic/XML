@@ -35,7 +35,7 @@ public class AdditionalServiceServiceImpl implements AdditionalServiceService{
 	@Override
 	public String update(Long id, AdditionalServiceDTO additionalServiceDTO) {
 		AdditionalServices additionalService = additionalServiceRepository.getById(id);
-		if(!additionalService.getId().equals(additionalServiceDTO.getId())) {
+		if(!additionalService.getId().equals(id)) {
 			return "ERROR";
 		}
 		additionalService.setName(additionalServiceDTO.getName());
@@ -47,6 +47,7 @@ public class AdditionalServiceServiceImpl implements AdditionalServiceService{
 	public List<AdditionalServices> findAll() {
 		return additionalServiceRepository.findAll();
 	}
+	
 	
 	
 }

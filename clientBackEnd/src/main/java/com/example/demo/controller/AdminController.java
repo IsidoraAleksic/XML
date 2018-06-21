@@ -23,6 +23,7 @@ import com.example.demo.model.dto.AccommodationTypeDTO;
 import com.example.demo.model.dto.AdditionalServiceDTO;
 import com.example.demo.model.dto.AgentDTO;
 import com.example.demo.model.type.Role;
+import com.example.demo.model.type.Status;
 import com.example.demo.service.AccommodationCategoryService;
 import com.example.demo.service.AccommodationTypeService;
 import com.example.demo.service.AdditionalServiceService;
@@ -61,7 +62,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/updateAccommodationType/{id}")
-	public ResponseEntity updateAccommodationType(@PathVariable("id") Long id,
+	public ResponseEntity<?> updateAccommodationType(@PathVariable("id") Long id,
 			@RequestBody AccommodationTypeDTO accommodationTypeDTO) {
 		String result = accommodationTypeService.update(id, accommodationTypeDTO);
 		return new ResponseEntity<>(result, HttpStatus.OK);
@@ -87,7 +88,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/updateAccommodationCategory/{id}")
-	public ResponseEntity updateAccommodationCategory(@PathVariable("id") Long id,
+	public ResponseEntity<?> updateAccommodationCategory(@PathVariable("id") Long id,
 			@RequestBody AccommodationCategoryDTO accommodationCategoryDTO) {
 		String result = accommodationCategoryService.update(id, accommodationCategoryDTO);
 		return new ResponseEntity<>(result, HttpStatus.OK);
@@ -114,7 +115,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/updateAdditionalServices/{id}")
-	public ResponseEntity updateAdditionalServices(@PathVariable("id") Long id_ad,
+	public ResponseEntity<?> updateAdditionalServices(@PathVariable("id") Long id_ad,
 			@RequestBody AdditionalServiceDTO additionalServiceDTO) {
 		String result = additionalServiceService.update(id_ad, additionalServiceDTO);
 		return new ResponseEntity<>(result, HttpStatus.OK);
@@ -161,39 +162,22 @@ public class AdminController {
 		return list;
 	}
 
-	@PostMapping("/blockGuests/{email}")
-	public boolean block(@PathVariable("email") String email) {
-		User forBlocking = authenticationService.findRegisteredByEmail(email);
-		if (forBlocking != null && forBlocking.getRole() == Role.GUEST) {
-			forBlocking.setBlocked(true);
-			authenticationService.saveUser(forBlocking);
+	@PostMapping("/changeUserStatus/{email}/{status}")
+	public boolean changeUserStatus(@PathVariable("email") String email,@PathVariable("status") String status) {
+		User forStatusChange = authenticationService.findRegisteredByEmail(email);
+		if (forStatusChange != null && forStatusChange.getRole() == Role.GUEST && status.equals("ACTIVATED")) {
+			forStatusChange.setStatus(Status.ACTIVATED);
+			authenticationService.saveUser(forStatusChange);
+			return true;
+		}else if(forStatusChange != null && forStatusChange.getRole() == Role.GUEST && status.equals("BLOCKED")) {
+			forStatusChange.setStatus(Status.BLOCKED);
+			authenticationService.saveUser(forStatusChange);
+			return true;
+		}else if(forStatusChange != null && forStatusChange.getRole() == Role.GUEST && status.equals("DELETED")){
+			forStatusChange.setStatus(Status.DELETED);
+			authenticationService.saveUser(forStatusChange);
 			return true;
 		}
-
-		return false;
-	}
-
-	@PostMapping("/activateGuests/{email}")
-	public boolean activate(@PathVariable("email") String email) {
-		User forActivation = authenticationService.findRegisteredByEmail(email);
-		if (forActivation != null && forActivation.getRole() == Role.GUEST) {
-			forActivation.setActivated(true);
-			authenticationService.saveUser(forActivation);
-			return true;
-		}
-
-		return false;
-	}
-
-	@PostMapping("/deleteGuests/{email}")
-	public boolean delete(@PathVariable("email") String email) {
-		User forDeleting = authenticationService.findRegisteredByEmail(email);
-		if (forDeleting != null && forDeleting.getRole() == Role.GUEST) {
-			forDeleting.setDeleted(true);
-			authenticationService.saveUser(forDeleting);
-			return true;
-		}
-
 		return false;
 	}
 
@@ -206,22 +190,11 @@ public class AdminController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PostMapping("/postReview/approve")
-	public boolean postReviewApprove(@RequestBody Long id) {
+	@PostMapping("/postReview/{id}/{status}")
+	public boolean postReview(@PathVariable("id") Long id,@PathVariable("status") boolean status) {
 		Review forPosting = reviewService.findById(id);
 		if (forPosting != null) {
-			forPosting.setApproved(true);
-			reviewService.save(forPosting);
-			return true;
-		}
-
-		return false;
-	}
-	@PostMapping("/postReview/reject")
-	public boolean postReviewReject(@RequestBody Long id) {
-		Review forPosting = reviewService.findById(id);
-		if (forPosting != null) {
-			forPosting.setApproved(false);
+			forPosting.setApproved(status);
 			reviewService.save(forPosting);
 			return true;
 		}

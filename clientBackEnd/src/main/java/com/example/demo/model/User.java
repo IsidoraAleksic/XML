@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import com.example.demo.model.type.Role;
+import com.example.demo.model.type.Status;
 
 @Entity
 @Table(name = "users")
@@ -21,9 +22,8 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private boolean blocked;
-    private boolean activated;
-    private boolean deleted;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     
     public User() {
     }
@@ -76,28 +76,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
-	public boolean isBlocked() {
-		return blocked;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setBlocked(boolean blocked) {
-		this.blocked = blocked;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
-	public boolean isActivated() {
-		return activated;
-	}
-
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
-
-	public boolean isDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}
+    
     
 }

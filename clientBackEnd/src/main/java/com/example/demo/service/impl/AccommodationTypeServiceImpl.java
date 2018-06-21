@@ -32,7 +32,7 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeService{
 	@Override
 	public String update(Long id, AccommodationTypeDTO accommodationTypeDTO) {
 		AccommodationType accommodationType = accommodationTypeRepository.getById(id);
-		if(!accommodationType.getId().equals(accommodationTypeDTO.getId())) {
+		if(!accommodationType.getId().equals(id)) {
 			return "ERROR";
 		}
 		accommodationType.setTypeName(accommodationTypeDTO.getTypeName());
