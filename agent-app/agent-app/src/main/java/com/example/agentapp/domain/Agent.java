@@ -9,18 +9,15 @@ import javax.persistence.*;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer","handler"})
-
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 //@Data
 //@NoArgsConstructor
 public class Agent {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
     private String email;
-
     private String password;
     private String name;
     private String surname;
@@ -31,7 +28,8 @@ public class Agent {
     public Agent() {
     }
 
-    public Agent(String email, String password, String name, String surname, String regNumber) {
+    public Agent(long id, String email, String password, String name, String surname, String regNumber) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;

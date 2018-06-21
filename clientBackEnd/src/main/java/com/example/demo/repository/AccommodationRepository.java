@@ -15,6 +15,7 @@ import com.example.demo.model.AdditionalServices;
 @Repository
 public interface AccommodationRepository extends JpaRepository<AccommodationUnit,Long> {
 
+	List<AccommodationUnit> getByAgent_Id(Long id);
     AccommodationUnit getById(Long id);
     List<AccommodationUnit> getByPlaceAndCapacity(String place,int capacity);
     List<AccommodationUnit> getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesContains

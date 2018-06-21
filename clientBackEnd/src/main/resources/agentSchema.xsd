@@ -21,4 +21,79 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="accommodationTypeWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="typeName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="accommodationCategoryWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="categoryName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="additionalServicesWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getAccommodationParametersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="additionalServices"
+                            type="additionalServicesWs"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="accommodationCategories"
+                            type="accommodationCategoryWs"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="accommodationTypes"
+                            type="accommodationTypeWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAccommodationParametersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="staos" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAccommodationByAgentIdReguest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAccommodationByAgentIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="accommodationUnitWs"
+                            type="AccommodationUnitWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="AccommodationUnitWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="place" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="capacity" type="xs:int"/>
+            <xs:element name="accommodationType" type="accommodationTypeWs"/>
+            <xs:element name="category" type="accommodationCategoryWs"/>
+            <xs:element name="additionalServices" type="additionalServicesWs" maxOccurs="unbounded"
+                        minOccurs="0"/>
+            <xs:element name="agent" type="AgentWs"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AgentWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="regNumber" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

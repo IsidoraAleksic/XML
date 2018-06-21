@@ -30,5 +30,7 @@ INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, addit
 INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, additional_services_id) VALUES ('1', '2');
 INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, additional_services_id) VALUES ('2', '2');
 
+
 INSERT INTO review (approved, review, accommodation_unit_id, user_id) VALUES (false, 'shit', '1', '1');
+
 INSERT INTO agent(password,name,surname,email,reg_number) VALUES ('agent','agent','agent','agent@gmail.com','23D');
