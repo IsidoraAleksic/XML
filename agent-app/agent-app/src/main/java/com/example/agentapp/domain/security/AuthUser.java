@@ -8,23 +8,46 @@ import java.util.Collection;
 public class AuthUser implements UserDetails {
 
     private Long id;
-    private String username;
+    private String email;
     private String password;
+    private String name;
+    private String surname;
+    private String regNumber;
     private Collection<? extends GrantedAuthority> authorities;
 
     public AuthUser() {
         super();
     }
 
-    public AuthUser(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthUser(Long id, String email, String password, String name, String surname,
+                    String regNumber, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.regNumber = regNumber;
         this.authorities = authorities;
     }
 
     public Long getId() {
         return this.id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getRegNumber() {
+        return regNumber;
     }
 
     @Override
@@ -39,7 +62,7 @@ public class AuthUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.email;
     }
 
     @Override
@@ -60,5 +83,17 @@ public class AuthUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthUser{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", regNumber='" + regNumber + '\'' +
+                '}';
     }
 }

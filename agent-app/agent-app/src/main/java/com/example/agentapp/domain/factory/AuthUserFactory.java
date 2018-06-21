@@ -18,6 +18,7 @@ public class AuthUserFactory {
             authorities = null;
         }
 
-        return new AuthUser(user.getId(), user.getUsername(), user.getPassword(), authorities);
+        return new AuthUser(user.getId(), user.getEmail(), user.getPassword(),
+                user.getName(), user.getSurname(), user.getRegNumber(), authorities);
     }
 }

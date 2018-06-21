@@ -4,7 +4,7 @@
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
             <h4>Welcome back.</h4>
-            <input v-model="data.username" type="text" class="form-control input-sm chat-input" placeholder="username" />
+            <input v-model="data.email" type="text" class="form-control input-sm chat-input" placeholder="username" />
             <br/>
             <input v-model="data.password" type="text" class="form-control input-sm chat-input" placeholder="password" />
             <br/>
@@ -31,15 +31,15 @@
         data () {
             return {
                 data: {
-                    username: '',
+                    email: '',
                     password: ''      
                 }
             }
         },
         methods: {
             sendUserData: function(event) {
-                if (this.username === '' || this.password === '') {
-                    alert('Username/password cannot be empty!');
+                if (this.email === '' || this.password === '') {
+                    alert('Email/password cannot be empty!');
                     return;
                 }
                 this.sendRequest(this.data);
