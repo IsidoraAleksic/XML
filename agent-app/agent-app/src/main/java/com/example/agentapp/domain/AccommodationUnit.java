@@ -13,7 +13,6 @@ import java.util.List;
 public class AccommodationUnit implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String place;
     private String description;
@@ -35,6 +34,17 @@ public class AccommodationUnit implements Serializable {
 
 
     public AccommodationUnit() {
+    }
+
+    public AccommodationUnit(long id, String place, String description, int capacity, AccommodationType accommodationType, AccommodationCategory category, List<AdditionalService> additionalServices, Agent agent) {
+        this.id = id;
+        this.place = place;
+        this.description = description;
+        this.capacity = capacity;
+        this.accommodationType = accommodationType;
+        this.category = category;
+        this.additionalServices = additionalServices;
+        this.agent = agent;
     }
 
     public long getId() {

@@ -14,6 +14,7 @@ public class LoginWS {
 
     public Agent sendLoginRequest(String email, String password) {
         LoginAgentResponse res = wsClient.loginAgent(email, password);
-        return new Agent(res.getEmail(), res.getPassword(), res.getName(), res.getSurname(), res.getRegNumber());
+
+        return new Agent(res.getId(), res.getEmail(), res.getPassword(), res.getName(), res.getSurname(), res.getRegNumber());
     }
 }

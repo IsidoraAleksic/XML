@@ -8,10 +8,17 @@ import java.util.List;
 public class AccommodationCategory implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 	
 	protected String categoryName;
+
+	public AccommodationCategory() {
+	}
+
+	public AccommodationCategory(Long id, String categoryName) {
+		this.id = id;
+		this.categoryName = categoryName;
+	}
 
 	public Long getId() {
 		return id;
@@ -29,6 +36,5 @@ public class AccommodationCategory implements Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public AccommodationCategory() {
-	}
+
 }

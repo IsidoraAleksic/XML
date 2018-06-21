@@ -14,4 +14,6 @@ public interface AccommodationUnitService {
 
     AccommodationUnit addUnit(AccommodationUnit unit);
 
+    void saveUnits(List<AccommodationUnit> units);
+
 }

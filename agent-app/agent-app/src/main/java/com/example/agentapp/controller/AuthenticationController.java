@@ -2,9 +2,12 @@ package com.example.agentapp.controller;
 
 import com.example.agentapp.domain.Agent;
 import com.example.agentapp.domain.security.AuthUser;
+import com.example.agentapp.event.OnLoginSuccessEvent;
 import com.example.agentapp.service.AgentService;
+import com.example.agentapp.service.ws.AccommodationUnitWS;
 import com.example.agentapp.service.ws.LoginWS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,7 +26,7 @@ public class AuthenticationController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    LoginWS loginWS;
+    ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
     AgentService agentService;
@@ -39,14 +42,15 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // ovo ispod je za slucaj da bude trebao u lokalnoj bazi, inace imas ga kao principal
         if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             return false;
         } else {
             AuthUser authUser = (AuthUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Agent authAgent = new Agent(authUser.getEmail(), authUser.getPassword(), authUser.getName(),
+            Agent authAgent = new Agent(authUser.getId(), authUser.getEmail(), authUser.getPassword(), authUser.getName(),
                                             authUser.getSurname(), authUser.getRegNumber());
-            Agent ret = agentService.save(authAgent);
+            Agent saved = agentService.save(authAgent);
+
+            applicationEventPublisher.publishEvent(new OnLoginSuccessEvent(saved));
             return true;
         }
     }

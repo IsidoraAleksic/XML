@@ -58,7 +58,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+        httpSecurity.
+                headers()
+                    .frameOptions().disable()
+                    .and()
                 .cors()
                     .and()
                 .csrf()
@@ -67,9 +70,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                    .antMatchers(HttpMethod.POST, "/auth").permitAll()
 //                        .anyRequest().authenticated()
 //                    .and()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                    .and()
+//                .sessionManagement()
+//                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+//                    .and()
                 .formLogin()
                     .disable()
                 .rememberMe();
