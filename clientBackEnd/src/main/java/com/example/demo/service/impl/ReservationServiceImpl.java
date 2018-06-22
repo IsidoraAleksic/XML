@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exceptions.BadRequestException;
+import com.example.demo.exceptions.ConflictException;
 import com.example.demo.model.AccommodationUnit;
 import com.example.demo.model.Message;
 import com.example.demo.model.Reservation;
@@ -60,7 +61,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation getByAccommodationUnit(AccommodationUnit accommodationUnit) {
+    public List<Reservation> getByAccommodationUnit(AccommodationUnit accommodationUnit) {
         return reservationRepository.getByAccommodationUnit(accommodationUnit);
     }
 
@@ -69,13 +70,24 @@ public class ReservationServiceImpl implements ReservationService {
         if(reservation==null){
             throw new BadRequestException("Reservation must not be null");
         }
+//        if(!check(reservation))
+//            throw new ConflictException("Reservation exists");
         User user = authenticationService.getLoggedInUser();
         if(user==null){
             throw new BadRequestException("User must not be null");
         }
         reservation.setUser(user);
+        reservation.setConfirmed(false);
         save(reservation);
 
+    }
+
+    @Override
+    public boolean check(Reservation reservation) {
+        int rez = reservationRepository.countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(reservation.getAccommodationUnit(),reservation.getStartDate(),reservation.getEndDate());
+        if(rez==0)
+            return true;
+        return false;
     }
 
     @Override

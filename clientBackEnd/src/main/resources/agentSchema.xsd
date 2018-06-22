@@ -130,4 +130,30 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:element name="bookIntervalRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="accommodationId" type="xs:long"/>
+                <xs:element name="startDate" type="xs:date"/>
+                <xs:element name="endDate" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="bookIntervalResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="reservations"
+                            type="reservationWs"/>
+                <xs:element name="success" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="reservationWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="startDate" type="xs:date"/>
+            <xs:element name="endDate" type="xs:date"/>
+            <xs:element name="confirmed" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

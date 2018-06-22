@@ -13,7 +13,8 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
 
     Reservation getById(Long id);
-    Reservation getByAccommodationUnit(AccommodationUnit accommodationUnit);
+    List<Reservation> getByAccommodationUnit(AccommodationUnit accommodationUnit);
+    int countByAccommodationUnitAndStartDateAndEndDate(AccommodationUnit accommodationUnit, Date startDate, Date endDate);
     int countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(AccommodationUnit accommodationUnit, Date endDate, Date startDate);
     List<Reservation> getByUser(User user);
 }

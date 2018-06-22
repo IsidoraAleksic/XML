@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -27,9 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="idAccommodation" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="idImage" type="{http://www.w3.org/2001/XMLSchema}long" maxOccurs="unbounded"/>
- *         &lt;element name="idPricing" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="reservations" type="{http://www.ftn.uns.ac.rs/agenti}reservationWs" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="success" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,77 +38,58 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idAccommodation",
-    "idImage",
-    "idPricing"
+    "reservations",
+    "success"
 })
-@XmlRootElement(name = "createAccommodationResponse")
-public class CreateAccommodationResponse {
+@XmlRootElement(name = "bookIntervalResponse")
+public class BookIntervalResponse {
 
-    protected long idAccommodation;
-    @XmlElement(type = Long.class)
-    protected List<Long> idImage;
-    protected long idPricing;
+    protected List<ReservationWs> reservations;
+    protected boolean success;
 
     /**
-     * Gets the value of the idAccommodation property.
-     * 
-     */
-    public long getIdAccommodation() {
-        return idAccommodation;
-    }
-
-    /**
-     * Sets the value of the idAccommodation property.
-     * 
-     */
-    public void setIdAccommodation(long value) {
-        this.idAccommodation = value;
-    }
-
-    /**
-     * Gets the value of the idImage property.
+     * Gets the value of the reservations property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the idImage property.
+     * This is why there is not a <CODE>set</CODE> method for the reservations property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIdImage().add(newItem);
+     *    getReservations().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Long }
+     * {@link ReservationWs }
      * 
      * 
      */
-    public List<Long> getIdImage() {
-        if (idImage == null) {
-            idImage = new ArrayList<Long>();
+    public List<ReservationWs> getReservations() {
+        if (reservations == null) {
+            reservations = new ArrayList<ReservationWs>();
         }
-        return this.idImage;
+        return this.reservations;
     }
 
     /**
-     * Gets the value of the idPricing property.
+     * Gets the value of the success property.
      * 
      */
-    public long getIdPricing() {
-        return idPricing;
+    public boolean isSuccess() {
+        return success;
     }
 
     /**
-     * Sets the value of the idPricing property.
+     * Sets the value of the success property.
      * 
      */
-    public void setIdPricing(long value) {
-        this.idPricing = value;
+    public void setSuccess(boolean value) {
+        this.success = value;
     }
 
 }
