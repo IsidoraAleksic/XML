@@ -16,12 +16,22 @@ public class Reservation implements Serializable {
     private AccommodationUnit accommodationUnit;
     private Date startDate;
     private Date endDate;
+    private boolean confirmed;
 
-    public Reservation(User user, AccommodationUnit accommodationUnit, Date startDate, Date endDate) {
+    public Reservation(User user, AccommodationUnit accommodationUnit, Date startDate, Date endDate,boolean confirmed) {
         this.user = user;
         this.accommodationUnit = accommodationUnit;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.confirmed = confirmed;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     public long getId() {

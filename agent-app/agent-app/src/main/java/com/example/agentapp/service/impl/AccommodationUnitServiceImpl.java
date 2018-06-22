@@ -39,4 +39,9 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     public AccommodationUnit addUnit(AccommodationUnit unit) {
         return accommodationUnitRepository.save(unit);
     }
+
+    @Override
+    public void saveUnits(List<AccommodationUnit> units) {
+        accommodationUnitRepository.saveAll(units);
+    }
 }

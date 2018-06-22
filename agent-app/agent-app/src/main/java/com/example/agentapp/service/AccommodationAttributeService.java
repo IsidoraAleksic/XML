@@ -16,4 +16,10 @@ public interface AccommodationAttributeService {
     AccommodationCategory getCategoryByName(String categoryName);
 
     List<AdditionalService> getAdditionalServicesByNames(List<String> additionalServiceName);
+
+    void insertAccommodationCategories(List<AccommodationCategory> categories);
+
+    void insertAccommodationTypes(List<AccommodationType> types);
+
+    void insertAdditionalServices(List<AdditionalService> services);
 }

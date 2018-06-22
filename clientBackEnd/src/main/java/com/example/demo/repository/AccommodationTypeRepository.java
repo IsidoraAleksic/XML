@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface AccommodationTypeRepository extends JpaRepository<AccommodationType,Long> {
 
     AccommodationType getById(Long id);
+
+    AccommodationType getByName(String name);
 }

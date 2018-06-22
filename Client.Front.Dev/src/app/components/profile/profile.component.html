@@ -21,10 +21,11 @@
                     <mat-icon>more_horiz</mat-icon>
                   </button>
                   <mat-menu #resevationMenu="matMenu">
-                    <button mat-menu-item [routerLink]="'/messages/'+reservation.id">Show Messages</button>
+                    <button mat-menu-item [routerLink]="'/messages/'+reservation.id" *ngIf="reservation.endDate | beforeToday: false">Show Messages</button>
                     <button mat-menu-item (click)="onCancel(reservation)" *ngIf="reservation.endDate | beforeToday: false">Cancel Reservation</button>
                     <button mat-menu-item (click)="showReviews(reservation)" *ngIf="reservation.endDate | beforeToday: false">Show Reviews</button>
                     <button mat-menu-item (click)="onReview(reservation)" *ngIf="reservation.endDate | beforeToday">Review Visit</button>
+                    <button mat-menu-item (click)="onRate(reservation)" *ngIf="reservation.endDate | beforeToday">Rate Visit</button>
                   </mat-menu>
                 </mat-card-header>
                 <mat-card-content>

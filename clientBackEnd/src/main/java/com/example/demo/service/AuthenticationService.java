@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public interface AuthenticationService {
     User authenticateUser(String username, String password);
     String registerUser(User user);

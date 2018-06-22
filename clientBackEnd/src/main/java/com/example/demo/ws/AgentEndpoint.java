@@ -13,7 +13,8 @@ import rs.ac.uns.ftn.agenti.LoginAgentResponse;
 
 @Endpoint
 public class AgentEndpoint {
-    private static final String NAMESPACE_URI = "http://www.ftn.uns.ac.rs/agenti";
+
+    public static final String NAMESPACE_URI = "http://www.ftn.uns.ac.rs/agenti";
 
     @Autowired
     AgentRepository agentRepository;
@@ -31,4 +32,6 @@ public class AgentEndpoint {
         response.setRegNumber(agent.getRegNumber());
         return response;
     }
+
+
 }

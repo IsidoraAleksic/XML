@@ -10,12 +10,16 @@ import java.io.Serializable;
 public class AdditionalService implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 	
 	protected String name;
 
 	public AdditionalService() {
+	}
+
+	public AdditionalService(Long id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public Long getId() {

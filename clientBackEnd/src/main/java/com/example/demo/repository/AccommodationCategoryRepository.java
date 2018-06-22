@@ -12,4 +12,5 @@ public interface AccommodationCategoryRepository extends JpaRepository<Accommoda
     AccommodationCategory getById(Long id);
 
 
+    AccommodationCategory getByName(String name);
 }

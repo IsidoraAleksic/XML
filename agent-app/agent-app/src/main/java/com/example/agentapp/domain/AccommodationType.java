@@ -10,12 +10,16 @@ import java.io.Serializable;
 public class AccommodationType implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 	
 	protected String typeName;
 
 	public AccommodationType(){}
+
+	public AccommodationType(Long id, String typeName) {
+		this.id = id;
+		this.typeName = typeName;
+	}
 
 	public Long getId() {
 		return id;

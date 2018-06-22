@@ -6,11 +6,14 @@ import com.example.demo.model.AdditionalServices;
 import com.example.demo.model.dto.SearchParameters;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface AccommodationOptionService {
 
     AdditionalServices getServiceById(Long id);
     AccommodationType getTypeById(Long id);
     AccommodationCategory getCategoryById(Long id);
     SearchParameters getParameters();
+    AccommodationType getTypeByName(String name);
+    AccommodationCategory getCategoryByName(String name);
+    AdditionalServices getServiceByName(String name);
 }

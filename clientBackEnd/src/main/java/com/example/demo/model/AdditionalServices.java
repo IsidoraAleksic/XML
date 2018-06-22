@@ -22,6 +22,10 @@ public class AdditionalServices implements Serializable {
 	public AdditionalServices() {
 	}
 
+	public AdditionalServices(String name) {
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}

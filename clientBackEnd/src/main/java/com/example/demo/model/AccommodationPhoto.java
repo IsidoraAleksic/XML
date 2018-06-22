@@ -14,12 +14,13 @@ public class AccommodationPhoto implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "accommodation_unit_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private AccommodationUnit accommodationUnit;
 
+    @Lob
     private String path;
 
     public AccommodationPhoto(AccommodationUnit accommodationUnit, String path) {

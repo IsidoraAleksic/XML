@@ -28,13 +28,23 @@ public class AccommodationUnit implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AdditionalServices> additionalServices;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "agent_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Agent agent;
 
 
     public AccommodationUnit() {
+    }
+
+    public AccommodationUnit(String place, String description, int capacity, AccommodationType accommodationType, AccommodationCategory category, List<AdditionalServices> additionalServices, Agent agent) {
+        this.place = place;
+        this.description = description;
+        this.capacity = capacity;
+        this.accommodationType = accommodationType;
+        this.category = category;
+        this.additionalServices = additionalServices;
+        this.agent = agent;
     }
 
     public long getId() {

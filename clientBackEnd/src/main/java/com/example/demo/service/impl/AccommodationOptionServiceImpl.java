@@ -43,4 +43,19 @@ public class AccommodationOptionServiceImpl implements AccommodationOptionServic
                         accommodationCategoryRepository.findAll(),accommodationTypeRepository.findAll());
         return searchParameters;
     }
+
+    @Override
+    public AccommodationType getTypeByName(String name) {
+        return accommodationTypeRepository.getByName(name);
+    }
+
+    @Override
+    public AccommodationCategory getCategoryByName(String name) {
+        return accommodationCategoryRepository.getByName(name);
+    }
+
+    @Override
+    public AdditionalServices getServiceByName(String name) {
+        return additionalServicesRepository.getByName(name);
+    }
 }

@@ -39,17 +39,18 @@ public class RatingServiceImpl implements RatingService {
 
 		if (reservation.getUser().getId() != user.getId())
 			throw new UnauthorizedException("Can't rate");
-		
+
 		if (reservation.getEndDate().after(Calendar.getInstance().getTime()))
 			throw new BadRequestException("Can't rate yet");
-		
+
 		if (rating < 1 || rating > 5)
 			throw new BadRequestException("Rating must be between 1 and 5");
-
-		/*RatingDTO ratingDTO = new RatingDTO(user.getId(), reservation_id, rating);
+		
+		RatingDTO ratingDTO = new RatingDTO(user.getId(), reservation_id, reservation.getAccommodationUnit().getId(),
+				rating);
 
 		new RestTemplate().postForObject("http://localhost:8010/rating-service/us-central1/ratings", ratingDTO,
-				Object.class);*/
+				Object.class);
 
 	}
 

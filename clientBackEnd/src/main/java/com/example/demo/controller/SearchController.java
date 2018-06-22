@@ -1,22 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AccommodationPricing;
-import com.example.demo.model.dto.AccommodationUnitListItemDTO;
-import com.example.demo.model.dto.SearchParameters;
-import com.example.demo.service.AccommodationOptionService;
-import com.example.demo.service.AccommodationService;
-import com.example.demo.service.ReservationService;
+import java.sql.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.example.demo.model.dto.SearchParameters;
+import com.example.demo.service.AccommodationOptionService;
+import com.example.demo.service.AccommodationService;
+import com.example.demo.service.ReservationService;
 
 @RestController
 @RequestMapping(value = "/search")
@@ -30,14 +26,13 @@ public class SearchController {
 	AccommodationOptionService accommodationOptionService;
 
 	@RequestMapping(value = "/basicSearch", method = RequestMethod.GET, produces = "application/json")
-	public List<AccommodationUnitListItemDTO> basicSearch(@RequestParam("place") String place,
+	public Object basicSearch(@RequestParam("place") String place,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("people") int people) {
 
 		Date sqlStartDate = reservationService.toDate(startDate);
 		Date sqlEndDate = reservationService.toDate(endDate);
-		return accommodationService.basicSearch(place, sqlStartDate, sqlEndDate, people).stream()
-				.map(x -> new AccommodationUnitListItemDTO(x, sqlStartDate, sqlEndDate)).collect(Collectors.toList());
+		return accommodationService.basicSearch(place, sqlStartDate, sqlEndDate, people);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -46,7 +41,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/advancedSearch", method = RequestMethod.GET, produces = "application/json")
-	public List<AccommodationUnitListItemDTO> advancedSearch(@RequestParam("place") String place,
+	public Object advancedSearch(@RequestParam("place") String place,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("people") int people, @RequestParam("type") Long type,
 			@RequestParam("category") Long category,
@@ -55,8 +50,7 @@ public class SearchController {
 		Date sqlStartDate = reservationService.toDate(startDate);
 		Date sqlEndDate = reservationService.toDate(endDate);
 		return accommodationService
-				.advancedSearch(place, sqlStartDate, sqlEndDate, people, type, category, additionalServices).stream()
-				.map(x -> new AccommodationUnitListItemDTO(x, sqlStartDate, sqlEndDate)).collect(Collectors.toList());
+				.advancedSearch(place, sqlStartDate, sqlEndDate, people, type, category, additionalServices);
 
 	}
 }
