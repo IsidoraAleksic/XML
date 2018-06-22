@@ -1,11 +1,13 @@
 package com.example.demo.ws;
 
-import com.example.demo.model.AccommodationCategory;
-import com.example.demo.model.AccommodationType;
-import com.example.demo.model.AccommodationUnit;
-import com.example.demo.model.AdditionalServices;
+import com.example.demo.exceptions.BadRequestException;
+import com.example.demo.exceptions.NotFoundException;
+import com.example.demo.model.*;
 import com.example.demo.model.dto.SearchParameters;
+import com.example.demo.repository.AccommodationPhotoRepository;
+import com.example.demo.repository.AccommodationPricingRepository;
 import com.example.demo.repository.AccommodationRepository;
+import com.example.demo.repository.AgentRepository;
 import com.example.demo.service.AccommodationService;
 import com.example.demo.service.impl.AccommodationOptionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class AccommodationEndpoint {
     AccommodationOptionServiceImpl accommodationOptionService;
     @Autowired
     AccommodationRepository accommodationRepository;
+    @Autowired
+    AgentRepository agentRepository;
+    @Autowired
+    AccommodationPhotoRepository accommodationPhotoRepository;
+    @Autowired
+    AccommodationPricingRepository accommodationPricingRepository;
 
     @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "getAccommodationParametersRequest")
     @ResponsePayload
@@ -111,5 +119,49 @@ public class AccommodationEndpoint {
 
         return response;
     }
+
+    @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "createAccommodationRequest")
+    @ResponsePayload
+    public CreateAccommodationResponse createAccommodation(@RequestPayload CreateAccommodationRequest request){
+        CreateAccommodationResponse response = new CreateAccommodationResponse();
+        List<AdditionalServices> additionalServicesList  = new ArrayList<>();
+        for(AdditionalServicesWs additionalServices: request.getAccommodationUnit().getAdditionalServices()){
+            AdditionalServices services =accommodationOptionService.getServiceByName(additionalServices.getName());
+            if(services==null)
+                throw new BadRequestException("Additional services cannot be null");
+            additionalServicesList.add(services);
+        }
+        AccommodationUnitWs pom = request.getAccommodationUnit();
+        AccommodationType accommodationType = accommodationOptionService.getTypeByName(pom.getAccommodationType().getTypeName());
+        if(accommodationType==null)
+            throw new BadRequestException("Type cannot be null");
+        AccommodationCategory accommodationCategory = accommodationOptionService.getCategoryByName(pom.getCategory().getCategoryName());
+        if(accommodationCategory==null)
+            throw new BadRequestException("Category cannot be null");
+        Agent agent = agentRepository.getByEmailIgnoreCase(pom.getAgent().getEmail());
+        if(agent==null)
+            throw new BadRequestException("Agent cannot be null");
+        AccommodationUnit accommodationUnit = new AccommodationUnit(pom.getPlace(),pom.getDescription(),
+                pom.getCapacity(),accommodationType,accommodationCategory,additionalServicesList,agent);
+        accommodationUnit = accommodationRepository.save(accommodationUnit);
+        response.setIdAccommodation(accommodationUnit.getId());
+        List<Long> imageIds = new ArrayList<>();
+        for(String src: request.getImageSrc()){
+            AccommodationPhoto accommodationPhoto = new AccommodationPhoto(accommodationUnit,src);
+            accommodationPhoto = accommodationPhotoRepository.save(accommodationPhoto);
+            imageIds.add(accommodationPhoto.getId());
+        }
+        response.getIdImage().addAll(imageIds);
+
+        Pricing pricing = request.getPricing();
+        AccommodationPricing accommodationPricing = new AccommodationPricing(accommodationUnit,pricing.getJanuary(),
+                pricing.getFebruary(),pricing.getMarch(),pricing.getApril(),pricing.getMay(),pricing.getJune(),pricing.getJuly()
+                ,pricing.getAugust(),pricing.getSeptember(),pricing.getOctober(),pricing.getNovember(),pricing.getDecember());
+        accommodationPricing = accommodationPricingRepository.save(accommodationPricing);
+        response.setIdPricing(accommodationPricing.getId());
+        return response;
+    }
+
+
 
 }

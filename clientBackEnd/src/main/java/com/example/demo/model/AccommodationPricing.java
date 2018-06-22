@@ -31,6 +31,22 @@ public class AccommodationPricing implements Serializable {
     public AccommodationPricing() {
     }
 
+    public AccommodationPricing(AccommodationUnit accommodationUnit, int january, int february, int march, int april, int may, int june, int july, int august, int september, int october, int november, int december) {
+        this.accommodationUnit = accommodationUnit;
+        this.january = january;
+        this.february = february;
+        this.march = march;
+        this.april = april;
+        this.may = may;
+        this.june = june;
+        this.july = july;
+        this.august = august;
+        this.september = september;
+        this.october = october;
+        this.november = november;
+        this.december = december;
+    }
+
     public long getId() {
         return id;
     }

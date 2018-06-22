@@ -37,6 +37,16 @@ public class AccommodationUnit implements Serializable {
     public AccommodationUnit() {
     }
 
+    public AccommodationUnit(String place, String description, int capacity, AccommodationType accommodationType, AccommodationCategory category, List<AdditionalServices> additionalServices, Agent agent) {
+        this.place = place;
+        this.description = description;
+        this.capacity = capacity;
+        this.accommodationType = accommodationType;
+        this.category = category;
+        this.additionalServices = additionalServices;
+        this.agent = agent;
+    }
+
     public long getId() {
         return id;
     }

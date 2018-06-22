@@ -22,6 +22,10 @@ public class AccommodationType implements Serializable {
 
 	public AccommodationType(){}
 
+	public AccommodationType(String typeName) {
+		this.typeName = typeName;
+	}
+
 	public Long getId() {
 		return id;
 	}

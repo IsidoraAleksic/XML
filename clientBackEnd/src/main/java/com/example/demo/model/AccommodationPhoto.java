@@ -20,6 +20,7 @@ public class AccommodationPhoto implements Serializable {
     @JsonIgnore
     private AccommodationUnit accommodationUnit;
 
+    @Lob
     private String path;
 
     public AccommodationPhoto(AccommodationUnit accommodationUnit, String path) {

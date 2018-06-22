@@ -13,4 +13,7 @@ public interface AccommodationOptionService {
     AccommodationType getTypeById(Long id);
     AccommodationCategory getCategoryById(Long id);
     SearchParameters getParameters();
+    AccommodationType getTypeByName(String name);
+    AccommodationCategory getCategoryByName(String name);
+    AdditionalServices getServiceByName(String name);
 }
