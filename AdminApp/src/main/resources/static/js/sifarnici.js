@@ -3,6 +3,83 @@ var action;
 var accommodationIdType;
 var accommodationIdCategory;
 var additionalServiceId;
+
+$( document ).ready(function() {
+	 var x = document.getElementById("accommodationType");
+	 var y = document.getElementById("accommodationCategory");
+	 var z = document.getElementById("additionalServices");
+	 var w = document.getElementById("reviews");
+	 var u = document.getElementById("showUsers");
+	 var v =  document.getElementById("addAgent");
+	 x.style.display = "none";
+	 y.style.display = "none";
+	 z.style.display = "none";
+	 w.style.display = "none";
+	 u.style.display = "none";
+	 v.style.display = "none";
+});
+
+
+function showHideAccommodationType() {
+    var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+	var z = document.getElementById("additionalServices");
+	var w = document.getElementById("reviews");
+	var u = document.getElementById("showUsers");
+	var v =  document.getElementById("addAgent");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+   	 	z.style.display = "none";
+	   	w.style.display = "none";
+	   	u.style.display = "none";
+	   	v.style.display = "none";
+        getAccommodationType();
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function showHideAccommodationCategory() {
+	var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+	var z = document.getElementById("additionalServices");
+	var w = document.getElementById("reviews");
+	var u = document.getElementById("showUsers");
+	var v =  document.getElementById("addAgent");
+    if (y.style.display === "none") {
+        y.style.display = "block";
+        x.style.display = "none";
+   	 	z.style.display = "none";
+   	 	w.style.display = "none";
+	   	u.style.display = "none";
+	   	v.style.display = "none";
+        getAccommodationCategory();
+    } else {
+        y.style.display = "none";
+    }
+}
+
+function showHideAdditionalServices() {
+	var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+    var z = document.getElementById("additionalServices");
+    var w = document.getElementById("reviews");
+	var u = document.getElementById("showUsers");
+	var v =  document.getElementById("addAgent");
+    if (z.style.display === "none") {
+        z.style.display = "block";
+        x.style.display = "none";
+   	 	y.style.display = "none";
+   	 	w.style.display = "none";
+	   	u.style.display = "none";
+	   	v.style.display = "none";
+        getAdditionalServices();
+    } else {
+        z.style.display = "none";
+    }
+}
+
 function getAccommodationType(){
 	$.ajax({
         url: backedServer+"/administrator/getAllAccommodationType",
@@ -24,27 +101,27 @@ function getAccommodationType(){
 
 function createAccommodationTypeDiv(accommodationType){
 var content = "";
-content+="<div class=\"card merch-container\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+
-    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+")\">Update Accommodation Type</button></div><br/>" +
-    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete Accommodation Type</button></div></div>";
+content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+    "<button  type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+")\">Update</button><br/>" +
+    "<button  type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete</button></div>";
 return content;
 }
 
 function createAccommodationCategoryDiv(accommodationCategory){
 	var content = "";
-	content+="<div class=\"card merch-container\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+")\">Update Accommodation Category</button></div><br/>" +
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete Accommodation Category</button></div></div>";
+	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+")\">Update</button><br/>" +
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete</button></div>";
 	return content;
 }
 
 function createAdditionalServicesDiv(additionalService){
 	var content = "";
-	content+="<div class=\"card merch-container\"><h2>"+ "Additional service:" + additionalService.name + "</h2>"+
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+")\">Update Additional Service</button></div><br/>" +
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete Accommodation Service</button></div></div>";
+	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2>" +"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+")\">Update</button><br/>" +
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete</button></div>";
 	return content;
-	}
+}
 function openModalAccommodationTypeCreate() {
     action="create";
     $("#accommodationTypeModal").modal();

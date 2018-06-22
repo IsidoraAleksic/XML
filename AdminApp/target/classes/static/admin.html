@@ -4,77 +4,92 @@
 	<meta charset="UTF-8">
 	<title>Admin</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="js/sifarnici.js"></script>
 	<script src="js/other.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style>
-		table {
+		#tableUsers table, td, th {
+   		 border: 1px solid black;
+   		 
+		}
+		#tableUsers table {
 			font-family: arial, sans-serif;
 			border-collapse: collapse;
-			width: 100%;
 		}
 
-		td, th {
+		#tableUsers td, th {
 			border: 1px solid #dddddd;
 			text-align: left;
 			padding: 8px;
 		}
-
-		tr:nth-child(even) {
-			background-color: #dddddd;
-		}
-	.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-	}
-
+	
 	.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+	
+	.card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        
+	} 
+	
+	body {
+    background-image: url("booking_background.jpg");
+	}
 	</style>
 </head>
 <body>
-	<div class="dropdown">
-	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Admin Profile</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+   
+	<!-- Dropdown -->
+	  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
 		Sifarnici
-	  </button>
-	  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-		<li><a href="#accommodationType" onclick="getAccommodationType()" data-toggle="tab">Accommodation Type</a></li>
-		<li><a href="#accommodationCategory" onclick="getAccommodationCategory()" data-toggle="tab">Accommodation Category</a></li>
-		<li><a href="#additionalServices" onclick="getAdditionalServices()" data-toggle="tab">Additional Services</a></li>
+	   </a>
+	   <div class="dropdown-menu">
+		<a class="dropdown-item" href="#accommodationType" onclick="showHideAccommodationType()">Accommodation Type</a>
+		<a class="dropdown-item" href="#accommodationCategory" onclick="showHideAccommodationCategory()">Accommodation Category</a>
+		<a class="dropdown-item" href="#additionalServices" onclick="showHideAdditionalServices()">Additional Services</a>
 	  </div>
-	</div>
-	<div class="dropdown">
+	</li>
+	  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+		Other
+		</a>
 		
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Other
-		</button>
-		
-		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<li><a href="#addAgent" onclick="showHideAgent()" data-toggle="tab">Add agent</a></li>
-			<li><a href="#showUsers" onclick="showHideUser()" data-toggle="tabUsers">Change users</a></li>
-			<li><a href="#reviews" onclick="getReviews()" data-toggle="tab">Publish reviews</a></li>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#addAgent" onclick="showHideAgent()">Add agent</a>
+			<a class="dropdown-item" href="#showUsers" onclick="showHideUser()">Change users</a>
+			<a class="dropdown-item" href="#reviews" onclick="showHideReview()">Publish reviews</a>
 		</div>
-		
-	</div>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="openModalAdditionalServiceCreate()">Add new additional service</a>
+    </li>
+  </ul>
+</nav>
 	
-	<button type="button" class="button button4" onclick="openModalAccommodationTypeCreate()">Add new accommodation type</button>
-	<button type="button" class="button button4" onclick="openModalAccommodationCategoryCreate()">Add new accommodation category</button>
-	<button type="button" class="button button4" onclick="openModalAdditionalServiceCreate()">Add new additional service</button>
+	
 	<div id="accommodationType"></div>
 	<div id="accommodationCategory"></div>
 	<div id="additionalServices"></div>
 	<div id="reviews"></div>
 	<div  class="tab-pane" id="showUsers">
 		<br/><br/>
-		<table width="100" id="tableUsers">
+		<table style="width:70%" class="table table-sm table-dark"  id="tableUsers">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -88,8 +103,7 @@
 			<tbody>
 			</tbody>
 		</table>
-		<br/><br/>
-		<button type="button" onclick="showHideUser()" class="btn">Dismiss</button>
+		<div><button type="button" onclick="showHideUser()" class="btn">Dismiss</button></div>
 		
 	</div>
 	
@@ -97,8 +111,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add new accommodation type</h4>
+                	<h4 class="modal-title">Add/update accommodation type</h4>
+                	<button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
 
                 </div>
                 <div class="modal-body">
@@ -109,20 +124,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Accommodation Type</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save</button>
                 </div>
             </div>
 	</div>
 
 </div>
-
 <div class="modal fade" id="accommodationCategoryModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add/update accommodation category</h4>
-
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -132,7 +145,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Accommodation Category</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationCategory()">Save</button>
                 </div>
             </div>
 	</div>
@@ -144,9 +157,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add/update additional service</h4>
-
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -156,11 +168,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="chooseMethodAccommodationType()">Save Additional Service</button>
+                    <button type="button" class="btn btn-primary" onclick="chooseMethodAdditionalService()">Save Additional Service</button>
                 </div>
             </div>
-	</div>
-
+		</div>
 </div>
 
 <div class="tab-pane" id="addAgent">

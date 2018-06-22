@@ -1,3 +1,40 @@
+$( document ).ready(function() {
+	 var x = document.getElementById("accommodationType");
+	 var y = document.getElementById("accommodationCategory");
+	 var z = document.getElementById("additionalServices");
+	 var w = document.getElementById("reviews");
+	 var u = document.getElementById("showUsers");
+	 var v =  document.getElementById("addAgent");
+	 x.style.display = "none";
+	 y.style.display = "none";
+	 z.style.display = "none";
+	 w.style.display = "none";
+	 u.style.display = "none";
+	 v.style.display = "none";
+});
+
+function showHideReview() {
+    var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+	var z = document.getElementById("additionalServices");
+	var w = document.getElementById("reviews");
+	var u = document.getElementById("showUsers");
+	var v =  document.getElementById("addAgent");
+    if (w.style.display === "none") {
+        w.style.display = "block";
+        y.style.display = "none";
+   	 	z.style.display = "none";
+		u.style.display = "none";
+		v.style.display = "none";
+		x.style.display = "none";
+		getReviews();
+    } else {
+        w.style.display = "none";
+    }
+}
+
+
+
 function registerAgent() {
 	 $.ajax({
 	        url: backedServer+"/administrator/addAgent",
@@ -37,9 +74,9 @@ function getReviews(){
 
 function createReviewsDiv(review){
 	var content = "";
-	content+="<div class=\"card merch-container\"><h2>"+ "Review:" + review.review + "</h2>"+ "Approved:" + review.approved + 
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"postReview("+review.id+","+true+")\">Approve review</button></div><br/>" +
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"postReview("+review.id+","+false+")\">Reject review</button></div></div>";
+	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Review:" + review.review + "</h2>"+ "Approved:" + review.approved + "<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"postReview("+review.id+","+true+")\">Approve review</button><br/>" +
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"postReview("+review.id+","+false+")\">Reject review</button></div></div>";
 	return content;
 }
 
@@ -104,9 +141,9 @@ function getUsers(){
 }
 
 function createUsersDiv(user){
-	let status = "<button type=\"button\" onclick=\"changeStatus(\'"+user.email+"\',\'ACTIVATED\')\" class=\"btn\">Activate User</button>"+
-	"<button type=\"button\" onclick=\"changeStatus(\'"+user.email+"\',\'BLOCKED\')\" class=\"btn\">Block User</button>"+
-	"<button type=\"button\" onclick=\"changeStatus(\'"+user.email+"\',\'DELETED\')\" class=\"btn\">Delete User</button>";
+	let status = "&nbsp; &nbsp;&nbsp\<button class=\"btn\" onclick=\"changeStatus(\'"+user.email+"\',\'ACTIVATED\')\"><i class=\"far fa-smile fa-2x\"></i>Activate</button>"+ "&nbsp; &nbsp;&nbsp"+
+	"<button class=\"btn\" onclick=\"changeStatus(\'"+user.email+"\',\'BLOCKED\')\"><i class=\"far fa-frown-open fa-2x \"></i>Block</button>"+ "&nbsp; &nbsp;&nbsp" +
+	"<button class=\"btn\" onclick=\"changeStatus(\'"+user.email+"\',\'DELETED\')\"><i class=\"fas fa-trash-alt fa-2x\"></i>Delete</button>";
 	$("#showUsers").find('tbody')
     .append($('<tr>')
         .append($('<td>')
@@ -147,25 +184,39 @@ function createUsersDiv(user){
 }
 
 function showHideAgent() {
-    var x = document.getElementById("addAgent");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
+    var z = document.getElementById("addAgent");
+    var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+	var v = document.getElementById("additionalServices");
+	var w = document.getElementById("reviews");
+	var u = document.getElementById("showUsers");
+    if (z.style.display === "none") {
+        z.style.display = "block";
         x.style.display = "none";
+   	 	y.style.display = "none";
+   	 	w.style.display = "none";
+   	 	u.style.display = "none";
+   	 	v.style.display = "none";
+    } else {
+        z.style.display = "none";
     }
 }
 function showHideUser() {
 	getUsers();
-    var x = document.getElementById("showUsers");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
+    var u = document.getElementById("showUsers");
+    var z = document.getElementById("addAgent");
+    var x = document.getElementById("accommodationType");
+    var y = document.getElementById("accommodationCategory");
+	var v = document.getElementById("additionalServices");
+	var w = document.getElementById("reviews");
+    if (u.style.display === "none") {
+        u.style.display = "block";
+        z.style.display = "none";
         x.style.display = "none";
+   	 	y.style.display = "none";
+   	 	w.style.display = "none";
+   	 	v.style.display = "none";
+    } else {
+        u.style.display = "none";
     }
 }
-$( document ).ready(function() {
-	 var x = document.getElementById("addAgent");
-	 var y = document.getElementById("showUsers");
-	 x.style.display = "none";
-	 y.style.display = "none";
-});
