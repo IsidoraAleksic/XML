@@ -96,4 +96,38 @@
             <xs:element name="regNumber" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:element name="createAccommodationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="accommodationUnit" type="AccommodationUnitWs"/>
+                <xs:element maxOccurs="unbounded" name="imageSrc" type="xs:string"/>
+                <xs:element name="pricing" type="Pricing"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Pricing">
+        <xs:sequence>
+            <xs:element name="january" type="xs:int"/>
+            <xs:element name="february" type="xs:int"/>
+            <xs:element name="march" type="xs:int"/>
+            <xs:element name="april" type="xs:int"/>
+            <xs:element name="may" type="xs:int"/>
+            <xs:element name="june" type="xs:int"/>
+            <xs:element name="july" type="xs:int"/>
+            <xs:element name="august" type="xs:int"/>
+            <xs:element name="september" type="xs:int"/>
+            <xs:element name="october" type="xs:int"/>
+            <xs:element name="november" type="xs:int"/>
+            <xs:element name="december" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="createAccommodationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idAccommodation" type="xs:long"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" name="idImage" type="xs:long"/>
+                <xs:element name="idPricing" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

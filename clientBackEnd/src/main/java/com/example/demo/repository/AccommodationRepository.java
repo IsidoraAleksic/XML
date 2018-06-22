@@ -17,13 +17,13 @@ public interface AccommodationRepository extends JpaRepository<AccommodationUnit
 
 	List<AccommodationUnit> getByAgent_Id(Long id);
     AccommodationUnit getById(Long id);
-    List<AccommodationUnit> getByPlaceAndCapacity(String place,int capacity);
+    List<AccommodationUnit> getByPlaceContainingIgnoreCaseAndCapacity(String place,int capacity);
     List<AccommodationUnit> getByPlaceAndCapacityAndAccommodationTypeAndCategoryAndAdditionalServicesContains
             (String place, int capacity, AccommodationType accommodationType, AccommodationCategory accommodationCategory,
              List<AdditionalServices> additionalServices);
     
     @Query("select distinct a from AccommodationUnit a join a.additionalServices as s " + 
-    		"where s in (:additionalServices) and a.place = (:place) and a.capacity = (:capacity) and a.accommodationType = (:accommodationType) and a.category = (:accommodationCategory) "
+    		"where s in (:additionalServices) and a.place like '%(:place)%' and a.capacity = (:capacity) and a.accommodationType = (:accommodationType) and a.category = (:accommodationCategory) "
     		+ "group by a.id "
     		+ "having count(s.id) = :size" 
     		)

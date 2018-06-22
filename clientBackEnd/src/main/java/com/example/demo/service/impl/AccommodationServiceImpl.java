@@ -102,7 +102,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
 	@Override
 	public List<AccommodationUnit> getByPlaceAndCapacity(String place, int capacity) {
-		return accommodationRepository.getByPlaceAndCapacity(place, capacity);
+		return accommodationRepository.getByPlaceContainingIgnoreCaseAndCapacity(place, capacity);
 	}
 
 	@Override

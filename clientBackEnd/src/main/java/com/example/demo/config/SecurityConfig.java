@@ -14,6 +14,7 @@ import org.springframework.web.filter.CorsFilter;
 @Order(SecurityProperties.BASIC_AUTH_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity

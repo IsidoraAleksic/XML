@@ -32,8 +32,6 @@ public class AccommodationEndpoint {
         SearchParameters parameters =  accommodationOptionService.getParameters();
         GetAccommodationParametersResponse response = new GetAccommodationParametersResponse();
 
-
-
         List<AdditionalServicesWs> asList = new ArrayList<>();
         for(AdditionalServices as: parameters.getAdditionalServices()){
             AdditionalServicesWs additionalServicesWs = new AdditionalServicesWs();
@@ -81,13 +79,13 @@ public class AccommodationEndpoint {
             aw.setPlace(au.getPlace());
 
             AgentWs agentWs = new AgentWs();
-            agentWs.setId(au.getId());
+            agentWs.setId(au.getAgent().getId());
             agentWs.setEmail(au.getAgent().getEmail());
             agentWs.setName(au.getAgent().getName());
             agentWs.setSurname(au.getAgent().getSurname());
             agentWs.setPassword(au.getAgent().getPassword());
             agentWs.setRegNumber(au.getAgent().getRegNumber());
-
+            aw.setAgent(agentWs);
 
             AccommodationTypeWs at = new AccommodationTypeWs();
             at.setId(au.getAccommodationType().getId());
