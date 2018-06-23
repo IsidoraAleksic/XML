@@ -46,8 +46,10 @@ public class ReservationEndpoint {
     public BookIntervalResponse reserve(@RequestPayload BookIntervalRequest request){
         BookIntervalResponse response = new BookIntervalResponse();
         AccommodationUnit accommodationUnit = accommodationRepository.getById(request.getAccommodationId());
-        Date startDate = request.getStartDate().toGregorianCalendar().getTime();
+//        Date startDate = reservationService.toDate(request.getStartDate().toGregorianCalendar().getTime().toString().split("+")[0]);
+        Date startDate = request.getEndDate().toGregorianCalendar().getTime();
         Date endDate = request.getStartDate().toGregorianCalendar().getTime();
+
         Reservation reservation = new Reservation(null, accommodationUnit,startDate,endDate,false);
         boolean rez = reservationService.check(reservation);
         if (rez)
@@ -61,19 +63,24 @@ public class ReservationEndpoint {
             reservationWs.setId(r.getId());
 
             GregorianCalendar gc =  new GregorianCalendar();
+            GregorianCalendar gc1 =  new GregorianCalendar();
             XMLGregorianCalendar xmlCalendar = null;
+            XMLGregorianCalendar xmlCalendar1 = null;
             try {
                 gc.setTime(r.getStartDate());
                 xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
                 reservationWs.setStartDate(xmlCalendar);
-                gc.setTime(r.getEndDate());
-                xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
-                reservationWs.setEndDate(xmlCalendar);
+                gc1.setTime(r.getEndDate());
+                xmlCalendar1 = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc1);
+                reservationWs.setEndDate(xmlCalendar1);
+                response.getReservations().add(reservationWs);
             } catch (DatatypeConfigurationException e) {
                 e.printStackTrace();
             }
         }
         return response;
     }
+
+
 
 }

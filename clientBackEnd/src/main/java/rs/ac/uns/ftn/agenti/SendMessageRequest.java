@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="staos" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="message" type="{http://www.ftn.uns.ac.rs/agenti}messageWs"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "staos"
+    "message"
 })
-@XmlRootElement(name = "getAccommodationParametersRequest")
-public class GetAccommodationParametersRequest {
+@XmlRootElement(name = "sendMessageRequest")
+public class SendMessageRequest {
 
     @XmlElement(required = true)
-    protected String staos;
+    protected MessageWs message;
 
     /**
-     * Gets the value of the staos property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link MessageWs }
      *     
      */
-    public String getStaos() {
-        return staos;
+    public MessageWs getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the staos property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link MessageWs }
      *     
      */
-    public void setStaos(String value) {
-        this.staos = value;
+    public void setMessage(MessageWs value) {
+        this.message = value;
     }
 
 }

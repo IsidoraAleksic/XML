@@ -34,3 +34,8 @@ INSERT INTO accommodation_unit_additional_services (accommodation_unit_id, addit
 INSERT INTO review (approved, review, accommodation_unit_id, user_id) VALUES (false, 'shit', '1', '1');
 
 INSERT INTO agent(password,name,surname,email,reg_number) VALUES ('agent','agent','agent','agent@gmail.com','23D');
+
+insert into reservation(confirmed, end_date, start_date, accommodation_unit_id,user_id) VALUES (FALSE,'2018-06-24','2018-06-15','1','1');
+INSERT into message(agent, message,reservation_id) VALUES (FALSE, 'cao veki', '1');
+INSERT into message(agent, message,reservation_id) VALUES (TRUE, 'cao jef', '1');
+INSERT into message(agent, message,reservation_id) VALUES (FALSE, 'sta radis', '1');

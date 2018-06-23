@@ -10,7 +10,6 @@ package rs.ac.uns.ftn.agenti;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="staos" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="agentId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "staos"
+    "agentId"
 })
-@XmlRootElement(name = "getAccommodationParametersRequest")
-public class GetAccommodationParametersRequest {
+@XmlRootElement(name = "getMessagesRequest")
+public class GetMessagesRequest {
 
-    @XmlElement(required = true)
-    protected String staos;
+    protected long agentId;
 
     /**
-     * Gets the value of the staos property.
+     * Gets the value of the agentId property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getStaos() {
-        return staos;
+    public long getAgentId() {
+        return agentId;
     }
 
     /**
-     * Sets the value of the staos property.
+     * Sets the value of the agentId property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setStaos(String value) {
-        this.staos = value;
+    public void setAgentId(long value) {
+        this.agentId = value;
     }
 
 }

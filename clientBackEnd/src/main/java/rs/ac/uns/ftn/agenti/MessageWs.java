@@ -15,17 +15,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for accommodationCategoryWs complex type.
+ * <p>Java class for messageWs complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="accommodationCategoryWs">
+ * &lt;complexType name="messageWs">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="reservationId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="agent" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,15 +37,19 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "accommodationCategoryWs", propOrder = {
+@XmlType(name = "messageWs", propOrder = {
     "id",
-    "categoryName"
+    "reservationId",
+    "message",
+    "agent"
 })
-public class AccommodationCategoryWs {
+public class MessageWs {
 
     protected long id;
+    protected long reservationId;
     @XmlElement(required = true)
-    protected String categoryName;
+    protected String message;
+    protected boolean agent;
 
     /**
      * Gets the value of the id property.
@@ -62,27 +68,59 @@ public class AccommodationCategoryWs {
     }
 
     /**
-     * Gets the value of the categoryName property.
+     * Gets the value of the reservationId property.
+     * 
+     */
+    public long getReservationId() {
+        return reservationId;
+    }
+
+    /**
+     * Sets the value of the reservationId property.
+     * 
+     */
+    public void setReservationId(long value) {
+        this.reservationId = value;
+    }
+
+    /**
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCategoryName() {
-        return categoryName;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the categoryName property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCategoryName(String value) {
-        this.categoryName = value;
+    public void setMessage(String value) {
+        this.message = value;
+    }
+
+    /**
+     * Gets the value of the agent property.
+     * 
+     */
+    public boolean isAgent() {
+        return agent;
+    }
+
+    /**
+     * Sets the value of the agent property.
+     * 
+     */
+    public void setAgent(boolean value) {
+        this.agent = value;
     }
 
 }

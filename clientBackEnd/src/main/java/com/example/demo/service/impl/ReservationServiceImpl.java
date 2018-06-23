@@ -13,7 +13,7 @@ import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,6 +70,11 @@ public class ReservationServiceImpl implements ReservationService {
         if(reservation==null){
             throw new BadRequestException("Reservation must not be null");
         }
+
+        if(getByAccommodationUnitAndStartDateBeforeAndEndDateAfter(reservation.getAccommodationUnit(),reservation.getEndDate(),reservation.getStartDate())!=0){
+            throw new BadRequestException("Cannot reserve");
+        }
+
 //        if(!check(reservation))
 //            throw new ConflictException("Reservation exists");
         User user = authenticationService.getLoggedInUser();
@@ -84,7 +89,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean check(Reservation reservation) {
-        int rez = reservationRepository.countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(reservation.getAccommodationUnit(),reservation.getStartDate(),reservation.getEndDate());
+        int rez = reservationRepository.countByAccommodationUnitAndStartDateBeforeAndEndDateAfter(reservation.getAccommodationUnit(),reservation.getEndDate(),reservation.getStartDate());
         if(rez==0)
             return true;
         return false;
