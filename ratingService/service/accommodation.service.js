@@ -50,6 +50,11 @@ function calcAverage(accommodations, idx, resolve, reject) {
 }
 
 function average(pricings, month, days) {
+    pricings = pricings.map(x=>{
+        x.pricing.accommodationUnit.images = x.images;
+	return x.pricing;
+    });
+
     var accommodations = pricingsToAccommodations(pricings, month, days);
 
     return new Promise(function (resolve, reject) {
