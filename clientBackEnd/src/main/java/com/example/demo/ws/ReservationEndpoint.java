@@ -48,8 +48,8 @@ public class ReservationEndpoint {
         BookIntervalResponse response = new BookIntervalResponse();
         AccommodationUnit accommodationUnit = accommodationRepository.getById(request.getAccommodationId());
 //        Date startDate = reservationService.toDate(request.getStartDate().toGregorianCalendar().getTime().toString().split("+")[0]);
-        Date startDate = request.getEndDate().toGregorianCalendar().getTime();
-        Date endDate = request.getStartDate().toGregorianCalendar().getTime();
+        Date startDate = request.getStartDate().toGregorianCalendar().getTime();
+        Date endDate = request.getEndDate().toGregorianCalendar().getTime();
 
         Reservation reservation = new Reservation(null, accommodationUnit,startDate,endDate,false);
         boolean rez = reservationService.check(reservation);

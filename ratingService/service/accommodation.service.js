@@ -51,7 +51,7 @@ function calcAverage(accommodations, idx, resolve, reject) {
 
 function average(pricings, month, days) {
     pricings = pricings.map(x=>{
-        x.pricing.accommodationUnit.images = x.images;
+        x.pricing.accommodationUnit.images = x.image;
 	return x.pricing;
     });
 
