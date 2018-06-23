@@ -7,7 +7,7 @@
     <h1 mat-dialog-title>{{data.title}} Images</h1>    
   </div>
   <div style="display: flex; flex: 1 1 auto; justify-content: center">
-    <img style="max-width: 100%; object-fit: contain;" [src]="data.srcs[data.idx]">
+    <img style="max-width: 100%; object-fit: contain;" [src]="'data:image/jpg;base64,'+data.srcs[data.idx]">
   </div>
   <div style="margin: auto; font-family: Roboto,'Helvetica Neue',sans-serif">
     {{data.idx+1}}/{{data.srcs.length}}

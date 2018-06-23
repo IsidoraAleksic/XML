@@ -3,6 +3,8 @@ package com.example.agentapp.service.ws.impl;
 import com.example.agentapp.domain.*;
 import com.example.agentapp.service.AccommodationAttributeService;
 import com.example.agentapp.service.AccommodationUnitService;
+import com.example.agentapp.service.BookedIntervalService;
+import com.example.agentapp.service.MessageService;
 import com.example.agentapp.ws.WSClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,12 @@ public class AccommodationUnitWSGet {
 
     @Autowired
     private AccommodationUnitService accommodationUnitService;
+
+    @Autowired
+    private BookedIntervalService bookedIntervalService;
+
+    @Autowired
+    private MessageService messageService;
 
 
     public void getAccommodationParameters() {
@@ -47,7 +55,39 @@ public class AccommodationUnitWSGet {
 
     public void getAllAccommodationUnits(long agentId) {
         GetAccommodationByAgentIdResponse response = wsClient.getAccommodationByAgentId(agentId);
-        List<AccommodationUnit> units = response.getAccommodationUnitWs()
+        List<AccommodationUnit> units = getUnits(response);
+        accommodationUnitService.saveUnits(units);
+
+        List<Reservation> reservations = getReservations(response);
+        bookedIntervalService.saveReservations(reservations);
+
+        List<Message> messages = getMessages(response);
+        messageService.saveMessages(messages);
+    }
+
+    private List<Reservation> getReservations(GetAccommodationByAgentIdResponse response) {
+        return response.getReservations()
+                .stream()
+                .map(res -> {
+                    AccommodationUnit accUnit = accommodationUnitService.getUnit(res.getAccommodationId());
+                    return new Reservation(res.getId(), res.getStartDate().toGregorianCalendar().getTime(), res.getEndDate().toGregorianCalendar().getTime(), accUnit);
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<Message> getMessages(GetAccommodationByAgentIdResponse response) {
+        return response.getMessages()
+                .stream()
+                .map(msg -> {
+                    Reservation reservation = bookedIntervalService.getById(msg.getReservationId());
+                    return new Message(msg.getId(), reservation, msg.getMessage(), msg.isAgent());
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    private List<AccommodationUnit> getUnits(GetAccommodationByAgentIdResponse response) {
+        return response.getAccommodationUnitWs()
                 .stream()
                 .map(unitWs -> {
                     AccommodationUnit unit = new AccommodationUnit();
@@ -66,10 +106,7 @@ public class AccommodationUnitWSGet {
                     return unit;
                 })
                 .collect(Collectors.toList());
-
-        System.out.println("SMJESTAJI : " + units.toString() + "\tSIZEEE: " + units.size());
-
-        accommodationUnitService.saveUnits(units);
     }
+
 
 }

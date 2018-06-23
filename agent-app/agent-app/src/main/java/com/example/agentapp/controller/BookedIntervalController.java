@@ -1,18 +1,24 @@
 package com.example.agentapp.controller;
 
 import com.example.agentapp.domain.AccommodationUnit;
-import com.example.agentapp.domain.BookedInterval;
+import com.example.agentapp.domain.Reservation;
 import com.example.agentapp.domain.dto.BookFromTo;
+import com.example.agentapp.domain.dto.BookedIntervals;
 import com.example.agentapp.service.AccommodationUnitService;
 import com.example.agentapp.service.BookedIntervalService;
+import com.example.agentapp.service.ws.impl.AccommodationUnitWSSend;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
+import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/book")
 public class BookedIntervalController {
+
+    @Autowired
+    AccommodationUnitWSSend wsSend;
 
     private BookedIntervalService bookedIntervalService;
     private AccommodationUnitService accommodationUnitService;
@@ -23,14 +29,23 @@ public class BookedIntervalController {
     }
 
     @GetMapping("/get/{unitId}")
-    public List<BookedInterval> getBookedIntervalsFromUnit(@PathVariable("unitId") long id) {
-        List<BookedInterval> ints = bookedIntervalService.getByUnitId(id);
+    public List<Reservation> getBookedIntervalsFromUnit(@PathVariable("unitId") long id) {
+        List<Reservation> ints = bookedIntervalService.getByUnitId(id);
         return bookedIntervalService.getByUnitId(id);
     }
 
     @PostMapping(path = "/bookInterval")
-    public BookedInterval bookInterval(@RequestBody BookFromTo fromTo) {
+    public boolean bookInterval(@RequestBody BookFromTo fromTo) throws DatatypeConfigurationException {
         AccommodationUnit accommodationUnit = accommodationUnitService.getUnit(fromTo.getUnitId());
-        return bookedIntervalService.bookInterval(new BookedInterval(fromTo.getFrom(), fromTo.getTo(), accommodationUnit));
+
+        BookedIntervals ret = wsSend.bookInterval(new Reservation(fromTo.getFrom(), fromTo.getTo(), accommodationUnit));
+        bookedIntervalService.saveReservations(ret.getReservationList());
+
+        return ret.isSuccess();
+    }
+
+    @GetMapping(path = "/getAll")
+    public List<Reservation> getAll() {
+        return bookedIntervalService.getAll();
     }
 }

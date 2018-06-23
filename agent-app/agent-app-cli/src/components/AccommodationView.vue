@@ -9,17 +9,17 @@
                 <form>
                     <div class="form-row">  
                         <label class="col-md-2">City:</label>
-                        <input v-model="city" type="text" class="form-control col-md-10" placeholder="">
+                        <input v-model="city" type="text" class="form-control col-md-10" placeholder="" readonly>
                     </div>
                     <br>
                    <div class="form-row">
                         <label class="col-md-2">Country:</label>
-                        <input v-model="country" type="text" class="form-control col-md-10" placeholder="">
+                        <input v-model="country" type="text" class="form-control col-md-10" placeholder="" readonly>
                     </div>
                     <br>
                     <div class="form-row">
                         <label class="col-md-2">Address:</label>
-                        <input v-model="address" type="text" class="form-control col-md-10" placeholder="">
+                        <input v-model="address" type="text" class="form-control col-md-10" placeholder="" readonly>
                     </div>
                     <br>
 
@@ -27,7 +27,7 @@
                         
                             <label class="col-md-2">Enter description: </label>                
                         <hr>                      
-                            <textarea class="col-md-10" v-if="unit.description" v-model="unit.description" rows="4" cols="44">
+                            <textarea class="col-md-10" v-if="unit.description" v-model="unit.description" rows="4" cols="44" readonly>
                             </textarea>    
                     </div> 
                 </form>

@@ -1,16 +1,16 @@
 package com.example.agentapp.ws;
 
-import com.example.agentapp.controller.AccommodationAttributesController;
-import com.example.agentapp.domain.AccommodationPricing;
-import com.example.agentapp.domain.AccommodationType;
-import com.example.agentapp.domain.AccommodationUnit;
-import com.example.agentapp.domain.Agent;
+import com.example.agentapp.domain.*;
 import com.example.agentapp.mapper.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 import schema.wsdl.*;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -18,6 +18,8 @@ public class WSClient extends WebServiceGatewaySupport {
 
     @Value("${producer.default-uri}")
     private String PRODUCER_URI;
+
+    private ObjectFactory objectFactory = new ObjectFactory();
 
     public LoginAgentResponse loginAgent(String email, String password) {
         LoginAgentRequest request = new LoginAgentRequest();
@@ -63,11 +65,41 @@ public class WSClient extends WebServiceGatewaySupport {
                 .marshalSendAndReceive(PRODUCER_URI, request,
                         new SoapActionCallback(PRODUCER_URI+"/createAccommodationRequest"));
         return response;
-        //TODO:
-        //dodati listu stringova za image i onda test
+    }
 
-        //        AccommodationCategoryWs accommodationCategoryWs = AccommodationCategoryConverter.fromPojoToXMLType(unit.getCategory());
-//        AgentWs agentWs = AgentConverter.fromPojoToXMLType(unit.getAgent());
-//        AccommodationTypeWs accommodationTypeWs = AccommodationTypeConverter.fromPojoToXMLType(unit.getAccommodationType());
+    public BookIntervalResponse bookInterval(Reservation reservation) throws DatatypeConfigurationException {
+        BookIntervalRequest request = new BookIntervalRequest();
+
+        GregorianCalendar fromGreg = new GregorianCalendar();
+        fromGreg.setTime(reservation.getFromDate());
+        XMLGregorianCalendar fromXMLDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(fromGreg);
+
+        GregorianCalendar toGreg = new GregorianCalendar();
+        toGreg.setTime(reservation.getToDate());
+        XMLGregorianCalendar toXMLDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(toGreg);
+
+        request.setAccommodationId(reservation.getAccommodationUnit().getId());
+        request.setStartDate(fromXMLDate);
+        request.setEndDate(toXMLDate);
+
+        BookIntervalResponse response = (BookIntervalResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(PRODUCER_URI, request,
+                        new SoapActionCallback(PRODUCER_URI+"/bookIntervalRequest"));
+        return response;
+    }
+
+    public MessagesResponse sendMessage(Message message) {
+        SendMessageRequest request = new SendMessageRequest();
+        MessageWs messageWs = objectFactory.createMessageWs();
+        messageWs.setAgent(true);
+        messageWs.setMessage(message.getMessage());
+        messageWs.setReservationId(message.getReservation().getId());
+        request.setMessage(messageWs);
+
+        MessagesResponse response = (MessagesResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(PRODUCER_URI, request,
+                        new SoapActionCallback(PRODUCER_URI+"/sendMessageRequest"));
+
+        return response;
     }
 }

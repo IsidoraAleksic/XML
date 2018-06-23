@@ -1,7 +1,7 @@
 <div class="carousel-sm-container">
   <div class="carousel-sm">
     <div class="background">
-      <img (click)="onOpen()" class="image-carousel-sm" mat-card-image [src]="srcs[idx]">
+      <img (click)="onOpen()" class="image-carousel-sm" mat-card-image [src]="'data:image/jpg;base64,'+srcs[idx]">
     </div>
     <div class="foreground">
       <div mat-card-image style="margin-top: 0; display: flex;">

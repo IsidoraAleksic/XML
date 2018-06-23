@@ -58,7 +58,6 @@
 
             axios.get(url)
                     .then(x => {
-                        alert(JSON.stringify(x.data));
                         this.accommodationUnits = this.accommodationUnits.concat(x.data); 
                     })
         }
