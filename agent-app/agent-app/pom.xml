@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<maven-jaxb2-plugin.version>0.13.3</maven-jaxb2-plugin.version>
-		<producer-uri>http://192.168.0.16:8080/ws</producer-uri>
+		<producer-uri>http://192.168.7.168:8080/ws</producer-uri>
 	</properties>
 
 	<dependencies>

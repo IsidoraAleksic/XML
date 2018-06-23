@@ -68,7 +68,10 @@
             },
             sendRequest(data) {
                 const url = `${BASE_URL}/book/bookInterval`;
-                axios.post(url, data);  //then
+                axios.post(url, data)
+                        .then(x => {
+                            (x.data === true) ? alert('Reservation success') : alert('Reservation failure'); 
+                        });
                 this.$parent.toggleShowBook();
                 alert('Success!');
             }
@@ -80,18 +83,31 @@
             axios.get(url)
                     .then(res => {                        
                         let ret = res.data.map( x => {
-                        return  {
-                            from : new Date(
-                                new Date(x.fromDate).getFullYear(),
-                                new Date(x.fromDate).getMonth(),
-                                new Date(x.fromDate).getDate()
-                                ),
-                            to : new Date(
-                                new Date(x.toDate).getFullYear(),
-                                new Date(x.toDate).getMonth(),
-                                new Date(x.toDate).getDate()
-                                ) 
+                            let obj = {
+                                from : new Date(
+                                    new Date(x.fromDate).getFullYear(),
+                                    new Date(x.fromDate).getMonth(),
+                                    new Date(x.fromDate).getDate()
+                                    ),
+                                to : new Date(
+                                    new Date(x.toDate).getFullYear(),
+                                    new Date(x.toDate).getMonth(),
+                                    new Date(x.toDate).getDate()
+                                    ) 
                             }
+                            return obj;
+                        // return  {
+                        //     from : new Date(
+                        //         new Date(x.fromDate).getFullYear(),
+                        //         new Date(x.fromDate).getMonth(),
+                        //         new Date(x.fromDate).getDate()
+                        //         ),
+                        //     to : new Date(
+                        //         new Date(x.toDate).getFullYear(),
+                        //         new Date(x.toDate).getMonth(),
+                        //         new Date(x.toDate).getDate()
+                        //         ) 
+                        //     }
                         })  
                         self.fromDate.disabled.ranges = self.fromDate.disabled.ranges.concat(ret);
                         self.toDate.disabled.ranges = self.toDate.disabled.ranges.concat(ret);

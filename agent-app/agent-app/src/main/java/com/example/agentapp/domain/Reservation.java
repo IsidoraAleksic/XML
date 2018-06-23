@@ -1,70 +1,44 @@
 package com.example.agentapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reservation implements Serializable {
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Data
+@NoArgsConstructor
+public class Reservation implements Serializable{
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
-    private User user;
-    @ManyToOne
+
+    private Date fromDate;
+    private Date toDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "accommodation_unit_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AccommodationUnit accommodationUnit;
-    private Date startDate;
-    private Date endDate;
 
-    public Reservation(User user, AccommodationUnit accommodationUnit, Date startDate, Date endDate) {
-        this.user = user;
+
+    public Reservation(Date fromDate, Date toDate, AccommodationUnit accommodationUnit) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.accommodationUnit = accommodationUnit;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Reservation(long id, Date fromDate, Date toDate, AccommodationUnit accommodationUnit) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public AccommodationUnit getAccommodationUnit() {
-        return accommodationUnit;
-    }
-
-    public void setAccommodationUnit(AccommodationUnit accommodationUnit) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.accommodationUnit = accommodationUnit;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Reservation() {
-
     }
 }

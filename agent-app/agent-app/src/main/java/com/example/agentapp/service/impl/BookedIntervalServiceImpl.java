@@ -1,6 +1,6 @@
 package com.example.agentapp.service.impl;
 
-import com.example.agentapp.domain.BookedInterval;
+import com.example.agentapp.domain.Reservation;
 import com.example.agentapp.repository.BookedIntervalRepository;
 import com.example.agentapp.service.BookedIntervalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,27 @@ public class BookedIntervalServiceImpl implements BookedIntervalService {
     }
 
     @Override
-    public BookedInterval bookInterval(BookedInterval bookedInterval) {
-        return bookedIntervalRepository.save(bookedInterval);
+    public Reservation bookInterval(Reservation reservation) {
+        return bookedIntervalRepository.save(reservation);
     }
 
     @Override
-    public List<BookedInterval> getByUnitId(long id) {
+    public List<Reservation> getByUnitId(long id) {
         return bookedIntervalRepository.getByAccommodationUnit_Id(id);
+    }
+
+    @Override
+    public List<Reservation> getAll() {
+        return bookedIntervalRepository.findAll();
+    }
+
+    @Override
+    public void saveReservations(List<Reservation> reservations) {
+        bookedIntervalRepository.saveAll(reservations);
+    }
+
+    @Override
+    public Reservation getById(long id) {
+        return bookedIntervalRepository.getOne(id);
     }
 }

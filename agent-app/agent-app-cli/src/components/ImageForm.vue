@@ -72,7 +72,7 @@
             const url = `${BASE_URL}/photos/` + unitId + `/upload`;
             return axios.post(url, formData)
                           .then(x => {
-                            (x.data === true) ? this.currentStatus = STATUS_SUCCESS : this.currentStatus = STATUS_FAILED;
+                            (x.data === true) ? alert('Success!') : alert('Failure!');
                           });
         },
         saveImages(unitId) {  //ovo preko eventa dobija

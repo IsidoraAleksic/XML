@@ -48,9 +48,11 @@
            <br>
 
            <div class="row">
+            
             <div class="col-md-2">
                 <label>Capacity:</label>                
             </div>
+
             <div class="col-md-7">
                 <div class="row">
                     <div class="col-md-4">
@@ -62,9 +64,175 @@
             </div>
 
            </div>
-        
+           <br>
+           <br>
+
+           <div class="row">
+                <div class="col-md-6">
+                   <label>Enter accommodation pricing (per day of month):</label>
+                </div>
+           </div>
+           <br>
+
+           <hr>
+           <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>January:</label>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.january" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>February:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.february" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>March:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.march" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>                
+           </div> 
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>April:</label>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.april" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>May:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.may" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>June:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.june" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>  
+           </div> <!-- row 2 end -->
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>July:</label>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.july" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>August:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.august" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>September:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.september" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div> 
+           </div> <!-- row 3 end -->
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>October:</label>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.october" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>November:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.november" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>December:</label>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input v-model="data.accommodationPricing.december" type="number" class="form-control input-number" min="1" max="500">
+                        </div>
+                    </div>
+                </div>
+           </div> <!-- row 4 end -->
+            <hr>
             <br>
-            <br>
+            <!-- end pricing -->
 
             <div class="form-group">
                 <label>Choose accommodation type: </label>
@@ -145,7 +313,21 @@
                     },
                     place : '',
                     description : '',
-                    capacity : 1
+                    capacity : 1,
+                    accommodationPricing : {
+                        january : 0,
+                        february : 0,
+                        march : 0,
+                        april : 0, 
+                        may : 0, 
+                        june : 0, 
+                        july : 0, 
+                        august : 0, 
+                        september : 0, 
+                        october : 0, 
+                        november : 0, 
+                        december : 0
+                    }
                 },
                 selectedServices : null,
                 selectedCategory : null,
@@ -165,9 +347,23 @@
                 sendData.capacity = parseInt(sendData.capacity);
                 sendData.accommodationType = { typeName : this.selectedType};
                 sendData.category = { categoryName : this.selectedCategory };
-                sendData.additionalServices = this.selectedServices.map( x => {  return { name : x } });
+                sendData.additionalServices = this.selectedServices
+                    .map( x => { return { name : x } });
 
-                alert(JSON.stringify(sendData))
+                let tmpMap = {};
+                tmpMap.accommodationUnit = {
+                    id : 3333
+                }
+                Object.keys(sendData.accommodationPricing)
+                    .forEach(function(key, index) {
+                        tmpMap[key] = parseInt(sendData.accommodationPricing[key]);
+                    });
+                    
+                sendData.accommodationPricing = tmpMap;
+
+                // this.$emit('sendImages', JSON.stringify(sendData)); 
+
+                //neces sad ovo nego pozovi slike da ti vrati child
                 this.sendRequest(sendData);
             },
             sendRequest(data) {

@@ -7,7 +7,7 @@
             <template v-for="item in images">
                 <div class="col-lg-3 col-md-4 col-xs-6">
                     <a href="#" class="d-block mb-4 h-100">
-                        <img :src="getImageSrc(item)" class="img-fluid img-thumbnail">
+                        <img :src="getImageSrc(item)" width="150" height="80" class="img-fluid img-thumbnail">
                     </a>
                 </div>
             </template>
@@ -38,7 +38,6 @@
             }
         },
         created() {
-            //ovo nece ici na mounted nego na event i id ce bit dinamicki
             axios.get(BASE_URL + '/photos/get/'+this.unitId)
                     .then(x => {
                         this.images = this.images.concat(x.data);
