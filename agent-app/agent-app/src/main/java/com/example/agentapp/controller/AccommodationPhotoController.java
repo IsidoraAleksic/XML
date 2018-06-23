@@ -2,9 +2,11 @@ package com.example.agentapp.controller;
 
 import com.example.agentapp.domain.AccommodationPhoto;
 import com.example.agentapp.domain.dto.ImageData;
+import com.example.agentapp.event.OnCreateAccommodationEvent;
 import com.example.agentapp.service.AccommodationPhotoService;
 import com.example.agentapp.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/photos")
 public class AccommodationPhotoController {
+
+    @Autowired
+    ApplicationEventPublisher applicationEventPublisher;
 
     private FileService fileService;
     private AccommodationPhotoService accommodationPhotoService;
@@ -48,6 +53,12 @@ public class AccommodationPhotoController {
                     .map(el -> el.getOriginalFilename())
                     .collect(Collectors.toList());
             accommodationPhotoService.saveUnitPhotos(id, fNames);
+
+
+            applicationEventPublisher.publishEvent(new OnCreateAccommodationEvent(id, fNames));
+            //ovdje sad imas fejk id novog acc unita i pricinga preko njega
+            //sad publish event i proslijedi sve slike kao stringove pa tamo getuj preko fejk id-a
+            //
         }
         return isUploadSuccess;
     }

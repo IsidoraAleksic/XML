@@ -1,12 +1,12 @@
 package com.example.agentapp.controller;
 
-import com.example.agentapp.domain.AccommodationCategory;
-import com.example.agentapp.domain.AccommodationType;
-import com.example.agentapp.domain.AccommodationUnit;
-import com.example.agentapp.domain.AdditionalService;
+import com.example.agentapp.domain.*;
+import com.example.agentapp.domain.dto.AccommodationUnitForm;
 import com.example.agentapp.service.AccommodationAttributeService;
+import com.example.agentapp.service.AccommodationPricingService;
 import com.example.agentapp.service.AccommodationUnitService;
 import com.example.agentapp.service.AuthenticationService;
+import com.example.agentapp.service.ws.impl.AccommodationUnitWSGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +18,16 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class AccommodationUnitController {
 
+    public static final long TEMP_ID = 10111011;
+
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private AccommodationUnitWSGet accommodationUnitWSGet;
+
+    @Autowired
+    private AccommodationPricingService accommodationPricingService;
 
     private AccommodationUnitService accommodationUnitService;
     private AccommodationAttributeService accommodationAttributeService;
@@ -48,20 +56,49 @@ public class AccommodationUnitController {
         return accommodationUnitService.getUnitsByCreator(agentId);
     }
 
+//    @PostMapping(consumes = "application/json")
+//    public AccommodationUnit addAccommodationUnit(@RequestBody AccommodationUnit unit) {
+//        AccommodationType type = accommodationAttributeService.getTypeByName(unit.getAccommodationType().getTypeName());
+//        AccommodationCategory category = accommodationAttributeService.getCategoryByName(unit.getCategory().getCategoryName());
+//        List<AdditionalService> services = accommodationAttributeService
+//                .getAdditionalServicesByNames(unit.getAdditionalServices()
+//                .stream()
+//                .map(el -> el.getName()).collect(Collectors.toList()));
+//
+//        unit.setAccommodationType(type);
+//        unit.setCategory(category);
+//        unit.setAdditionalServices(services);
+//
+//        return accommodationUnitService.addUnit(unit);
+//    }
+
     @PostMapping(consumes = "application/json")
-    public AccommodationUnit addAccommodationUnit(@RequestBody AccommodationUnit unit) {
+    public AccommodationUnit addAccommodationUnit(@RequestBody AccommodationUnitForm unit) {
+        AccommodationUnit accommodationUnit = new AccommodationUnit();
+
         AccommodationType type = accommodationAttributeService.getTypeByName(unit.getAccommodationType().getTypeName());
         AccommodationCategory category = accommodationAttributeService.getCategoryByName(unit.getCategory().getCategoryName());
         List<AdditionalService> services = accommodationAttributeService
                 .getAdditionalServicesByNames(unit.getAdditionalServices()
-                .stream()
-                .map(el -> el.getName()).collect(Collectors.toList()));
+                        .stream()
+                        .map(el -> el.getName()).collect(Collectors.toList()));
 
-        unit.setAccommodationType(type);
-        unit.setCategory(category);
-        unit.setAdditionalServices(services);
+        accommodationUnit.setId(TEMP_ID);
+        accommodationUnit.setAccommodationType(type);
+        accommodationUnit.setCategory(category);
+        accommodationUnit.setAdditionalServices(services);
+        accommodationUnit.setAgent(unit.getAgent());
+        accommodationUnit.setCapacity(unit.getCapacity());
+        accommodationUnit.setDescription(unit.getDescription());
+        accommodationUnit.setPlace(unit.getPlace());
+        AccommodationUnit saved = accommodationUnitService.addUnit(accommodationUnit);
 
-        return accommodationUnitService.addUnit(unit);
+        AccommodationPricing accommodationPricing = unit.getAccommodationPricing();
+        accommodationPricing.setId(TEMP_ID);
+        accommodationPricing.setAccommodationUnit(saved);
+        accommodationPricingService.save(accommodationPricing);
+
+        return saved;
     }
 
 }

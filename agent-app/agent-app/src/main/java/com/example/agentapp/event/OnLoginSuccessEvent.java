@@ -16,7 +16,4 @@ public class OnLoginSuccessEvent extends ApplicationEvent {
         return loggedInAgent;
     }
 
-    public void setLoggedInAgent(Agent loggedInAgent) {
-        this.loggedInAgent = loggedInAgent;
-    }
 }

@@ -74,9 +74,9 @@ function getReviews(){
 
 function createReviewsDiv(review){
 	var content = "";
-	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Review:" + review.review + "</h2>"+ "Approved:" + review.approved + "<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
-	    "<div><button type=\"button\" class=\"btn btn-primary\" onclick=\"postReview("+review.id+","+true+")\">Approve review</button><br/>" +
-	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"postReview("+review.id+","+false+")\">Reject review</button></div></div>";
+	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Review:" + review.review + "</h2>"+ "Approved:" + review.approved + "<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"postReview("+review.id+","+true+")\">Approve review</button><br/>" +
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"postReview("+review.id+","+false+")\">Reject review</button></div></div></div>";
 	return content;
 }
 

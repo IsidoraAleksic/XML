@@ -16,7 +16,6 @@ public class Agent {
 
     @Id
     private long id;
-
     private String email;
     private String password;
     private String name;

@@ -4,7 +4,7 @@ package com.example.agentapp.service.impl;
 import com.example.agentapp.domain.Agent;
 import com.example.agentapp.domain.factory.AuthUserFactory;
 import com.example.agentapp.repository.AgentRepository;
-import com.example.agentapp.service.ws.LoginWS;
+import com.example.agentapp.service.ws.impl.LoginWS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
     private AgentRepository agentRepository;
 
     @Autowired
-    LoginWS loginWS;
+    private LoginWS loginWS;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

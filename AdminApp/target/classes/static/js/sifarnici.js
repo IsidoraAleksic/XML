@@ -101,25 +101,25 @@ function getAccommodationType(){
 
 function createAccommodationTypeDiv(accommodationType){
 var content = "";
-content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
     "<button  type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+")\">Update</button><br/>" +
-    "<button  type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete</button></div>";
+    "<button  type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete</button></div></div></div>";
 return content;
 }
 
 function createAccommodationCategoryDiv(accommodationCategory){
 	var content = "";
-	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
 	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+")\">Update</button><br/>" +
-	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete</button></div>";
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete</button></div></div></div>";
 	return content;
 }
 
 function createAdditionalServicesDiv(additionalService){
 	var content = "";
-	content+="<div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2>" +"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
+	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2>" +"<button type=\"button\" class=\"close\" onclick=\"self.close()\" data-dismiss=\"modal\">&times;</button></div>"+
 	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+")\">Update</button><br/>" +
-	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete</button></div>";
+	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete</button></div></div></div>";
 	return content;
 }
 function openModalAccommodationTypeCreate() {

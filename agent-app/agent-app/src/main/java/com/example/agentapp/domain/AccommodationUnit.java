@@ -27,7 +27,7 @@ public class AccommodationUnit implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AdditionalService> additionalServices;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "agent_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Agent agent;

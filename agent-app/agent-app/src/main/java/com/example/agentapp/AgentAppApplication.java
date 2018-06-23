@@ -1,6 +1,7 @@
 package com.example.agentapp;
 
 import com.example.agentapp.service.impl.FileServiceImpl;
+import org.dozer.DozerBeanMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,4 +18,7 @@ public class AgentAppApplication {
 		new File(FileServiceImpl.uploadingDir).mkdirs();
 		SpringApplication.run(AgentAppApplication.class, args);
 	}
+
 }
+
+

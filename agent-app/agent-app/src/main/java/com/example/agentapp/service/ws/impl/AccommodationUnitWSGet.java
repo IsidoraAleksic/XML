@@ -1,4 +1,4 @@
-package com.example.agentapp.service.ws;
+package com.example.agentapp.service.ws.impl;
 
 import com.example.agentapp.domain.*;
 import com.example.agentapp.service.AccommodationAttributeService;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AccommodationUnitWS {
+public class AccommodationUnitWSGet {
 
     @Autowired
     private WSClient wsClient;
@@ -23,6 +23,7 @@ public class AccommodationUnitWS {
 
     @Autowired
     private AccommodationUnitService accommodationUnitService;
+
 
     public void getAccommodationParameters() {
         GetAccommodationParametersResponse response = wsClient.getAccommodationParameters();
@@ -65,6 +66,8 @@ public class AccommodationUnitWS {
                     return unit;
                 })
                 .collect(Collectors.toList());
+
+        System.out.println("SMJESTAJI : " + units.toString() + "\tSIZEEE: " + units.size());
 
         accommodationUnitService.saveUnits(units);
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface AccommodationUnitService {
 
+
     AccommodationUnit getUnit(long id);
 
     List<AccommodationUnit> getAllUnits();
@@ -15,5 +16,7 @@ public interface AccommodationUnitService {
     AccommodationUnit addUnit(AccommodationUnit unit);
 
     void saveUnits(List<AccommodationUnit> units);
+
+    void delete(AccommodationUnit accommodationUnit);
 
 }
