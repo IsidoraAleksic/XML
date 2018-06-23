@@ -2,7 +2,7 @@
     <a mat-button routerLink="/">Booking.цом</a>
     <span style="flex: 1 1 auto"></span>
     <ng-template [ngIf]="auth.current" [ngIfElse]="anon">
-        <button mat-button routerLink="profile" [ngClass.xs]="{'icon-button':true}">
+        <button mat-button routerLink="/profile" [ngClass.xs]="{'icon-button':true}">
             <mat-icon>account_circle</mat-icon>
             <span fxHide fxShow.gt-xs>{{auth.current.email}}</span>
         </button>
@@ -24,6 +24,6 @@
     </ng-template>
     <ng-template #anon>
         <a mat-button (click)="onLogin()">Login</a>
-        <a mat-button routerLink="register">Register</a>
+        <a mat-button routerLink="/register">Register</a>
     </ng-template>
 </div>

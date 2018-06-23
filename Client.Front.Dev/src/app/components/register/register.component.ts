@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     this.errmsg = undefined;
     this.auth.register(this.form.value as any).subscribe(x => {
-      this.router.navigateByUrl("login");
+      this.router.navigateByUrl("");
     }, e => {
       this.loading = false;
       if (e.status == 400 || e.status == 409) {

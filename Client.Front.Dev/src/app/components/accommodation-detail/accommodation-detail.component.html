@@ -13,7 +13,7 @@
       <mat-chip *ngFor="let service of accommodation.additionalServices">{{service.name}}</mat-chip>
     </mat-chip-list>
     <br/>
-    <app-image-carousel [title]="'Shiba Apartments'" [srcs]="['https://material.angular.io/assets/img/examples/shiba1.jpg', 'https://i.imgur.com/o1hHhWP.jpg', 'https://material.angular.io/assets/img/examples/shiba2.jpg']"></app-image-carousel>
+    <app-image-carousel [title]="'Shiba Apartments'" [srcs]="accommodation.images"></app-image-carousel>
     <mat-card-content>
       <p>
         {{accommodation.description}}
