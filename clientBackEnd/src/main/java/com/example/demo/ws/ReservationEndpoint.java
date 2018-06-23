@@ -41,7 +41,7 @@ public class ReservationEndpoint {
     @Autowired
     ReservationService reservationService;
 
-    @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "getAccommodationParametersRequest")
+    @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "bookIntervalRequest")
     @ResponsePayload
     public BookIntervalResponse reserve(@RequestPayload BookIntervalRequest request){
         BookIntervalResponse response = new BookIntervalResponse();
