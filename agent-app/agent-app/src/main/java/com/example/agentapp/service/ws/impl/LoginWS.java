@@ -1,4 +1,4 @@
-package com.example.agentapp.service.ws;
+package com.example.agentapp.service.ws.impl;
 
 import com.example.agentapp.domain.Agent;
 import com.example.agentapp.ws.WSClient;
