@@ -9,5 +9,5 @@ public interface AccommodationTypeRepository extends JpaRepository<Accommodation
 
     AccommodationType getById(Long id);
 
-    AccommodationType getByName(String name);
+    AccommodationType getByTypeName(String name);
 }

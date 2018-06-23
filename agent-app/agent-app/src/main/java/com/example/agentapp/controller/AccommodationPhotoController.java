@@ -52,7 +52,7 @@ public class AccommodationPhotoController {
             List<String> fNames = Arrays.asList(files).stream()
                     .map(el -> el.getOriginalFilename())
                     .collect(Collectors.toList());
-            accommodationPhotoService.saveUnitPhotos(id, fNames);
+//            accommodationPhotoService.saveUnitPhotos(id, fNames);
 
 
             applicationEventPublisher.publishEvent(new OnCreateAccommodationEvent(id, fNames));

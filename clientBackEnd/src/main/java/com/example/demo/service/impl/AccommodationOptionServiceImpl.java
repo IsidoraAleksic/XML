@@ -46,12 +46,12 @@ public class AccommodationOptionServiceImpl implements AccommodationOptionServic
 
     @Override
     public AccommodationType getTypeByName(String name) {
-        return accommodationTypeRepository.getByName(name);
+        return accommodationTypeRepository.getByTypeName(name);
     }
 
     @Override
     public AccommodationCategory getCategoryByName(String name) {
-        return accommodationCategoryRepository.getByName(name);
+        return accommodationCategoryRepository.getByCategoryName(name);
     }
 
     @Override
