@@ -38,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
         System.out.println("END DATE OF RESERVATION:  " + reservation.getEndDate());
         System.out.println("COMPARE:  " +reservation.getEndDate().after(Calendar.getInstance().getTime()));
 
-        if(reservation.getEndDate().after(Calendar.getInstance().getTime()))
+        if(reservation.getEndDate().after(Calendar.getInstance().getTime()) || !reservation.isConfirmed())
             throw new BadRequestException("Reservation has not passed");
         if(review==null)
             throw new BadRequestException("Review cannot be null");

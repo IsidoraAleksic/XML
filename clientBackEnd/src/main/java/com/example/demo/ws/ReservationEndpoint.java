@@ -1,5 +1,6 @@
 package com.example.demo.ws;
 
+import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.model.AccommodationUnit;
 import com.example.demo.model.Agent;
 import com.example.demo.model.Reservation;
@@ -17,6 +18,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import rs.ac.uns.ftn.agenti.BookIntervalRequest;
 import rs.ac.uns.ftn.agenti.BookIntervalResponse;
 import rs.ac.uns.ftn.agenti.ReservationWs;
+import rs.ac.uns.ftn.agenti.SendReservations;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -48,8 +50,8 @@ public class ReservationEndpoint {
         BookIntervalResponse response = new BookIntervalResponse();
         AccommodationUnit accommodationUnit = accommodationRepository.getById(request.getAccommodationId());
 //        Date startDate = reservationService.toDate(request.getStartDate().toGregorianCalendar().getTime().toString().split("+")[0]);
-        Date startDate = request.getEndDate().toGregorianCalendar().getTime();
-        Date endDate = request.getStartDate().toGregorianCalendar().getTime();
+        Date startDate = request.getStartDate().toGregorianCalendar().getTime();
+        Date endDate = request.getEndDate().toGregorianCalendar().getTime();
 
         Reservation reservation = new Reservation(null, accommodationUnit,startDate,endDate,false);
         boolean rez = reservationService.check(reservation);
@@ -81,6 +83,17 @@ public class ReservationEndpoint {
         }
         return response;
     }
+
+    @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "sendReservations")
+    @ResponsePayload
+    public void reserve(@RequestPayload SendReservations request){
+        Reservation reservation = reservationService.getById(request.getReservations());
+        if(reservation==null)
+            throw new BadRequestException("Reservation was not found veki");
+        reservation.setConfirmed(true);
+        reservationService.save(reservation);
+    }
+
 
 
 

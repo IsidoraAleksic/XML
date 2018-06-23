@@ -73,8 +73,8 @@ public class CreateAccommodationEventListener implements ApplicationListener<OnC
                 .forEach(i -> {
                     accommodationPhotos.add(new AccommodationPhoto(res.getIdImage().get(i), newUnit, fNames.get(i)));
                 });
-        accommodationPhotoService.saveAccommodationUnitPhotos(accommodationPhotos);
 
+        accommodationPhotoService.saveAccommodationUnitPhotos(accommodationPhotos);
         accommodationPricingService.delete(accommodationPricing);
         accommodationUnitService.delete(accommodationUnit);
     }

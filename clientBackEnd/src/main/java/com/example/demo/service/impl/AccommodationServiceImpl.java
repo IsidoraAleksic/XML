@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
+import com.example.demo.model.dto.AccommodationDTO;
+import com.example.demo.repository.AccommodationPhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -31,6 +34,8 @@ public class AccommodationServiceImpl implements AccommodationService {
 	AccommodationOptionService accommodationOptionServices;
 	@Autowired
 	AccommodationPricingRepository accommodationPricingRepository;
+	@Autowired
+	AccommodationPhotoRepository accommodationPhotoRepository;
 
 	@Override
 	public void save(AccommodationUnit accommodationUnit) {
@@ -64,12 +69,17 @@ public class AccommodationServiceImpl implements AccommodationService {
 		for (AccommodationUnit accommodationUnit : ret)
 			accommodationPricings.add(accommodationPricingRepository.getByAccommodationUnit(accommodationUnit));
 
+		List<AccommodationDTO> dtos = accommodationPricings.stream().map(x->
+			new AccommodationDTO(x,
+					accommodationPhotoRepository.getByAccommodationUnit_Id(x.getAccommodationUnit().getId()).stream().map(p->p.getPath()).collect(Collectors.toList())
+					)
+		).collect(Collectors.toList());
 		int month = startDate.getMonth();
 		int days = (int) (TimeUnit.MILLISECONDS.toDays(endDate.getTime() - startDate.getTime()));
 
 		return new RestTemplate().postForObject(
 				"http://localhost:8010/rating-service/us-central1/average?month=" + month + "&days=" + days,
-				accommodationPricings, Object.class);
+				dtos, Object.class);
 	}
 
 	@Override
@@ -95,9 +105,15 @@ public class AccommodationServiceImpl implements AccommodationService {
 		int month = startDate.getMonth();
 		int days = (int) (TimeUnit.MILLISECONDS.toDays(endDate.getTime() - startDate.getTime()));
 
+		List<AccommodationDTO> dtos = accommodationPricings.stream().map(x->
+				new AccommodationDTO(x,
+						accommodationPhotoRepository.getByAccommodationUnit_Id(x.getAccommodationUnit().getId()).stream().map(p->p.getPath()).collect(Collectors.toList())
+				)
+		).collect(Collectors.toList());
+
 		return new RestTemplate().postForObject(
 				"http://localhost:8010/rating-service/us-central1/average?month=" + month + "&days=" + days,
-				accommodationPricings, Object.class);
+				dtos, Object.class);
 	}
 
 	@Override

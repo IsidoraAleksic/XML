@@ -8,6 +8,8 @@ import AccommodationForm from '@/components/AccommodationForm'
 import Datepicker from '@/components/Datepicker'
 import AccommodationList from '@/components/AccommodationList'
 import AccommodationView from '@/components/AccommodationView'
+import Message from '@/components/Message'
+
  
 Vue.use(Router)
 
@@ -52,6 +54,11 @@ export default new Router({
       path: '/accommodationUnit/:id',
       name: 'AccommodationView',
       component: AccommodationView
+    },
+    {
+      path: '/msg',
+      name: 'Message',
+      component: Message
     }
   ]
 })

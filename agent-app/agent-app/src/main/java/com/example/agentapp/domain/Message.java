@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class Message implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     @ManyToOne
     private Reservation reservation;
@@ -17,11 +16,13 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(Reservation reservation, String message, boolean agent) {
+    public Message(long id, Reservation reservation, String message, boolean agent) {
+        this.id = id;
         this.reservation = reservation;
         this.message = message;
         this.agent = agent;
     }
+
     public long getId() {
         return id;
     }

@@ -1,13 +1,19 @@
 package com.example.agentapp.service;
 
-import com.example.agentapp.domain.BookedInterval;
+import com.example.agentapp.domain.Reservation;
 
 import java.util.List;
 
 public interface BookedIntervalService {
 
-    BookedInterval bookInterval(BookedInterval bookedInterval);
+    Reservation bookInterval(Reservation reservation);
 
-    List<BookedInterval> getByUnitId(long id);
+    List<Reservation> getByUnitId(long id);
+
+    List<Reservation> getAll();
+
+    void saveReservations(List<Reservation> reservations);
+
+    Reservation getById(long id);
 }
 

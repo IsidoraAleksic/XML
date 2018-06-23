@@ -11,6 +11,9 @@ public interface MessageService {
 
     void delete(Long reservationId);
     List<Message> getByReservation(Long reservationId);
+
+    void save(Message message);
+
     void send(Message message);
 
 }
