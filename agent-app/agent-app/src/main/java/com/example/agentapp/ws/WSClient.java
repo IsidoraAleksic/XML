@@ -57,12 +57,17 @@ public class WSClient extends WebServiceGatewaySupport {
 
         request.setAccommodationUnit(accommodationUnitWs);
         request.setPricing(pricingWs);
+        request.getImageSrc().addAll(encodedImages);
+
+        CreateAccommodationResponse response = (CreateAccommodationResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(PRODUCER_URI, request,
+                        new SoapActionCallback(PRODUCER_URI+"/createAccommodationRequest"));
+        return response;
         //TODO:
         //dodati listu stringova za image i onda test
 
         //        AccommodationCategoryWs accommodationCategoryWs = AccommodationCategoryConverter.fromPojoToXMLType(unit.getCategory());
 //        AgentWs agentWs = AgentConverter.fromPojoToXMLType(unit.getAgent());
 //        AccommodationTypeWs accommodationTypeWs = AccommodationTypeConverter.fromPojoToXMLType(unit.getAccommodationType());
-        return null;
     }
 }

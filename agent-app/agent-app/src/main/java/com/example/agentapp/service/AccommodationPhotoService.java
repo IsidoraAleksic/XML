@@ -8,5 +8,6 @@ public interface AccommodationPhotoService {
 
     List<AccommodationPhoto> getPhotosByAccommodationUnitId(long id);
 
-    void saveUnitPhotos(long id, List<String> paths);
+    void saveAccommodationUnitPhotos(List<AccommodationPhoto> photos);
+//    void saveUnitPhotos(long id, long unitId, List<String> paths);
 }

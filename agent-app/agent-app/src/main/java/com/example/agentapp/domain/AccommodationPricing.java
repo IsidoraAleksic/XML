@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class AccommodationPricing implements Serializable {
 
     @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
     @OneToOne
@@ -27,6 +26,23 @@ public class AccommodationPricing implements Serializable {
     private int december;
 
     public AccommodationPricing() {
+    }
+
+    public AccommodationPricing(long id, AccommodationUnit accommodationUnit, int january, int february, int march, int april, int may, int june, int july, int august, int september, int october, int november, int december) {
+        this.id = id;
+        this.accommodationUnit = accommodationUnit;
+        this.january = january;
+        this.february = february;
+        this.march = march;
+        this.april = april;
+        this.may = may;
+        this.june = june;
+        this.july = july;
+        this.august = august;
+        this.september = september;
+        this.october = october;
+        this.november = november;
+        this.december = december;
     }
 
     public long getId() {
