@@ -91,6 +91,7 @@ public class ReservationEndpoint {
         if(reservation==null)
             throw new BadRequestException("Reservation was not found veki");
         reservation.setConfirmed(true);
+        reservationService.save(reservation);
     }
 
 
