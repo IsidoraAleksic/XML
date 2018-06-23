@@ -117,7 +117,7 @@ function createAccommodationCategoryDiv(accommodationCategory){
 
 function createAdditionalServicesDiv(additionalService){
 	var content = "";
-	content+="<div class=\"row\"><div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-6\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2></div>"+
+	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2></div>"+
 	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+",\'"+ additionalService.name+"\')\">Update</button><br/>" +
 	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete</button></div></div></div>";
 	return content;
@@ -152,13 +152,12 @@ function openModalAccommodationCategoryUpdate(id,name) {
 	$("#categoryName").val(name);
     action="update";
     $("#accommodationCategoryModal").modal();
-
 }
 function chooseMethodAccommodationCategory(){
     if(action == "create"){
     	addAccommodationCategory();
     }else{
-    	updateAccommodationCategory();
+    	updateAccommodationCategory(accommodationIdCategory);
     }
 }
 function openModalAdditionalServiceCreate() {
@@ -178,7 +177,7 @@ function chooseMethodAdditionalService(){
     if(action == "create"){
     	addAdditionalService();
     }else{
-    	updateAdditionalService();
+    	updateAdditionalService(additionalServiceId);
     }
 }
 function getAccommodationCategory(){
@@ -280,14 +279,14 @@ function updateAccommodationCategory(accommodationIdCategory){
 
 }
 
-function addAdditionalServices(){
+function addAdditionalService(){
     $.ajax({
         url: backedServer+"/administrator/addAdditionalServices",
         contentType: "application/json",
         dataType: "text",
         type: "POST",
         data: JSON.stringify({
-            "name": $("#name").val()
+            "name": $("#nameService").val()
         }),
         success: function(data) {
             $(location).attr('href', 'admin.html');
@@ -296,17 +295,17 @@ function addAdditionalServices(){
 
 }
 
-function updateAdditionalServices(additionalServiceId){
+function updateAdditionalService(additionalServiceId){
     $.ajax({
         url: backedServer+"/administrator/updateAdditionalServices/"+additionalServiceId,
         contentType: "application/json",
         dataType: "text",
         type: "POST",
         data: JSON.stringify({
-            "name": $("#name").val()
+            "name": $("#nameService").val()
         }),
         success: function(data) {
-        	 $('#additionalServicesModal').modal('hide');
+        	 $('#additionalServiceModal').modal('hide');
         }
     });
 
