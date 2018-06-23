@@ -158,6 +158,7 @@
             <xs:element name="startDate" type="xs:date"/>
             <xs:element name="endDate" type="xs:date"/>
             <xs:element name="confirmed" type="xs:boolean"/>
+            <xs:element name="accommodationId" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="messageWs">

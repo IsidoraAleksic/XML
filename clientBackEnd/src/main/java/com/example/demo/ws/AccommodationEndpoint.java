@@ -127,6 +127,7 @@ public class AccommodationEndpoint {
             for(Reservation reservation: reservations){
                 ReservationWs reservationWs = new ReservationWs();
                 reservationWs.setId(reservation.getId());
+                reservationWs.setAccommodationId(au.getId());
                 GregorianCalendar gc =  new GregorianCalendar();
                 XMLGregorianCalendar xmlCalendar = null;
                 try {

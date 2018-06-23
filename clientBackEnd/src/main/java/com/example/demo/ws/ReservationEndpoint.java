@@ -1,6 +1,7 @@
 package com.example.demo.ws;
 
 import com.example.demo.model.AccommodationUnit;
+import com.example.demo.model.Agent;
 import com.example.demo.model.Reservation;
 import com.example.demo.repository.AccommodationPhotoRepository;
 import com.example.demo.repository.AccommodationPricingRepository;
@@ -61,7 +62,7 @@ public class ReservationEndpoint {
             ReservationWs reservationWs = new ReservationWs();
             reservationWs.setConfirmed(r.isConfirmed());
             reservationWs.setId(r.getId());
-
+            reservationWs.setAccommodationId(accommodationUnit.getId());
             GregorianCalendar gc =  new GregorianCalendar();
             GregorianCalendar gc1 =  new GregorianCalendar();
             XMLGregorianCalendar xmlCalendar = null;
