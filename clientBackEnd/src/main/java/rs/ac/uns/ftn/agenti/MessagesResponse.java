@@ -25,8 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="message" type="{http://www.ftn.uns.ac.rs/agenti}messageWs"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,63 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "email",
-    "password"
+    "message"
 })
-@XmlRootElement(name = "loginAgentRequest")
-public class LoginAgentRequest {
+@XmlRootElement(name = "messagesResponse")
+public class MessagesResponse {
 
     @XmlElement(required = true)
-    protected String email;
-    @XmlElement(required = true)
-    protected String password;
+    protected MessageWs message;
 
     /**
-     * Gets the value of the email property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link MessageWs }
      *     
      */
-    public String getEmail() {
-        return email;
+    public MessageWs getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the email property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link MessageWs }
      *     
      */
-    public void setEmail(String value) {
-        this.email = value;
-    }
-
-    /**
-     * Gets the value of the password property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets the value of the password property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPassword(String value) {
-        this.password = value;
+    public void setMessage(MessageWs value) {
+        this.message = value;
     }
 
 }

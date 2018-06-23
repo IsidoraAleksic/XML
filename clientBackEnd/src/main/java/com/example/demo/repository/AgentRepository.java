@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface AgentRepository extends JpaRepository<Agent,Long>{
 
     Agent getByEmailIgnoreCase(String email);
-	
+
+    Agent getById(Long agentId);
 }

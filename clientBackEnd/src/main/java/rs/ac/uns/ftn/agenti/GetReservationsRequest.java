@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="agentId" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,27 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "agentId"
 })
-@XmlRootElement(name = "getAccommodationByAgentIdReguest")
-public class GetAccommodationByAgentIdReguest {
+@XmlRootElement(name = "getReservationsRequest")
+public class GetReservationsRequest {
 
-    protected long id;
+    protected long agentId;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the agentId property.
      * 
      */
-    public long getId() {
-        return id;
+    public long getAgentId() {
+        return agentId;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the agentId property.
      * 
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setAgentId(long value) {
+        this.agentId = value;
     }
 
 }

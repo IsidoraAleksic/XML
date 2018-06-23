@@ -72,6 +72,16 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.0.7.RELEASE</version>
 		</dependency>
+
+		<!--dozer-->
+
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.5.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

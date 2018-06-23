@@ -2,12 +2,10 @@ package com.example.demo.ws;
 
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
+import com.example.demo.mapper.MessageConverter;
 import com.example.demo.model.*;
 import com.example.demo.model.dto.SearchParameters;
-import com.example.demo.repository.AccommodationPhotoRepository;
-import com.example.demo.repository.AccommodationPricingRepository;
-import com.example.demo.repository.AccommodationRepository;
-import com.example.demo.repository.AgentRepository;
+import com.example.demo.repository.*;
 import com.example.demo.service.AccommodationService;
 import com.example.demo.service.impl.AccommodationOptionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,11 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import rs.ac.uns.ftn.agenti.*;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Endpoint
@@ -33,6 +35,11 @@ public class AccommodationEndpoint {
     AccommodationPhotoRepository accommodationPhotoRepository;
     @Autowired
     AccommodationPricingRepository accommodationPricingRepository;
+    @Autowired
+    MessageRepository messageRepository;
+
+    @Autowired
+    ReservationRepository reservationRepository;
 
     @PayloadRoot(namespace = AgentEndpoint.NAMESPACE_URI, localPart = "getAccommodationParametersRequest")
     @ResponsePayload
@@ -114,9 +121,35 @@ public class AccommodationEndpoint {
             }
             aw.getAdditionalServices().addAll(asList);
             accommodationUnitWs.add(aw);
+
+            List<Reservation> reservations = reservationRepository.getByAccommodationUnit(au);
+            //TODO: CHECK IF ADDING ALL
+            for(Reservation reservation: reservations){
+                ReservationWs reservationWs = new ReservationWs();
+                reservationWs.setId(reservation.getId());
+                reservationWs.setAccommodationId(au.getId());
+                GregorianCalendar gc =  new GregorianCalendar();
+                XMLGregorianCalendar xmlCalendar = null;
+                try {
+                    gc.setTime(reservation.getEndDate());
+                    xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+                    reservationWs.setEndDate(xmlCalendar);
+                    gc.setTime(reservation.getStartDate());
+                    xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+                    reservationWs.setStartDate(xmlCalendar);
+                    response.getReservations().add(reservationWs);
+                } catch (DatatypeConfigurationException e) {
+                    e.printStackTrace();
+                }
+                List<Message> messages = messageRepository.getByReservation(reservation);
+                for(Message message: messages){
+                    MessageWs messageWs = MessageConverter.fromPojoToXMLType(message);
+                    messageWs.setReservationId(message.getReservation().getId());
+                    response.getMessages().add(messageWs);
+                }
+            }
         }
         response.getAccommodationUnitWs().addAll(accommodationUnitWs);
-
         return response;
     }
 

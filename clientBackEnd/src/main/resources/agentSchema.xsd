@@ -69,7 +69,11 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="accommodationUnitWs"
-                            type="AccommodationUnitWs"/>
+                            type="AccommodationUnitWs" nillable="true"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="messages" nillable="true"
+                            type="messageWs"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="reservations" nillable="true"
+                            type="reservationWs"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -154,6 +158,50 @@
             <xs:element name="startDate" type="xs:date"/>
             <xs:element name="endDate" type="xs:date"/>
             <xs:element name="confirmed" type="xs:boolean"/>
+            <xs:element name="accommodationId" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="messageWs">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="reservationId" type="xs:long"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="agent" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="sendMessageRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="messageWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="messagesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="messageWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getMessagesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agentId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getMessagesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="messages" type="messageWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getReservationsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agentId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
