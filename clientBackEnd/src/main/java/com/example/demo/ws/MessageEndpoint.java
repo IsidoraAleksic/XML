@@ -37,7 +37,7 @@ public class MessageEndpoint {
         Reservation reservation = reservationRepository.getById(request.getMessage().getReservationId());
         Message message = MessageConverter.fromXMLTypeToPojo(messageWs);
         message.setReservation(reservation);
-        messageService.send(message);
+        messageService.save(message);
         MessageWs ws = MessageConverter.fromPojoToXMLType(message);
         ws.setReservationId(message.getReservation().getId());
         response.setMessage(ws);

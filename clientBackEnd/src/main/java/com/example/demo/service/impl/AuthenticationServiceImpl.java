@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
 import com.example.demo.model.type.Role;
+import com.example.demo.model.type.Status;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userRepository.findByEmail(user.getEmail()) != null)
             return "exists";
         user.setRole(Role.GUEST);
+        user.setStatus(Status.ACTIVATED);
         return "registered";
     }
 

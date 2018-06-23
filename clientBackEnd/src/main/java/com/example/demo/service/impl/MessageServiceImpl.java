@@ -38,6 +38,10 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public void save(Message message){
+        messageRepository.save(message);
+    }
+    @Override
     public void send(Message message) {
 
         if(message.getMessage()==null || message.getMessage().equals("")){

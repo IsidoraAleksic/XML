@@ -23,7 +23,7 @@ public interface AccommodationRepository extends JpaRepository<AccommodationUnit
              List<AdditionalServices> additionalServices);
     
     @Query("select distinct a from AccommodationUnit a join a.additionalServices as s " + 
-    		"where s in (:additionalServices) and a.place like '%(:place)%' and a.capacity = (:capacity) and a.accommodationType = (:accommodationType) and a.category = (:accommodationCategory) "
+    		"where s in (:additionalServices) and a.place like %:place% and a.capacity = (:capacity) and a.accommodationType = (:accommodationType) and a.category = (:accommodationCategory) "
     		+ "group by a.id "
     		+ "having count(s.id) = :size" 
     		)

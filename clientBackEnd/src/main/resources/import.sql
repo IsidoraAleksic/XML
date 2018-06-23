@@ -1,5 +1,5 @@
 
-INSERT INTO users(email,first_name,last_name,password,role,status) VALUES ('jefimija', 'jefimija','jefimija','jefimija', 'GUEST', 'ACTIVATED');
+INSERT INTO users(email,first_name,last_name,password,role,status) VALUES ('jefimija@gmail.com', 'jefimija','jefimija','jefimija', 'GUEST', 'ACTIVATED');
 INSERT INTO users(email,first_name,last_name,password,role,status) VALUES ('dejan.tot@gmail.com', 'dejan','tot','dejan', 'GUEST', 'ACTIVATED');
 
 
