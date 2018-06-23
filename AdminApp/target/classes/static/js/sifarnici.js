@@ -101,33 +101,35 @@ function getAccommodationType(){
 
 function createAccommodationTypeDiv(accommodationType){
 var content = "";
-content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
-    "<button  type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+")\">Update</button><br/>" +
+content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation type:" + accommodationType.typeName + "</h2></div>"+
+    "<button  type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationTypeUpdate("+accommodationType.id+",\'"+accommodationType.typeName+"\')\">Update</button><br/>" +
     "<button  type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationType("+accommodationType.id+")\">Delete</button></div></div></div>";
 return content;
 }
 
 function createAccommodationCategoryDiv(accommodationCategory){
 	var content = "";
-	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2>"+"<button type=\"button\" class=\"close\" onclick=\"card merch-container.close()\" data-dismiss=\"modal\">&times;</button></div>"+
-	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+")\">Update</button><br/>" +
+	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Accommodation category:" + accommodationCategory.categoryName + "</h2></div>"+
+	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAccommodationCategoryUpdate("+accommodationCategory.id+",\'"+ accommodationCategory.categoryName+"\')\">Update</button><br/>" +
 	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAccommodationCategory("+accommodationCategory.id+")\">Delete</button></div></div></div>";
 	return content;
 }
 
 function createAdditionalServicesDiv(additionalService){
 	var content = "";
-	content+="<div class=\"row\"><div class=\"col-md-4\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2>" +"<button type=\"button\" class=\"close\" onclick=\"self.close()\" data-dismiss=\"modal\">&times;</button></div>"+
-	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+")\">Update</button><br/>" +
+	content+="<div class=\"row\"><div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-6\"><div class=\"card merch-container\" style=\"width:400px; height:190px\"><div class=\"modal-header\"><h2>"+ "Additional service:" + additionalService.name + "</h2></div>"+
+	    "<button type=\"button\" class=\"btn btn-primary\" onclick=\"openModalAdditionalServiceUpdate("+additionalService.id+",\'"+ additionalService.name+"\')\">Update</button><br/>" +
 	    "<button type=\"button\" class=\"btn btn-secondary\" onclick=\"deleteAdditionalServices("+additionalService.id+")\">Delete</button></div></div></div>";
 	return content;
 }
 function openModalAccommodationTypeCreate() {
+	$("#typeName").val("");
     action="create";
     $("#accommodationTypeModal").modal();
 }
-function openModalAccommodationTypeUpdate(id) {
+function openModalAccommodationTypeUpdate(id,name) {
 	accommodationIdType=id;
+	$("#typeName").val(name);
     action="update";
     $("#accommodationTypeModal").modal();
 
@@ -140,12 +142,14 @@ function chooseMethodAccommodationType(){
     }
 }
 function openModalAccommodationCategoryCreate() {
+	$("#categoryName").val("");
     action="create";
     $("#accommodationCategoryModal").modal();
 
 }
-function openModalAccommodationCategoryUpdate(id) {
+function openModalAccommodationCategoryUpdate(id,name) {
 	accommodationIdCategory=id;
+	$("#categoryName").val(name);
     action="update";
     $("#accommodationCategoryModal").modal();
 
@@ -158,12 +162,14 @@ function chooseMethodAccommodationCategory(){
     }
 }
 function openModalAdditionalServiceCreate() {
+	$("#nameService").val("");
     action="create";
     $("#additionalServiceModal").modal();
 
 }
-function openModalAdditionalServiceUpdate(id) {
+function openModalAdditionalServiceUpdate(id,name) {
 	additionalServiceId=id;
+	$("#nameService").val(name);
     action="update";
     $("#additionalServiceModal").modal();
 
