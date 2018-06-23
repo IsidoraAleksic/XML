@@ -28,12 +28,17 @@ public class AccommodationPhotoServiceImpl implements AccommodationPhotoService{
         return accommodationPhotoRepository.findByAccommodationUnitId(id);
     }
 
+//    @Override
+//    public void saveUnitPhotos(long accPhotoId, long unitId, List<String> paths) {
+//        AccommodationUnit unit = accommodationUnitRepository.getOne(unitId);
+//        List<AccommodationPhoto> photos = paths.stream()
+//                .map(el -> new AccommodationPhoto(unit, el))
+//                .collect(Collectors.toList());
+//        accommodationPhotoRepository.saveAll(photos);
+//    }
+
     @Override
-    public void saveUnitPhotos(long id, List<String> paths) {
-        AccommodationUnit unit = accommodationUnitRepository.getOne(id);
-        List<AccommodationPhoto> photos = paths.stream()
-                .map(el -> new AccommodationPhoto(unit, el))
-                .collect(Collectors.toList());
+    public void saveAccommodationUnitPhotos(List<AccommodationPhoto> photos) {
         accommodationPhotoRepository.saveAll(photos);
     }
 }

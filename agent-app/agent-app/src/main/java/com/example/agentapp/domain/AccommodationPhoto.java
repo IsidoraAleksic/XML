@@ -20,10 +20,9 @@ import java.io.Serializable;
 public class AccommodationPhoto implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "accommodation_unit_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -31,7 +30,8 @@ public class AccommodationPhoto implements Serializable {
 
     private String path;
 
-    public AccommodationPhoto(AccommodationUnit accommodationUnit, String path) {
+    public AccommodationPhoto(long id, AccommodationUnit accommodationUnit, String path) {
+        this.id = id;
         this.accommodationUnit = accommodationUnit;
         this.path = path;
     }
