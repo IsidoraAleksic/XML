@@ -43,4 +43,9 @@ public class BookedIntervalServiceImpl implements BookedIntervalService {
     public Reservation getById(long id) {
         return bookedIntervalRepository.getOne(id);
     }
+
+    @Override
+    public List<Reservation> getAllUnconfirmed() {
+        return bookedIntervalRepository.getByConfirmedFalse();
+    }
 }

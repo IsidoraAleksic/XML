@@ -9,4 +9,5 @@ public interface BookedIntervalRepository extends JpaRepository<Reservation, Lon
 
     List<Reservation> getByAccommodationUnit_Id(long id);
 
+    List<Reservation> getByConfirmedFalse();
 }

@@ -73,6 +73,7 @@
             return axios.post(url, formData)
                           .then(x => {
                             (x.data === true) ? alert('Success!') : alert('Failure!');
+                            this.$router.push('/home');
                           });
         },
         saveImages(unitId) {  //ovo preko eventa dobija

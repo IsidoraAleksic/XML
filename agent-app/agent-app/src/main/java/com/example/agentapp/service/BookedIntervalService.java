@@ -15,5 +15,8 @@ public interface BookedIntervalService {
     void saveReservations(List<Reservation> reservations);
 
     Reservation getById(long id);
+
+    List<Reservation> getAllUnconfirmed();
+
 }
 

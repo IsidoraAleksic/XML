@@ -28,11 +28,13 @@ public class Reservation implements Serializable{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AccommodationUnit accommodationUnit;
 
+    private boolean confirmed;
 
     public Reservation(Date fromDate, Date toDate, AccommodationUnit accommodationUnit) {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.accommodationUnit = accommodationUnit;
+        this.confirmed = false;
     }
 
     public Reservation(long id, Date fromDate, Date toDate, AccommodationUnit accommodationUnit) {
@@ -40,5 +42,6 @@ public class Reservation implements Serializable{
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.accommodationUnit = accommodationUnit;
+        this.confirmed = false;
     }
 }
