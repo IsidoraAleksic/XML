@@ -70,9 +70,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                    .antMatchers(HttpMethod.POST, "/auth").permitAll()
 //                        .anyRequest().authenticated()
 //                    .and()
-//                .sessionManagement()
-//                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-//                    .and()
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                    .and()
                 .formLogin()
                     .disable()
                 .rememberMe();

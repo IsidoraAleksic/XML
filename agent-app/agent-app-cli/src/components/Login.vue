@@ -48,8 +48,12 @@
                 const url = `${BASE_URL}/auth`;
                 axios.post(url, data)
                         .then( x => {
-                            alert(x.data);
-                            this.$router.push('/accList');
+                            if (x.data) {
+                                alert('Login success!')
+                                this.$router.push('/home');
+                            } else {
+                                alert('Login failure!')
+                            }
                         });
             }
         }

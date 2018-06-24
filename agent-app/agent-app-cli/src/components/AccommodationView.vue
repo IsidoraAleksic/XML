@@ -1,5 +1,9 @@
 <template>
-
+<div>
+    <nav class="navbar navbar-dark bg-dark">
+                <a @click="$router.push('/home')" class="navbar-brand" href="#">Home</a>
+                <a @click="$router.push(-1)" class="navbar-brand" href="#">Back</a>
+    </nav>
     <div class="jumbotron ">
         <h4 class="display-4" v-if="unit">{{ unit.place }}</h4>
                     <br>
@@ -44,7 +48,7 @@
         <Datepicker v-if="showBook" v-bind:unit="id"></Datepicker>
 
     </div>
-    
+</div>    
 </template>
 
 <script>
@@ -83,7 +87,6 @@
 
                 axios.get(url)
                         .then(x => {
-                         alert(JSON.stringify(x.data));
                          this.unit = x.data;   
                         });
             },

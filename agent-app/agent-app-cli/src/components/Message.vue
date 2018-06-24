@@ -1,17 +1,19 @@
 <template>
+    <div>
+        <nav class="navbar navbar-dark bg-dark">
+                <a @click="$router.push('/home')" class="navbar-brand" href="#">Home</a>
+                <a @click="$router.push(-1)" class="navbar-brand" href="#">Back</a>
+    </nav>
     <div class="container">
     <div class="row">
-    <!-- <div class="ui-group-buttons">
-                <a href="http://www.jquery2dotnet.com" class="btn btn-danger" role="button"><i style="padding-right:4px;" class="fas fa-pencil-alt"></i>Compose</a>
-                <div class="or"></div>
-                <a href="http://www.jquery2dotnet.com" class="btn btn-danger" role="button"><i style="padding-right:4px;"  class="fas fa-paper-plane"></i>Send</a>
-            </div> -->
         <div class="col-md-6">
         <div class="panel panel-default widget">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span>
+                <br>
                 <h1 class="panel-title">
-                    Messages</h1>    
+                    Messages
+                </h1>    
             </div>
             <br>
             <hr>
@@ -24,13 +26,15 @@
                             <div class="col-xs-10 col-md-11">
                                 <div>
                                     <div class="mic-info">
-                                        <h2>
+                                        <h3>
                                         Reservation id: <a href="#">{{res.id}}</a>
-                                        </h2>
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="comment-text">
+                                    <h4>
                                     {{res.accommodationUnit.place}}
+                                    </h4>
                                 </div>
                                
                                 <button @click="setCurrentReservationId(res.id)" class="btn btn-primary btn-lg">
@@ -43,7 +47,13 @@
             </div>
         </div>
     </div>
+
+    <div v-if="!messages.length" class="col-md-6">
+    <br><br><br>
+        <h4>No messages</h4>
+    </div>
     <div v-if="messages.length" class="col-md-6">
+        <br><br><br>
         <ul class="list-group">
                     <li v-for="msg in messages" class="list-group-item">
                         <div class="row">
@@ -57,7 +67,7 @@
         </ul>
         <input v-model="messageContent" type="text" class="form-control" placeholder="">
         <button @click="sendMessage()" class="btn btn-primary btn-lg" >
-            <span class="glyphicon glyphicon-envelope"></span>Send message
+            <span class="glyphicon glyphicon-envelope"></span>Reply
         </button>
     </div>
     </div>
@@ -65,7 +75,7 @@
 
 </div>
 
-
+</div>
 </template>
 
 <script>
@@ -85,6 +95,10 @@
             }
         },
         methods : {
+            reset() {
+                this.messages = [];
+                this.messageContent = '';
+            },
             initData() {
                 const url = `${BASE_URL}/book/getAll`;
 
@@ -118,7 +132,7 @@
                         .then(x => {
                             alert('Message sent!');
                         });
-                this.$router.go(-1); 
+                this.reset();
             }
         },
         created() {

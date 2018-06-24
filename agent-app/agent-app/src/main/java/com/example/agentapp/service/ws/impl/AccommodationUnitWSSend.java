@@ -49,5 +49,9 @@ public class AccommodationUnitWSSend {
         return new BookedIntervals(reservations, response.isSuccess());
     }
 
+    public void confirmReservation(long id) {
+        wsClient.confirmReservation(id);
+    }
+
 
 }

@@ -12,7 +12,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public String getLoggedInEmail() {
         if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated())
             return "noone";
-        AuthUser authUser = (AuthUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return authUser.getEmail();
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @Override
+    public long getLoggedInId() {
+        if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated())
+            return 0;
+        AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication();
+        return authUser.getId();
     }
 }

@@ -102,4 +102,11 @@ public class WSClient extends WebServiceGatewaySupport {
 
         return response;
     }
+
+    public void confirmReservation(long id) {
+        SendReservations request = new SendReservations();
+        request.setReservations(id);
+        getWebServiceTemplate().marshalSendAndReceive(PRODUCER_URI, request,
+                        new SoapActionCallback(PRODUCER_URI+"/sendReservations"));
+    }
 }

@@ -1,4 +1,9 @@
 <template>
+<div>
+    <nav class="navbar navbar-dark bg-dark">
+                <a @click="$router.push('/home')" class="navbar-brand" href="#">Home</a>
+                <a @click="$router.push(-1)" class="navbar-brand" href="#">Back</a>
+    </nav>
     <div class="jumbotron">
         <div class="row" v-for="i in Math.ceil(accommodationUnits.length / 4)">
             <span v-for="unit in accommodationUnits.slice((i - 1) * 4, i * 4)">
@@ -15,16 +20,13 @@
                             <li class="list-group-item">{{ getUnitCity(unit.place) }}</li>
                             <li class="list-group-item">{{ getUnitCountry(unit.place) }}</li>
                         </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
                     </div>
                 </div>
             </span>
         </div>
         <br>
     </div>
+</div>
 </template>
 
 <script>

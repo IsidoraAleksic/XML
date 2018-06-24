@@ -4,7 +4,7 @@
         <div class="col-md-6">
         <div class="card">
         <header class="card-header">
-            <a href="" class="float-right btn btn-outline-primary mt-1">Back</a>
+            <a href="#" @click="$router.push(-1)" class="float-right btn btn-outline-primary mt-1">Back</a>
             <h5 class="card-title mt-2">New accommodation unit</h5>
         </header>
         <article class="card-body">
@@ -372,7 +372,6 @@
 
                 axios.post(url, data)
                         .then(x => {
-                            alert(x.data.id);
                             // unitId = x.data.id;
                             this.$emit('upload', x.data.id); 
                         });

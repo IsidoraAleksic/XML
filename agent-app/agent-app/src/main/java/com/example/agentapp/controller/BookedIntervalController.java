@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.datatype.DatatypeConfigurationException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -47,5 +48,28 @@ public class BookedIntervalController {
     @GetMapping(path = "/getAll")
     public List<Reservation> getAll() {
         return bookedIntervalService.getAll();
+    }
+
+    @GetMapping("/confirm/{resId}")
+    public boolean confirmReservation(@PathVariable("resId") long resId) {
+        boolean ret = false;
+        Reservation reservation = bookedIntervalService.getById(resId);
+
+        Date from = reservation.getFromDate();
+        Date to = reservation.getToDate();
+        Date now = new Date();
+
+        if (from.compareTo(now) < 0 && now.compareTo(to) < 0) {
+            reservation.setConfirmed(true);
+            wsSend.confirmReservation(resId);
+            ret = true;
+        }
+        bookedIntervalService.bookInterval(reservation);
+        return ret;
+    }
+
+    @GetMapping("/get/unconfirmed")
+    public List<Reservation> getUnconfirmed() {
+        return bookedIntervalService.getAllUnconfirmed();
     }
 }

@@ -9,8 +9,10 @@ import Datepicker from '@/components/Datepicker'
 import AccommodationList from '@/components/AccommodationList'
 import AccommodationView from '@/components/AccommodationView'
 import Message from '@/components/Message'
+import Reservation from '@/components/Reservation'
+import Home from '@/components/Home'
 
- 
+
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +61,16 @@ export default new Router({
       path: '/msg',
       name: 'Message',
       component: Message
+    },
+    {
+      path: '/reservation',
+      name: 'Reservation',
+      component: Reservation
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ]
 })
