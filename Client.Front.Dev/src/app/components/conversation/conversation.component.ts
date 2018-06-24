@@ -12,14 +12,14 @@ import { MessageService } from '../../services/message.service';
 })
 export class ConversationComponent implements OnInit {
 
-  // reservation: any;
+  reservation: any;
   input: string;
   messages: any[] = [];
   id: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     public bg: BackgroundStyleService,
     public auth: AuthService,
     private reservationService: ReservationService,
@@ -32,12 +32,11 @@ export class ConversationComponent implements OnInit {
       this.messageService.getAll(this.id).subscribe(x => {
         this.messages = x;
       })
-      // this.reservationService.getOne(params['id']).subscribe(_=>{
-      // console.log(_);
-      // this.reservation = _;
-      // }, err=>{
-      // this.router.navigateByUrl("");
-      // })
+      this.reservationService.getOne(params['id']).subscribe(_ => {
+        this.reservation = _;
+      }, err => {
+        this.router.navigateByUrl("");
+      })
     })
   }
 

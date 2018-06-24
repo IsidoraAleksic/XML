@@ -13,9 +13,9 @@ export class ReservationService {
   constructor(private http: HttpClient) {
   }
 
-  // getOne(id: number): Observable<any> {
-  // return this.http.get<any>(`${environment.backendSrc}reserve/${id}`, { withCredentials: true })
-  // }
+  getOne(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.backendSrc}reserve/${id}`, { withCredentials: true })
+  }
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.backendSrc}reserve`, { withCredentials: true })
@@ -27,7 +27,7 @@ export class ReservationService {
 
   cancel(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.backendSrc}reserve/${id}`,
-      {        
+      {
         withCredentials: true
       });
   }
