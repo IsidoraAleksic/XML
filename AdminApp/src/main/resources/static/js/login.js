@@ -1,24 +1,45 @@
 function buttonLoginClick() {
-	email = $('#email').val();
-	password = $('#password').val();
+	email = $("#email").val();
+	password = $("#password").val();
 
-	$.ajax({
-		url: "http://localhost:8080/authenticate/login",
-		contentType: "application/json",
-        dataType: "text",
-        type: "POST",
-        async: false,
-        data: JSON.stringify({
-        	"id": "",
-        	"firstName":"",
-        	"lastName": "",
-        	"role": "ADMIN",
-    		"email": email,
-    		"password": password
-    	}),
-        success: function (data) {
-        	$(location).attr('href', 'admin.html');
-        }
-        
-    });
+	var data = {
+		"email": email,
+		"password": password
+	}
+	/*
+	$.post("http://localhost:8080/authenticate/login", data)
+	.done(function() {
+		alert('alert');
+		$(location).attr('href', 'admin.html');
+	})
+	.finally(function() {
+		alert('alert');
+		$(location).attr('href', 'admin.html');
+	});
+	alert('alert');
+	*/
+	try {
+		$.ajax({
+			url: "http://localhost:8080/authenticate/login",
+			contentType: "application/json",
+	        dataType: "json",
+	        xhrFields: {
+	            withCredentials: true
+	        },
+	        crossDomain: true,
+	        type: "POST",
+	        async: false,
+	        data: JSON.stringify({
+	    		"email": email,
+	    		"password": password
+	    	}),
+	        success: function (data) {
+	        	$(location).attr('href', 'admin.html');
+	        }
+	        
+	    });
+	} catch(err) {
+		$(location).attr('href', 'admin.html');
+	}
+	
 }

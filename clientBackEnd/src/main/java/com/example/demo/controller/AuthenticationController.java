@@ -1,15 +1,19 @@
 package com.example.demo.controller;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.exceptions.ConflictException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.User;
 import com.example.demo.service.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +42,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces ="application/json", consumes = "application/json")
-    public void loginUser(@RequestBody User user) {
+    public void loginUser(@RequestBody User user, @PathVariable String login) {
         User loggedIn = authenticationService.authenticateUser(user.getEmail(), user.getPassword());
         if (loggedIn == null)
             throw new NotFoundException("Invalid email or password");
