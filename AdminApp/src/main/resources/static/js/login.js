@@ -44,3 +44,21 @@ function buttonLoginClick() {
 
 	
 }
+
+function logout() {
+    $.ajax({
+    	url: "http://localhost:8080/authenticate/logout",
+        type: "GET",
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+         },
+         headers: {  'Access-Control-Allow-Origin': '*' },
+        success: function () {
+                top.location.href = "http://localhost:8090/login.html";
+
+        }, error: function (jqxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
