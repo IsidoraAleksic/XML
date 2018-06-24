@@ -22,19 +22,22 @@ function buttonLoginClick() {
 	$.ajax({
 		url: "http://localhost:8080/authenticate/login",
 		contentType: "application/json",
-        dataType: "json",
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
+        headers: {  'Access-Control-Allow-Origin': '*' },
         type: "POST",
         async: false,
         data: JSON.stringify({
     		"email": email,
     		"password": password
     	}),
-        success: function (data) {
+        success: function () {
         	$(location).attr('href', 'admin.html');
+        },
+        error: function (data) {
+        	alert("User not found!");
         }
         
     });
